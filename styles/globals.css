@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: 255 255 255;
+  --color-secondary: 249 250 251;
+  --color-accent: 216 163 26;
+  --color-text: 0 0 0;
+  --color-secondary_dark: 237 239 241;
+  --color-dactive: 189 196 203;
+  --color-active_background: 255 247 234;
+
+  --color-primary-s: 23 24 48 ;
+  --color-accent-s: 106 76 252;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: 46 49 57;
+    --color-secondary: 34 37 45;
+    --color-accent: 216 163 26;
+    --color-text: 255 255 255;
+    --color-secondary_dark: 46 49 57;
+    --color-dactive: 189 196 203;
+    --color-active_background: 46 49 57;
+
+    --color-primary-s: 23 24 48 ;
+    --color-accent-s: 106 76 252;
+
+  }
+}
+
+body {
+  color: rgb(var(--color-text));
+  background-color: rgb(var(--color-primary));
+}
+
+/* Styles for the scrollbar track */
+::-webkit-scrollbar {
+  width: 10px;
+  /* Width of the scrollbar */
+}
+
+/* Styles for the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  /* Color of the scrollbar thumb */
+  border-radius: 5px;
+  /* Border radius of the scrollbar thumb */
+}
+
+/* Styles for the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+  /* Color of the scrollbar thumb on hover */
+}
+
+/* Styles for the scrollbar track when scrollbar is being dragged */
+::-webkit-scrollbar-thumb:active {
+  background-color: #333;
+  /* Color of the scrollbar thumb when being dragged */
+}
