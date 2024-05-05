@@ -25,6 +25,7 @@ const StepOne = ({ goToNextStep, setTimer , setUserName , userName}) => {
             if (!checkform) {
                 return;
             }
+            setErrorMessage(null);
             setLoading(true);
             let response = await RlogInStepOne({ userName });
             let { data } = response;

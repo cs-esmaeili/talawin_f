@@ -38,10 +38,8 @@ export default function Layout({ children }) {
   }
 
   const userPsermissions = async () => {
-    console.log(permissions);
     try {
       if (permissions.length != 0 && permissions != null) {
-        console.log("dada");
         await checkUserAccessToUrl(permissions);
         return;
       }
@@ -57,11 +55,6 @@ export default function Layout({ children }) {
     } catch (error) {
       console.log(error);
       replace("/dashboard/login");
-      if (error?.response?.data?.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error(error.message);
-      }
     }
   }
 
