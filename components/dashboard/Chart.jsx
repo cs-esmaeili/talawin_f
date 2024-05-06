@@ -14,20 +14,28 @@ const Chart = () => {
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: ['شنبه', 'یک شنبه', 'دوشنبه', 'سه شنبه', 'چهار شنبه', 'پنجشنبه', 'جمعه' , 'صشیش'],
+                data: ['شنبه', 'یک شنبه', 'دوشنبه', 'سه شنبه', 'چهار شنبه', 'پنجشنبه', 'جمعه', 'صشیش'],
                 axisLabel: {
-                    color: 'white' // Set the color of xAxis labels to white
+                    color: 'white', // Set the color of xAxis labels to white
+                    fontSize: 14,// Set the font size of yAxis labels
                 }
             },
             yAxis: {
                 type: 'value',
                 axisLabel: {
-                    color: 'white' // Set the color of xAxis labels to white
+                    color: 'white',// Set the color of xAxis labels to white
+                    fontSize: 14, // Set the font size of yAxis labels
+                }
+            },
+            legend: {
+                textStyle: {
+                    color: 'white', // Set the color of legend text to white
+                    fontSize: 14 // Set the font size of legend text
                 }
             },
             series: [
                 {
-                    data: [820, 932, 901, 934, 1290, 1330, 1320 , 1325],
+                    data: [820, 932, 901, 934, 1290, 1330, 1320, 1325],
                     type: 'line',
                     areaStyle: {
                         color: 'rgba(255, 255, 0, 0.3)' // Set the color of the area under the line to light yellow

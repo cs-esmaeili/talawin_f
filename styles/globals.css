@@ -31,6 +31,12 @@
   }
 }
 
+@layer utilities {
+  .rtl {
+    direction: rtl;
+  }
+}
+
 body {
   color: rgb(var(--color-text));
   background-color: rgb(var(--color-primary));
