@@ -24,6 +24,9 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
             let response = await RlogInStepTwo({ userName, code: convertedCode });
             let { data } = response;
             setCookie('token', data.token, { expires: new Date(new Date().getTime() + parseInt(data.sessionTime) * 60000) });
+            setCookie('user', data.user, { expires: new Date(new Date().getTime() + parseInt(data.sessionTime) * 60000) });
+            setCookie('userName', userName, { expires: new Date(new Date().getTime() + parseInt(data.sessionTime) * 60000) });
+            setCookie('role', data.role, { expires: new Date(new Date().getTime() + parseInt(data.sessionTime) * 60000) });
             setLoading(false);
             goToDashboard();
         } catch (error) {

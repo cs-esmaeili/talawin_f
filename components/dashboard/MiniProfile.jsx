@@ -2,9 +2,28 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { FaBell } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
+import { getCookie, deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 
 const MiniProfile = ({ sliderIsOpen }) => {
+
   const [open, setOpen] = useState(false);
+
+
+  const user = getCookie('user') && JSON.parse(getCookie('user'));
+  const userName = getCookie('userName');
+  const role = getCookie('role');
+
+  const hostname = window.location.hostname;
+  const { push } = useRouter();
+
+  const exitFromDashboard = () => {
+    deleteCookie('token', { path: '/', domain: hostname });
+    deleteCookie('user', { path: '/', domain: hostname });
+    deleteCookie('userName', { path: '/', domain: hostname });
+    deleteCookie('role', { path: '/', domain: hostname });
+    push('/dashboard/login');
+  }
 
   return (
     <div
@@ -21,8 +40,8 @@ const MiniProfile = ({ sliderIsOpen }) => {
         height={50}
       />
       <div className="ml-3 hidden flex-col text-center sm:flex">
-        <span>Javad Esmaeili</span>
-        <span>Admin</span>
+        <span>{(user && user.fullName != null) ? user.fullName : userName}</span>
+        <span>{role}</span>
       </div>
 
       <div
@@ -32,8 +51,8 @@ const MiniProfile = ({ sliderIsOpen }) => {
             : "absolute right-0  top-[100%] mt-2 flex min-w-max flex-wrap rounded-md bg-secondary p-3 z-10"
         }
       >
-        <div className="flex flex-col justify-center text-center">
-          <div className="flex flex-row justify-center">
+        <div className="flex flex-col justify-center text-center p-2">
+          <div className="flex flex-row justify-around sm:hidden">
             <Image
               className="rounded-md"
               src="/avatar.jpg"
@@ -42,20 +61,24 @@ const MiniProfile = ({ sliderIsOpen }) => {
               height={50}
             />
             <div className="ml-2 flex flex-col text-center">
-              <span className="text-nowrap">Javad Esmaeili</span>
-              <span className="opacity-75">Admin</span>
+              <span>{(user && user.fullName != null) ? user.fullName : userName}</span>
+              <span>{role}</span>
             </div>
           </div>
-          <hr className=" mb-2 mt-2" />
-          <div>Main menu</div>
-          <div className="flex flex-row">
+          <hr className=" mb-2 mt-2 sm:hidden" />
+          <div className="flex flex-col justify-end">
+            <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer">حساب کاربری</div>
+            <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer" onClick={() => {
+              exitFromDashboard();
+            }}>خروج</div>
+          </div>
+          <hr className="mt-2" />
+          <div className="flex flex-row justify-end mt-2">
             <div className="flex">
               <MdSunny className="text-2xl" />
-              <span className="ml-2">Dark Mode</span>
             </div>
             <div className="flex">
               <FaBell className="ml-3 text-2xl" />
-              <span className="ml-2">Notifications</span>
             </div>
           </div>
         </div>
