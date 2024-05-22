@@ -1,6 +1,7 @@
 {
     "en": {},
     "fa": {
+        "someThingIsWrong": "مشکلی پیش آمد دوباره تلاش کنید",
         "sideBar": {
             "/dashboard": "داشبورد",
             "/dashboard/filemanager": "مدریت فایل ها",
@@ -14,6 +15,20 @@
         "logIn": {
             "back": "برگشت",
             "logInRegister": "ورود | ثبت نام"
+        },
+        "stepOne": {
+            "phoneNumberError": "فرمت شماره تماس صحیح نمی باشد",
+            "placeholderPhoneNumber": "شماره همراه",
+            "buttonTitle": "ادامه"
+        },
+        "stepTwo": {
+            "codeFormatIsWrong": "کد 4 رقم می باشد",
+            "placeHolderCode": "کد",
+            "buttonTitle": "ورود"
+        },
+        "layoutMain": {
+            "permissionError": "دسترسی مجاز نیست !",
+            "securityCheck": "برسی امنیتی"
         }
     }
 }

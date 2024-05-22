@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPermissions } from '@/state/permissions';
 import httpServices from '@/services/httpServices';
 import { getCookie } from 'cookies-next';
-import toast from 'react-hot-toast';
 import '@/styles/globals.css';
 import { useRouter, usePathname } from 'next/navigation';
+import translations from "@/translations.json";
 
 export default function Layout({ children }) {
 
@@ -22,6 +22,7 @@ export default function Layout({ children }) {
   const permissions = useSelector((state) => state.permissions.value);
   const { replace } = useRouter();
   const pathname = usePathname()
+  const { layoutMain, someThingIsWrong } = translations['fa'];
 
   const checkUserAccessToUrl = async (permissions) => {
     let access = false;
@@ -31,7 +32,7 @@ export default function Layout({ children }) {
       }
     });
     if (!access) {
-      throw new Error('Permission is not granted !');
+      throw new Error(layoutMain.permissionError);
     } else {
       return access;
     }
@@ -81,7 +82,7 @@ export default function Layout({ children }) {
       {loading ?
         <div className="relative flex flex-col gap-5 justify-center items-center h-full w-full">
           <div className="w-32 h-32 rounded-full border-8 border-solid border-accent border-t-transparent animate-spin"></div>
-          <span>Getting User Permissions</span>
+          <span>{layoutMain.securityCheck}</span>
         </div>
         :
         <ModalProvider>

@@ -2,19 +2,22 @@ import Input from '@/components/dashboard/Input';
 import { useEffect, useState } from 'react';
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import { logInStepOne as RlogInStepOne } from '@/services/Authorization';
+import translations from "@/translations.json";
 
-const StepOne = ({ goToNextStep, setTimer , setUserName , userName}) => {
+const StepOne = ({ goToNextStep, setTimer, setUserName, userName }) => {
 
 
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
+
+    const { stepOne, someThingIsWrong } = translations['fa'];
 
     const checkForm = () => {
         const iranianPhoneNumberRegex = /^09\d{9}$/;
         let check = iranianPhoneNumberRegex.test(userName);
         let erros = [];
         if (!check) {
-            erros.push(<div className='text-center'>فرمت شماره تماس صحیح نمی باشد</div>);
+            erros.push(<div className='text-center'>{stepOne.phoneNumberError}</div>);
         }
         setErrorMessage(erros);
         return check;
@@ -38,7 +41,7 @@ const StepOne = ({ goToNextStep, setTimer , setUserName , userName}) => {
             if (error?.response?.data?.message) {
                 setErrorMessage(<div className='text-center'>{error.response.data.message}</div>);
             } else {
-                setErrorMessage(<div className='text-center'>Something is wrong!</div>);
+                setErrorMessage(<div className='text-center'>{someThingIsWrong}</div>);
             }
         }
     }
@@ -50,7 +53,7 @@ const StepOne = ({ goToNextStep, setTimer , setUserName , userName}) => {
     return (
         <div className='flex flex-col w-full gap-4'>
             <div className='w-full'>
-                <Input bgColor={"bg-secondary"} placeholder={"شماره همراه"} cssClass={"text-center p-3"} maxLength={11}
+                <Input bgColor={"bg-secondary"} placeholder={stepOne.placeholderPhoneNumber} cssClass={"text-center p-3"} maxLength={11}
                     onChange={(e) => setUserName(e.target.value)}
                     value={userName}
                     onKeyDown={(e) => {
@@ -74,7 +77,7 @@ const StepOne = ({ goToNextStep, setTimer , setUserName , userName}) => {
                         logInStepOne();
                     }}
                     >
-                        <span>ادامه</span>
+                        <span>{stepOne.buttonTitle}</span>
                         <FaArrowRightToBracket className='text-lg' />
                     </div>
                 }

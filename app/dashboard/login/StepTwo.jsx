@@ -4,19 +4,20 @@ import { FaArrowRightToBracket } from "react-icons/fa6";
 import { logInStepTwo as RlogInStepTwo } from '@/services/Authorization';
 import Timer from '@/components/dashboard/Timer';
 import { setCookie } from 'cookies-next';
+import translations from "@/translations.json";
 
 const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDashboard }) => {
 
     const [code, setCode] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
-
+    const { stepTwo, someThingIsWrong } = translations['fa'];
 
 
     const logInStepTwo = async () => {
         try {
             if (code.length != 4) {
-                setErrorMessage(<div className='text-center'>کد 4 رقم می باشد</div>);
+                setErrorMessage(<div className='text-center'>{stepTwo.codeFormatIsWrong}</div>);
                 return;
             }
             setLoading(true);
@@ -35,7 +36,7 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
             if (error?.response?.data?.message) {
                 setErrorMessage(<div className='text-center'>{error.response.data.message}</div>);
             } else {
-                setErrorMessage(<div className='text-center'>Something is wrong!</div>);
+                setErrorMessage(<div className='text-center'>{someThingIsWrong}</div>);
             }
         }
     }
@@ -46,7 +47,7 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
             <div className='w-full'>
                 <Input
                     bgColor={"bg-secondary"}
-                    placeholder={"کد"}
+                    placeholder={stepTwo.placeHolderCode}
                     cssClass={"text-center p-3"}
                     maxLength={4}
                     onChange={(e) => setCode(e.target.value)}
@@ -72,7 +73,7 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
                         logInStepTwo();
                     }}
                     >
-                        <span>ورود</span>
+                        <span>{stepTwo.buttonTitle}</span>
                         <FaArrowRightToBracket className='text-lg' />
                     </div>
                 }

@@ -71,7 +71,7 @@ const Sidebar = ({ open, setOpen }) => {
       </div>
 
       <div className="mb-5 mt-8 flex items-center justify-between rounded-md bg-secondary_dark p-3">
-        <div className="flex grow justify-center">
+        <div className="flex grow justify-center mr-3">
           <span className="">جواد اسماعیلی</span>
         </div>
         <Image
