@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { IoMenu } from "react-icons/io5";
 import config from "../../config.json";
 import Link from "next/link";
+import config from "../../config.json";
 
 const Header = ({ open, setOpen, categorys }) => {
 
@@ -9,7 +10,7 @@ const Header = ({ open, setOpen, categorys }) => {
         <div className="flex fixed top-0  z-30  min-h-[80px] lg:max-w-[1140px] h-fit p-2 w-screen items-center overflow-hidden px-5 gap-3">
             <div className='relative w-[50px] h-[50px] min-w-[50px] rounded-md overflow-hidden'>
                 <Image
-                    src="/logo.jpg"
+                    src={config.api + config.logo_url}
                     alt="Picture of the author"
                     fill
                     style={{ objectFit: "cover" }}

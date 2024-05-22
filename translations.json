@@ -1,0 +1,19 @@
+{
+    "en": {},
+    "fa": {
+        "sideBar": {
+            "/dashboard": "داشبورد",
+            "/dashboard/filemanager": "مدریت فایل ها",
+            "/dashboard/category": "دسته بندی ها",
+            "/dashboard/post/createPost": "ساخت پست",
+            "/dashboard/post/postList": "لیست پست ها",
+            "/dashboard/role": "دسترسی ها",
+            "/dashboard/user": "کاربران",
+            "/dashboard/history": "تاریخچه خرید و فروش"
+        },
+        "logIn": {
+            "back": "برگشت",
+            "logInRegister": "ورود | ثبت نام"
+        }
+    }
+}

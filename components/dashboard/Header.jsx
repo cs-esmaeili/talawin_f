@@ -11,10 +11,13 @@ import { GiOpenTreasureChest } from "react-icons/gi";
 const Header = ({ open, setOpen }) => {
   return (
     <div className="flex items-center p-2">
-      <RiMenu3Line
-        className="mr-3 text-2xl lg:hidden"
-        onClick={() => setOpen(!open)}
-      />
+
+      <div className="mr-3 hidden sm:flex">
+        <MdSunny className="text-2xl" />
+        <FaBell className="ml-3 text-2xl" />
+      </div>
+      <MiniProfile sliderIsOpen={open} />
+
       <div className="flex  grow flex-wrap justify-around gap-1 rounded-xl bg-secondary p-2">
         <div className="hidden md:flex ">
           <BiSolidStar className="text-2xl  text-blue-400" />
@@ -33,11 +36,11 @@ const Header = ({ open, setOpen }) => {
           <span className="text-md">10 G</span>
         </div>
       </div>
-      <div className="ml-3 hidden sm:flex">
-        <MdSunny className="text-2xl" />
-        <FaBell className="ml-3 text-2xl" />
-      </div>
-      <MiniProfile sliderIsOpen={open} />
+
+      <RiMenu3Line
+        className="ml-3 text-2xl lg:hidden"
+        onClick={() => setOpen(!open)}
+      />
     </div>
   );
 };

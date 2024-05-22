@@ -30,7 +30,7 @@ const MiniProfile = ({ sliderIsOpen }) => {
 
   return (
     <div
-      className="relative ml-3 flex"
+      className="relative mr-3 flex"
       onClick={() => {
         setOpen(!open);
       }}

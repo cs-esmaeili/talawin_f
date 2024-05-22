@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import { FaArrowLeft } from "react-icons/fa6";
+import config from "../../../config.json";
+import translations from "@/translations.json";
 
 const LogIn = () => {
 
@@ -22,6 +24,8 @@ const LogIn = () => {
         push('/dashboard');
     }
 
+    const text = translations['fa'].logIn;
+
     return (
         <div className='bg-primary flex h-screen w-full max-w-full overflow-hidden justify-center items-center'>
             <Toaster position="top-center" />
@@ -36,7 +40,7 @@ const LogIn = () => {
                         <div className='flex flex-row-reverse justify-between w-full'>
                             <div className='relative max-w-full w-[140px] h-[140px] rounded-md overflow-hidden '>
                                 <Image
-                                    src="/logo.jpg"
+                                    src={config.api + config.logo_url}
                                     alt="Picture of the author"
                                     fill
                                     style={{ objectFit: "cover" }}
@@ -47,10 +51,10 @@ const LogIn = () => {
                                     setStep(false);
                                 }}>
                                     <FaArrowLeft />
-                                    <span>برگشت</span>
+                                    <span>{text.back}</span>
                                 </div>
                                 <div className='flex grow items-center'>
-                                    <span className='text-3xl'>ورود | ثبت نام</span>
+                                    <span className='text-3xl'>{text.logInRegister}</span>
                                 </div>
                             </div>
                         </div>

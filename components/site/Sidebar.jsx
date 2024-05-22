@@ -21,10 +21,10 @@ const Sidebar = ({ open, setOpen, categorys }) => {
             : "fixed  right-[-100%] h-full z-30 min-w-max bg-primary_s p-7 duration-500 ease-in"
         }
       >
-        <div className="flex items-center justify-center mb-5 min-w-36">
+        <div className="flex items-center justify-between mb-5 min-w-36 bg-red-300">
           <Image
             className="rounded-md"
-            src="/logo.jpg"
+            src={config.api + config.logo_url}
             alt="Site logo"
             width={60}
             height={60}
