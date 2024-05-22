@@ -4,6 +4,8 @@ import { FaBell } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
 import { getCookie, deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { deletePermissions } from '@/state/permissions';
 
 const MiniProfile = ({ sliderIsOpen }) => {
 
@@ -13,15 +15,16 @@ const MiniProfile = ({ sliderIsOpen }) => {
   const user = getCookie('user') && JSON.parse(getCookie('user'));
   const userName = getCookie('userName');
   const role = getCookie('role');
-
+  const dispatch = useDispatch();
   const hostname = window.location.hostname;
   const { push } = useRouter();
 
-  const exitFromDashboard = () => {
+  const exitFromDashboard = async () => {
     deleteCookie('token', { path: '/', domain: hostname });
     deleteCookie('user', { path: '/', domain: hostname });
     deleteCookie('userName', { path: '/', domain: hostname });
     deleteCookie('role', { path: '/', domain: hostname });
+    await dispatch(deletePermissions());
     push('/dashboard/login');
   }
 
