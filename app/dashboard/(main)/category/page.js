@@ -7,7 +7,7 @@ import { categoryList as RcategoryList } from '@/services/Category';
 import toast from 'react-hot-toast';
 import Table from '@/components/dashboard/Table';
 import Pagination from '@/components/dashboard/Pagination';
-
+import translations from "@/translations.json";
 
 export default function Category({ pickMode = false, selectListener }) {
 
@@ -16,9 +16,9 @@ export default function Category({ pickMode = false, selectListener }) {
     const [categorysCount, setCategorysCount] = useState(null);
     const [activePage, setActivePage] = useState(1);
     const [perPage, setPerPage] = useState(6);
-
     const [editData, setEditData] = useState(null);
 
+    const { someThingIsWrong, categoryPage } = translations['fa'];
 
 
     const categoryList = async () => {
@@ -31,7 +31,7 @@ export default function Category({ pickMode = false, selectListener }) {
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -51,10 +51,10 @@ export default function Category({ pickMode = false, selectListener }) {
                 {categorys &&
                     <Table
                         headers={[
-                            { name: 'Id', cssClass: "hidden lg:table-cell" },
-                            { name: 'Name', cssClass: "" },
-                            { name: 'UpdatedAt', cssClass: "hidden sm:table-cell" },
-                            { name: 'Actions', cssClass: "" },
+                            { name: categoryPage.id, cssClass: "hidden lg:table-cell" },
+                            { name: categoryPage.name, cssClass: "" },
+                            { name: categoryPage.updatedAt, cssClass: "hidden sm:table-cell" },
+                            { name: categoryPage.actions, cssClass: "" },
                         ]}
                         rowData={[
                             { name: '_id', cssClass: "hidden lg:table-cell" },
@@ -64,11 +64,11 @@ export default function Category({ pickMode = false, selectListener }) {
                         rows={categorys}
                         rowCountstart={(perPage * (activePage - 1))}
                         selectMode={true}
-                        selectListener={(row, index) => { 
-                            if(pickMode){
+                        selectListener={(row, index) => {
+                            if (pickMode) {
                                 selectListener(row);
                             }
-                         }}
+                        }}
                         special={(row, index) => {
                             return (
                                 <td className={`h-[1px]  p-0 pb-1 ${pickMode && "opacity-50"}`}>

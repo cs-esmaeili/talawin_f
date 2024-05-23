@@ -4,10 +4,11 @@ import {
     deleteFolder as RdeleteFolder,
     deleteFile as RdeleteFile,
 } from '@/services/Filemanager';
-
+import translations from "@/translations.json";
 
 export default function DeleteFile({ path, file, refreshList }) {
 
+    const { someThingIsWrong, filemanagerDelete } = translations['fa'];
 
     const deleteFile = async () => {
         try {
@@ -20,7 +21,7 @@ export default function DeleteFile({ path, file, refreshList }) {
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -37,7 +38,7 @@ export default function DeleteFile({ path, file, refreshList }) {
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -46,7 +47,7 @@ export default function DeleteFile({ path, file, refreshList }) {
         <IoMdTrash className="text-red-500 text-xl" onClick={() => {
 
             if (file == null) {
-                toast.error("ابتدا فایلی را انتخاب کنید");
+                toast.error(filemanagerDelete.toastError);
             } else if (file.type == "folder") {
                 deleteFolder();
             } else {

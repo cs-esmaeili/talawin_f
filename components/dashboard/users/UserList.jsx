@@ -6,6 +6,7 @@ import Pagination from '@/components/dashboard/Pagination';
 import { FaUserLock } from "react-icons/fa6";
 import { BiSolidEdit } from 'react-icons/bi';
 import { MdQueryStats } from "react-icons/md";
+import translations from "@/translations.json";
 
 const UserList = ({ editData, setEditData, refreshList }) => {
 
@@ -13,7 +14,7 @@ const UserList = ({ editData, setEditData, refreshList }) => {
     const [usersCount, setUsersCount] = useState(null);
     const [activePage, setActivePage] = useState(1);
     const [perPage, setPerPage] = useState(8);
-
+    const { someThingIsWrong, userlist } = translations['fa'];
 
     const userList = async () => {
         try {
@@ -25,7 +26,7 @@ const UserList = ({ editData, setEditData, refreshList }) => {
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -40,11 +41,11 @@ const UserList = ({ editData, setEditData, refreshList }) => {
                 {users &&
                     <Table
                         headers={[
-                            { name: 'Id', cssClass: "hidden lg:table-cell" },
-                            { name: 'userName', cssClass: "" },
-                            { name: 'Role', cssClass: "" },
-                            { name: 'createdAt', cssClass: "hidden sm:table-cell" },
-                            { name: 'Actions', cssClass: "" },
+                            { name: userlist.id, cssClass: "hidden lg:table-cell" },
+                            { name: userlist.userName, cssClass: "" },
+                            { name: userlist.role, cssClass: "" },
+                            { name: userlist.createdAt, cssClass: "hidden sm:table-cell" },
+                            { name: userlist.actions, cssClass: "" },
                         ]}
                         rowData={[
                             { name: '_id', cssClass: "hidden lg:table-cell" },

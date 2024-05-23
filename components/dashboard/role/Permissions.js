@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
 import { togglePermission as RtogglePermission } from '@/services/Permission';
 import toast from 'react-hot-toast';
+import translations from "@/translations.json";
 
 export default function Permissions({ allPermissions, currentRole, setUpdateList }) {
+
+    const { someThingIsWrong, permissions } = translations['fa'];
 
     const togglePermission = async (role_id, permission_id) => {
         try {
@@ -15,15 +17,10 @@ export default function Permissions({ allPermissions, currentRole, setUpdateList
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
-
-    // useEffect(() => {
-    //     console.log(allPermissions);
-    // }, [allPermissions, currentRole]);
-
 
     return (
         <>
@@ -62,7 +59,7 @@ export default function Permissions({ allPermissions, currentRole, setUpdateList
                 })
                 :
                 <div className='flex grow justify-center items-center'>
-                    نقشی را انتخاب کنید
+                    {permissions.selecRole}
                 </div>
             }
         </>

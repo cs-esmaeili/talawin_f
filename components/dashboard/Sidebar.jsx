@@ -10,7 +10,6 @@ import { FaUserPlus } from "react-icons/fa6";
 import { useRouter } from 'next/navigation';
 import config from "@/config.json";
 import translations from "@/translations.json";
-
 import Image from "next/image";
 import Link from "next/link";
 import { TbArrowsDownUp } from "react-icons/tb";

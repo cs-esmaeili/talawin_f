@@ -5,11 +5,11 @@ const SmsInput = ({ icon, value, setValue, placeholder, color, cssClass, onChang
   // const [value, setValue] = useState('');
 
   const handleChange = (e) => {
-    const inputValue = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
-    let formattedValue = inputValue.replace(/(\d{1})(?=\d)/g, '$1 '); // Add a space after each 1 digits
+    const inputValue = e.target.value.replace(/\D/g, ''); 
+    let formattedValue = inputValue.replace(/(\d{1})(?=\d)/g, '$1 ');
 
     if (formattedValue.length > 0 && formattedValue[formattedValue.length - 1] === ' ') {
-      formattedValue = formattedValue.slice(0, -1); // Remove space if the last character is a space
+      formattedValue = formattedValue.slice(0, -1); 
     }
 
     setValue(formattedValue);
@@ -18,7 +18,7 @@ const SmsInput = ({ icon, value, setValue, placeholder, color, cssClass, onChang
 
   const handleKeyDown = (e) => {
     if (e.key === 'Backspace' && value[value.length - 1] === ' ') {
-      setValue(value.slice(0, -2)); // Remove both the space and the number behind it
+      setValue(value.slice(0, -2)); 
     }
   };
 

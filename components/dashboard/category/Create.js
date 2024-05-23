@@ -4,6 +4,7 @@ import Filemanager from '@/app/dashboard/(main)/filemanager/page';
 import { createCategory as RcreateCategory, updateCategory as RupdateCategory } from '@/services/Category';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import translations from "@/translations.json";
 
 export default function CreateCategory({ categoryList, editData, setEditData }) {
 
@@ -12,6 +13,7 @@ export default function CreateCategory({ categoryList, editData, setEditData }) 
     const [editMode, setEditMode] = useState(false);
     const [image, setImage] = useState(null);
     const [name, setName] = useState("");
+    const { someThingIsWrong, categoryCreate } = translations['fa'];
 
     const createCategory = async () => {
         try {
@@ -25,7 +27,7 @@ export default function CreateCategory({ categoryList, editData, setEditData }) 
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -41,7 +43,7 @@ export default function CreateCategory({ categoryList, editData, setEditData }) 
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -76,7 +78,7 @@ export default function CreateCategory({ categoryList, editData, setEditData }) 
                 <div className='flex flex-col items-center max-h-fit  absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                     <div className='mb-2'>
                         <input
-                            placeholder={"Category"}
+                            placeholder={categoryCreate.inputCategoryPlaceholder}
                             className='outline-0 bg-transparent border-solid border-2 border-l-0 border-t-0 border-r-0 text-center rounded-xl'
                             onChange={(e) => setName(e.target.value)}
                             value={name}
@@ -91,7 +93,7 @@ export default function CreateCategory({ categoryList, editData, setEditData }) 
                                     } else {
                                         createCategory();
                                     }
-                                }}>{(editMode) ? "Done" : "Create"}</button>
+                                }}>{(editMode) ? categoryCreate.buttonDone : categoryCreate.buttonCreate}</button>
                             }
                             <button className={`bg-blue-500 text-white rounded-md p-1 w-full ${editMode && "ml-2"}`}
                                 onClick={(e) => {
@@ -101,12 +103,12 @@ export default function CreateCategory({ categoryList, editData, setEditData }) 
                                         closeModal();
                                     }} />);
                                 }}>
-                                Select
+                                {categoryCreate.buttonSelect}
                             </button>
                         </div>
                         {editMode &&
                             <div>
-                                <button className='bg-red-500 rounded-md p-1 w-full' onClick={() => setEditData(null)}>Cancel Edit</button>
+                                <button className='bg-red-500 rounded-md p-1 w-full' onClick={() => setEditData(null)}>{categoryCreate.buttonCancel}</button>
                             </div>
                         }
                     </div>

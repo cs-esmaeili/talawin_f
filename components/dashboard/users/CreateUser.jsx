@@ -13,6 +13,7 @@ import { MdSubtitles } from "react-icons/md";
 import { FaMobile } from "react-icons/fa6";
 import { FaIdCardAlt } from "react-icons/fa";
 import { MdCreditCard } from "react-icons/md";
+import translations from "@/translations.json";
 
 const CreateUser = ({ editData, setEditData, setRefreshList }) => {
 
@@ -23,11 +24,10 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
     const [birthday, setBirthday] = useState(null);
     const [nationalCode, setNationalCode] = useState("");
     const [shebaNumber, setShebaNumber] = useState("");
-
     const [createStatus, setCreateStatus] = useState(false);
-
-
     const { openModal, closeModal } = useModalContext();
+
+    const { someThingIsWrong, createuser } = translations['fa'];
 
     const resetForm = () => {
         setRole(null);
@@ -70,7 +70,7 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -110,10 +110,10 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
     return (
         <>
             <div className='flex flex-col grow  gap-2 w-2/3 max-w-2/3'>
-                <Input onChange={(e) => setFullName(e.target.value)} value={fullName} icon={<MdSubtitles />} placeholder={"Fullname"} color={"bg-primary"} />
-                <Input onChange={(e) => setUserName(e.target.value)} value={userName} icon={<FaMobile />} placeholder={"Username"} color={"bg-primary"} />
-                <Input onChange={(e) => setNationalCode(e.target.value)} value={nationalCode} icon={<FaIdCardAlt />} placeholder={"National_code"} color={"bg-primary"} />
-                <Input onChange={(e) => setShebaNumber(e.target.value)} value={shebaNumber} icon={<MdCreditCard />} placeholder={"sheba_Number"} color={"bg-primary"} />
+                <Input onChange={(e) => setFullName(e.target.value)} value={fullName} icon={<MdSubtitles />} placeholder={createuser.fullNamePlaceHolder} color={"bg-primary"} />
+                <Input onChange={(e) => setUserName(e.target.value)} value={userName} icon={<FaMobile />} placeholder={createuser.userNamePlaceHolder} color={"bg-primary"} />
+                <Input onChange={(e) => setNationalCode(e.target.value)} value={nationalCode} icon={<FaIdCardAlt />} placeholder={createuser.nationalCode} color={"bg-primary"} />
+                <Input onChange={(e) => setShebaNumber(e.target.value)} value={shebaNumber} icon={<MdCreditCard />} placeholder={createuser.shebaNumber} color={"bg-primary"} />
                 <div className='flex justify-between gap-2'>
                     <InputDatePicker icon={<BsImageFill className='' />} value={birthday} reset={birthday} onChange={(time) => setBirthday(time)} />
                     <button className='bg-accent grow text-nowrap p-1 pl-3 pr-3 rounded-md' onClick={() => {
@@ -122,7 +122,7 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
                             setRole({ name, _id });
                             closeModal();
                         }} />);
-                    }}>{role ? role.name : "Select Role"}</button>
+                    }}>{role ? role.name : createuser.selecRole}</button>
                 </div>
                 <div className='flex grow gap-2'>
                     {editData &&
@@ -132,7 +132,7 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
                                 resetForm();
                             }}
                         >
-                            Cancel Update
+                            {createuser.cancelUpdate}
                         </button>
                     }
                     <button className={`bg-green-500 grow text-nowrap p-1 pl-3 pr-3 rounded-md ${!createStatus && "opacity-50"}`}
@@ -142,13 +142,13 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
                             }
                         }}
                     >
-                        {(editData) ? "Update User" : "Create User"}
+                        {(editData) ? createuser.updateUser : createuser.createUser}
                     </button>
                 </div>
             </div>
 
             <div className='flex flex-col grow md:grow-0  w-1/3 justify-start bg-primary rounded-md p-2'>
-                <div className='w-fit'>User Image:</div>
+                <div className='w-fit'>{createuser.userImage}</div>
                 <div className='flex grow relative justify-center text-center mt-3'>
                     {image &&
                         <Image

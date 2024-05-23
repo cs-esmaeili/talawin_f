@@ -1,7 +1,7 @@
 'use client'
 import Roles from '@/components/dashboard/role/Roles';
 import Permissions from '@/components/dashboard/role/Permissions';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Role() {
 

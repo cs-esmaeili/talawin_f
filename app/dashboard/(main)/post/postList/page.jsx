@@ -7,6 +7,7 @@ import Pagination from '@/components/dashboard/Pagination';
 import { postList as RpostList } from '@/services/Post';
 import { BiSolidEdit } from 'react-icons/bi';
 import { RiCloseFill } from 'react-icons/ri';
+import translations from "@/translations.json";
 
 const postList = ({ pickMode = false, postPicker = null }) => {
 
@@ -14,10 +15,9 @@ const postList = ({ pickMode = false, postPicker = null }) => {
     const [postsCount, setPostsCount] = useState(null);
     const [activePage, setActivePage] = useState(1);
     const [perPage, setPerPage] = useState(30);
-
     const [editData, setEditData] = useState(null);
 
-
+    const { someThingIsWrong, postListPage } = translations['fa'];
 
     const postList = async () => {
         try {
@@ -29,7 +29,7 @@ const postList = ({ pickMode = false, postPicker = null }) => {
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -45,11 +45,11 @@ const postList = ({ pickMode = false, postPicker = null }) => {
                 {posts &&
                     <Table
                         headers={[
-                            { name: 'Id', cssClass: "hidden xl:table-cell" },
-                            { name: 'title', cssClass: "" },
-                            { name: 'Category', cssClass: "" },
-                            { name: 'UpdatedAt', cssClass: "hidden sm:table-cell" },
-                            { name: 'Actions', cssClass: "" },
+                            { name: postListPage.id, cssClass: "hidden xl:table-cell" },
+                            { name: postListPage.title, cssClass: "" },
+                            { name: postListPage.category, cssClass: "" },
+                            { name: postListPage.updatedAt, cssClass: "hidden sm:table-cell" },
+                            { name: postListPage.actions, cssClass: "" },
                         ]}
                         rowData={[
                             { name: '_id', cssClass: "hidden xl:table-cell" },

@@ -4,13 +4,14 @@ import { roleList as RroleList, deleteRole as RdeleteRole } from '@/services/Rol
 import { ImCancelCircle } from "react-icons/im";
 import Add from './Add';
 import toast from 'react-hot-toast';
+import translations from "@/translations.json";
 
 export default function Roles({ setCurrentRole, setAllpermissions, updateList, selectMode, listener }) {
 
     const [roles, setRoles] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(-1);
     const [deleteMode, setDeleteMode] = useState(-1);
-
+    const { someThingIsWrong, rolesT } = translations['fa'];
 
     const roleList = async (selectLastActiveRole) => {
         try {
@@ -27,7 +28,7 @@ export default function Roles({ setCurrentRole, setAllpermissions, updateList, s
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -44,7 +45,7 @@ export default function Roles({ setCurrentRole, setAllpermissions, updateList, s
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -82,7 +83,7 @@ export default function Roles({ setCurrentRole, setAllpermissions, updateList, s
     return (
         <div className='flex flex-col grow'>
             <div className='flex w-full justify-center p-2'>
-                <div>Role List</div>
+                <div>{rolesT.roleListTitle}</div>
             </div>
             <div className='flex flex-col pr-3 pl-3 w-full gap-2'>
                 {(roles != null) &&
@@ -100,7 +101,7 @@ export default function Roles({ setCurrentRole, setAllpermissions, updateList, s
                                             setCurrentIndex(index);
                                             if (!selectMode) {
                                                 setCurrentRole(roles[index]);
-                                            }else{
+                                            } else {
                                                 listener(role);
                                             }
                                         } else if (index != deleteMode) {

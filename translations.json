@@ -29,6 +29,87 @@
         "layoutMain": {
             "permissionError": "دسترسی مجاز نیست !",
             "securityCheck": "برسی امنیتی"
+        },
+        "categoryCreate": {
+            "inputCategoryPlaceholder": "دسته بندی",
+            "buttonDone": "اعمال",
+            "buttonCreate": "ساخت",
+            "buttonSelect": "انتخاب",
+            "buttonCancel": "لغو"
+        },
+        "categoryDelete": {
+            "inputPlaceHolder": "جایگزین شود با ...",
+            "toastError": "ای دی دسته بندی جایگزین را وارد کنید"
+        },
+        "filemanagerDelete": {
+            "toastError": "ابتدا فایلی را انتخاب کنید"
+        },
+        "filemanagerFiles": {
+            "pathIsEmpty": "مسیر خالی میباشد"
+        },
+        "filemanagerFolder": {
+            "inputPlaceHolder": "نام پوشه"
+        },
+        "filemanagerRename": {
+            "toastError": "ابتدا فایلی را انتخاب کنید",
+            "inputPlaceHolder": "تغییر نام با ..."
+        },
+        "postDetails": {
+            "inputTitlePlaceholder": "عنوان",
+            "inputDiscPlaceholder": "توضیحات",
+            "inputtagsPlaceholder": "تگ ها",
+            "buttonDone": "اعمال",
+            "buttonCreate": "ساخت",
+            "buttonSelect": "انتخاب دسته بندی"
+        },
+        "postList": {
+            "textAreaPlaceHolder": "متن...",
+            "placeText": "جا"
+        },
+        "permissions": {
+            "selecRole": "نقشی را انتخاب کنید"
+        },
+        "rolesT": {
+            "roleListTitle": "لیست نقش ها"
+        },
+        "createuser": {
+            "fullNamePlaceHolder": "نام و نام خانوادگی",
+            "userNamePlaceHolder": "نام کاربری",
+            "nationalCode": "کد ملی",
+            "shebaNumber": "شماره شبا",
+            "selecRole": "انتخاب نقش",
+            "cancelUpdate": "لغو",
+            "updateUser": "بروز رسانی کاربر",
+            "createUser": "ساخت کاربر",
+            "userImage": "تصویر کاربر"
+        },
+        "userlist": {
+            "id": "کد",
+            "userName": "نام کاربری",
+            "role": "نقش",
+            "createdAt": "تاریخ ساخت",
+            "actions": "اعمال"
+        },
+        "miniProfile": {
+            "profile": "حساب کاربری",
+            "exit": "خروج"
+        },
+        "categoryPage": {
+            "id": "کد",
+            "name": "نام",
+            "updatedAt": "بروز شده",
+            "actions": "اعمال"
+        },
+        "filemanagerPage": {
+            "home": "خانه",
+            "search": "جستجو"
+        },
+        "postListPage": {
+            "id": "کد",
+            "title": "عنوان",
+            "category": "دسته بندی",
+            "updatedAt": "بروز شده",
+            "actions": "اعمال"
         }
     }
 }

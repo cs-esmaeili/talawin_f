@@ -6,18 +6,20 @@ import { getCookie, deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { deletePermissions } from '@/state/permissions';
+import translations from "@/translations.json";
 
 const MiniProfile = ({ sliderIsOpen }) => {
 
   const [open, setOpen] = useState(false);
-
-
   const user = getCookie('user') && JSON.parse(getCookie('user'));
   const userName = getCookie('userName');
   const role = getCookie('role');
   const dispatch = useDispatch();
   const hostname = window.location.hostname;
   const { push } = useRouter();
+
+  const { miniProfile } = translations['fa'];
+
 
   const exitFromDashboard = async () => {
     deleteCookie('token', { path: '/', domain: hostname });
@@ -70,10 +72,10 @@ const MiniProfile = ({ sliderIsOpen }) => {
           </div>
           <hr className=" mb-2 mt-2 sm:hidden" />
           <div className="flex flex-col justify-end">
-            <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer">حساب کاربری</div>
+            <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer">{miniProfile.profile}</div>
             <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer" onClick={() => {
               exitFromDashboard();
-            }}>خروج</div>
+            }}>{miniProfile.exit}</div>
           </div>
           <hr className="mt-2" />
           <div className="flex flex-row justify-end mt-2">

@@ -3,11 +3,12 @@ import { rename as Rrename } from '@/services/Filemanager';
 import { BiSolidEdit } from 'react-icons/bi';
 import Input from '@/components/dashboard/Input';
 import toast from 'react-hot-toast';
+import translations from "@/translations.json";
 
 export default function Rename({ path, file, refreshList }) {
 
     const [inputOpen, setInputOpen] = useState(false);
-
+    const { someThingIsWrong, filemanagerRename } = translations['fa'];
 
     const rename = async (newName) => {
         try {
@@ -19,7 +20,7 @@ export default function Rename({ path, file, refreshList }) {
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -28,14 +29,15 @@ export default function Rename({ path, file, refreshList }) {
         <div className='flex items-center'>
             <BiSolidEdit className='text-xl text-blue-400' onClick={() => {
                 if (file == null) {
-                    toast.error("ابتدا فایلی را انتخاب کنید");
+                    toast.error(filemanagerRename.toastError);
                 } else {
                     setInputOpen(!inputOpen);
                 }
             }} />
             {inputOpen &&
                 <Input
-                    placeholder={"Rename to ..."}
+                    placeholder={filemanagerRename.inputPlaceHolder}
+                    className="rtl bg-primary border-hidden outline-none"
                     color={"bg-primary"}
                     autoFocus
                     onKeyDown={(e) => {

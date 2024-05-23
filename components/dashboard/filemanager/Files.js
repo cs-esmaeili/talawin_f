@@ -6,12 +6,14 @@ import ImageModal from "../Modals/ImageModal";
 import VideoModal from './../Modals/VideoModal';
 import { useState, useEffect } from 'react';
 import { folderFileList as RfolderFileList } from '@/services/Filemanager';
+import translations from "@/translations.json";
 
 export default function Files({ path, selectedFile, setSelectedFile, setPath, refreshList, baseUrl, setBaseUrl, fileType }) {
 
     const { openModal, closeModal } = useModalContext();
     const [files, setFiles] = useState(null);
     const [status, setStatus] = useState(false);
+    const { someThingIsWrong, filemanagerFiles } = translations['fa'];
 
     const folderFileList = async () => {
         try {
@@ -24,7 +26,7 @@ export default function Files({ path, selectedFile, setSelectedFile, setPath, re
             setBaseUrl(data.baseUrl);
             // setSelectedFile(data.files[0]);
             if (data.files.length == 0) {
-                setStatus('مسیر خالی میباشد');
+                setStatus(filemanagerFiles.pathIsEmpty);
             } else {
                 setStatus(false);
             }
@@ -32,7 +34,7 @@ export default function Files({ path, selectedFile, setSelectedFile, setPath, re
             if (error?.response?.data?.message) {
                 setStatus(error.response.data.message);
             } else {
-                setStatus('Something is wrong!');
+                setStatus(someThingIsWrong);
             }
         }
     }

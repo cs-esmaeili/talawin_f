@@ -8,6 +8,7 @@ import Rename from '@/components/dashboard/filemanager/Rename';
 import Folder from '@/components/dashboard/filemanager/Folder';
 import Files from '@/components/dashboard/filemanager/Files';
 import Input from '@/components/dashboard/Input';
+import translations from "@/translations.json";
 
 export default function FileManager({ fileType = null, fileSelectListener }) {
 
@@ -15,6 +16,7 @@ export default function FileManager({ fileType = null, fileSelectListener }) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [refreshList, setRefreshList] = useState(false);
     const [baseUrl, setBaseUrl] = useState(null);
+    const { filemanagerPage } = translations['fa'];
 
     useEffect(() => {
         if (fileSelectListener != null && selectedFile != null && selectedFile.type != "folder") {
@@ -39,11 +41,11 @@ export default function FileManager({ fileType = null, fileSelectListener }) {
                 </div>
                 <div className='flex grow basis-8 mb-2 justify-center mr-2 ml-2'>
                     <span>
-                        {path == "" ? "Home" : "Home > " + path.join(' > ')}
+                        {path == "" ? filemanagerPage.home : `${filemanagerPage.home} > ` + path.join(' > ')}
                     </span>
                 </div>
                 <div className='flex grow basis-1 mb-2'>
-                    <Input placeholder={"search..."}
+                    <Input placeholder={filemanagerPage.search}
                         icon={<PiKeyReturnBold className='text-xl' />}
                         color={"bg-primary"} />
                 </div>

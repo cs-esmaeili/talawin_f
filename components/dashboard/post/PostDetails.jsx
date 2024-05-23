@@ -9,6 +9,7 @@ import { RiCloseFill } from 'react-icons/ri';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import Filemanager from '@/app/dashboard/(main)/filemanager/page';
+import translations from "@/translations.json";
 
 const PostDetails = ({ content, setContent, editMode, editData, updateListener }) => {
 
@@ -20,8 +21,9 @@ const PostDetails = ({ content, setContent, editMode, editData, updateListener }
     const [disc, setDisc] = useState("");
     const [imageH, setImageH] = useState(null);
     const [imageV, setImageV] = useState(null);
-
     const [readyToCreate, setReadyToCreate] = useState(false);
+
+    const { someThingIsWrong, postDetails } = translations['fa'];
 
     const createPost = async () => {
         try {
@@ -43,7 +45,7 @@ const PostDetails = ({ content, setContent, editMode, editData, updateListener }
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
-                toast.error('Something is wrong!');
+                toast.error(someThingIsWrong);
             }
         }
     }
@@ -83,13 +85,13 @@ const PostDetails = ({ content, setContent, editMode, editData, updateListener }
         <div className='flex flex-col bg-secondary  p-2 mb-2 rounded-md' >
             <div className='flex  gap-2 mb-2  justify-between flex-wrap  max-w-full'>
                 <div className='grow'>
-                    <Input placeholder={"Title"} color={"bg-primary"} onChange={(e) => setTitle(e.target.value)} value={title} />
+                    <Input placeholder={postDetails.inputTitlePlaceholder} color={"bg-primary"} onChange={(e) => setTitle(e.target.value)} value={title} />
                 </div>
                 <div className='grow'>
-                    <Input placeholder={"Discription"} color={"bg-primary "} onChange={(e) => setDisc(e.target.value)} value={disc} />
+                    <Input placeholder={postDetails.inputDiscPlaceholder} color={"bg-primary "} onChange={(e) => setDisc(e.target.value)} value={disc} />
                 </div>
             </div>
-            <Input placeholder={"Meta Tags"} color={"bg-primary"} onKeyDown={(e) => {
+            <Input placeholder={postDetails.inputtagsPlaceholder} color={"bg-primary"} onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                     let temp = [...tags];
                     temp.push(e.target.value);
@@ -103,7 +105,6 @@ const PostDetails = ({ content, setContent, editMode, editData, updateListener }
                     {tags.map((tag, index) => {
                         return (
                             <div className='flex' onClick={() => {
-                                console.log("click");
                                 let temp = [...tags];
                                 temp.splice(index, 1);
                                 setTags(temp);
@@ -185,7 +186,7 @@ const PostDetails = ({ content, setContent, editMode, editData, updateListener }
                             createPost();
                         }
                     }}>
-                    {editMode ? "Done" : "Create"}
+                    {editMode ? postDetails.buttonDone : postDetails.buttonCreate}
                 </button>
                 <button className='w-full p-1 bg-green-500 rounded-md '
                     onClick={() => {
@@ -194,7 +195,7 @@ const PostDetails = ({ content, setContent, editMode, editData, updateListener }
                             closeModal();
                         }} />);
                     }}>
-                    {(category == null) ? "Select Category" : category.name}
+                    {(category == null) ? postDetails.buttonSelect : category.name}
                 </button>
             </div>
         </div>
