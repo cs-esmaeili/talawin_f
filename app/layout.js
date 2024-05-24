@@ -1,6 +1,6 @@
 import localFont from 'next/font/local'
 import '@/styles/globals.css';
-
+import config from "@/config.json";
 
 const custom = localFont({
   src: './fonts/IranianSans.ttf',
@@ -9,8 +9,8 @@ const custom = localFont({
 
 
 export const metadata = {
-  title: "News",
-  description: 'Created by Javad Esmaeili',
+  title: config.app_name,
+  description: config.site_description,
 }
 
 export default function RootLayout({ children }) {

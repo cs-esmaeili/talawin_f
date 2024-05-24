@@ -22,8 +22,14 @@ export default function Layout({ children }) {
   const permissions = useSelector((state) => state.permissions.value);
   const { replace } = useRouter();
   const pathname = usePathname()
-  const { layoutMain, someThingIsWrong } = translations['fa'];
+  const { layoutMain } = translations['fa'];
 
+  const checkExpTime = async () => {
+    const token = getCookie('token');
+    if (token == null || token == undefined) {
+      throw new Error(layoutMain.permissionError);
+    }
+  }
   const checkUserAccessToUrl = async (permissions) => {
     let access = false;
     permissions.forEach(element => {
@@ -40,9 +46,10 @@ export default function Layout({ children }) {
 
   const userPsermissions = async () => {
     try {
+      await checkExpTime();
       if (permissions.length != 0 && permissions != null) {
         await checkUserAccessToUrl(permissions);
-        return;
+        return
       }
       setLoading(true);
       const token = getCookie('token');
@@ -60,6 +67,11 @@ export default function Layout({ children }) {
   }
 
   useEffect(() => {
+    userPsermissions();
+  }, [pathname]);
+
+
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 576) {
         setOpen(false);
@@ -72,9 +84,7 @@ export default function Layout({ children }) {
     };
   }, []);
 
-  useEffect(() => {
-    userPsermissions();
-  }, [pathname]);
+
 
   return (
     <div className='bg-primary flex h-screen w-full max-w-full overflow-hidden'>

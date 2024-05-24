@@ -23,9 +23,6 @@ module.exports = {
         text: 'rgb(var(--color-text) / <alpha-value>)',
         dactive : 'rgb(var(--color-dactive) / <alpha-value>)',
         active_background : 'rgb(var(--color-active_background) / <alpha-value>)',
-
-        primary_s: 'rgb(var(--color-primary-s) / <alpha-value>)',
-        accent_s: 'rgb(var(--color-accent-s) / <alpha-value>)',
       }
     },
   },

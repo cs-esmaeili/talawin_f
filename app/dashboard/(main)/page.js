@@ -2,7 +2,6 @@
 
 import Chart from "@/components/dashboard/Chart"
 import ProductCard from "@/components/site/ProductCard";
-import Image from 'next/image';
 
 export default function Dashboard() {
 

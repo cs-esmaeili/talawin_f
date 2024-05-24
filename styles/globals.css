@@ -3,16 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: 255 255 255;
-  --color-secondary: 249 250 251;
+  --color-primary: 46 49 57;
+  --color-secondary: 34 37 45;
   --color-accent: 216 163 26;
-  --color-text: 0 0 0;
-  --color-secondary_dark: 237 239 241;
+  --color-text: 255 255 255;
+  --color-secondary_dark: 46 49 57;
   --color-dactive: 189 196 203;
-  --color-active_background: 255 247 234;
-
-  --color-primary-s: 23 24 48 ;
-  --color-accent-s: 106 76 252;
+  --color-active_background: 46 49 57;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,10 +21,6 @@
     --color-secondary_dark: 46 49 57;
     --color-dactive: 189 196 203;
     --color-active_background: 46 49 57;
-
-    --color-primary-s: 23 24 48 ;
-    --color-accent-s: 106 76 252;
-
   }
 }
 
