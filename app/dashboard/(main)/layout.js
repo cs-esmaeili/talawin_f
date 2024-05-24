@@ -27,17 +27,22 @@ export default function Layout({ children }) {
   const checkExpTime = async () => {
     const token = getCookie('token');
     if (token == null || token == undefined) {
+      console.log("Token not found !");
       throw new Error(layoutMain.permissionError);
     }
   }
   const checkUserAccessToUrl = async (permissions) => {
     let access = false;
-    permissions.forEach(element => {
+    if (pathname == "/dashboard/login") {
+      access = true;
+    }
+    await permissions.forEach(element => {
       if (element.route == pathname) {
         access = true;
       }
     });
     if (!access) {
+      console.log("Permission Not granted !");
       throw new Error(layoutMain.permissionError);
     } else {
       return access;
@@ -49,7 +54,7 @@ export default function Layout({ children }) {
       await checkExpTime();
       if (permissions.length != 0 && permissions != null) {
         await checkUserAccessToUrl(permissions);
-        return
+        return;
       }
       setLoading(true);
       const token = getCookie('token');
