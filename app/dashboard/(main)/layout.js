@@ -17,7 +17,7 @@ import translations from "@/translations.json";
 export default function Layout({ children }) {
 
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const permissions = useSelector((state) => state.permissions.value);
   const { replace } = useRouter();
@@ -72,7 +72,7 @@ export default function Layout({ children }) {
   }
 
   useEffect(() => {
-    userPsermissions();
+    //userPsermissions();
   }, [pathname]);
 
 
