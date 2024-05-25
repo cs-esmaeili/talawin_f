@@ -17,7 +17,7 @@ import translations from "@/translations.json";
 export default function Layout({ children }) {
 
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const permissions = useSelector((state) => state.permissions.value);
   const { replace } = useRouter();
@@ -31,11 +31,9 @@ export default function Layout({ children }) {
       throw new Error(layoutMain.permissionError);
     }
   }
+
   const checkUserAccessToUrl = async (permissions) => {
     let access = false;
-    if (pathname == "/dashboard/login") {
-      access = true;
-    }
     await permissions.forEach(element => {
       if (element.route == pathname) {
         access = true;
@@ -51,20 +49,29 @@ export default function Layout({ children }) {
 
   const userPsermissions = async () => {
     try {
-      await checkExpTime();
-      if (permissions.length != 0 && permissions != null) {
-        await checkUserAccessToUrl(permissions);
-        return;
-      }
       setLoading(true);
       const token = getCookie('token');
       if (token) httpServices.axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
       let response = await RuserPermissions();
       let { data } = response;
-      await dispatch(setPermissions(data));
-      await checkUserAccessToUrl(data);
+      dispatch(setPermissions(data));
       setLoading(false);
+      return data;
+    } catch (error) {
+      console.log(error);
+      replace("/dashboard/login");
+    }
+  }
+
+  const securityCheck = async () => {
+    try {
+      await checkExpTime();
+      if (permissions == null || permissions.length === 0) {
+        const freshPermissions = await userPsermissions();
+        await checkUserAccessToUrl(freshPermissions);
+      } else {
+        await checkUserAccessToUrl(permissions);
+      }
     } catch (error) {
       console.log(error);
       replace("/dashboard/login");
@@ -72,8 +79,8 @@ export default function Layout({ children }) {
   }
 
   useEffect(() => {
-    //userPsermissions();
-  }, [pathname]);
+    securityCheck();
+  }, []);
 
 
   useEffect(() => {

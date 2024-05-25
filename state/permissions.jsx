@@ -8,7 +8,6 @@ export const permissionSlice = createSlice({
   },
   reducers: {
     setPermissions: (state, { payload }) => {
-      console.log(payload);
       state.value = payload;
     },
     deletePermissions: (state) => {
