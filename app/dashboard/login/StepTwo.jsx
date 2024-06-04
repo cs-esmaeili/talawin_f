@@ -47,7 +47,7 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
         <div className='flex flex-col w-full gap-4'>
             <div className='w-full'>
                 <Input
-                    bgColor={"bg-secondary"}
+                    bgColor={"bg-secondary !ltr"}
                     placeholder={stepTwo.placeHolderCode}
                     cssClass={"text-center p-3"}
                     maxLength={4}

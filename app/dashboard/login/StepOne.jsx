@@ -53,7 +53,7 @@ const StepOne = ({ goToNextStep, setTimer, setUserName, userName }) => {
     return (
         <div className='flex flex-col w-full gap-4'>
             <div className='w-full'>
-                <Input bgColor={"bg-secondary"} placeholder={stepOne.placeholderPhoneNumber} cssClass={"text-center p-3"} maxLength={11}
+                <Input bgColor={"bg-secondary !ltr"} placeholder={stepOne.placeholderPhoneNumber} cssClass={"text-center p-3"} maxLength={11}
                     onChange={(e) => setUserName(e.target.value)}
                     value={userName}
                     onKeyDown={(e) => {

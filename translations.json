@@ -10,7 +10,8 @@
             "/dashboard/post/postList": "لیست پست ها",
             "/dashboard/role": "دسترسی ها",
             "/dashboard/user": "کاربران",
-            "/dashboard/history": "تاریخچه خرید و فروش"
+            "/dashboard/history": "تاریخچه خرید و فروش",
+            "/dashboard/product": "مدریت کالا"
         },
         "logIn": {
             "back": "برگشت",
@@ -18,7 +19,7 @@
         },
         "stepOne": {
             "phoneNumberError": "فرمت شماره تماس صحیح نمی باشد",
-            "placeholderPhoneNumber": "شماره همراه",
+            "placeholderPhoneNumber": "09xxxxxxxxx",
             "buttonTitle": "ادامه"
         },
         "stepTwo": {

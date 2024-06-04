@@ -40,7 +40,8 @@ const LogIn = () => {
                         <div className='flex flex-row-reverse justify-between w-full'>
                             <div className='relative max-w-full w-[140px] h-[140px] rounded-md overflow-hidden '>
                                 <Image
-                                    src={config.api + config.logo_url}
+                                    src={"/logo.png"}
+                                    //src={config.api + config.logo_url}
                                     alt="Picture of the author"
                                     fill
                                     style={{ objectFit: "cover" }}

@@ -1,7 +1,11 @@
 import Image from 'next/image';
 
-const ProductCard = () => {
+const ProductCard = ({ title, disc, price, offPrice }) => {
 
+    const addCommas = (number) => {
+        if (number)
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     return (
         <div className='bg-secondary p-3 rounded-xl items-center justify-between flex flex-col gap-2 hover:bg-opacity-75'>
@@ -11,14 +15,14 @@ const ProductCard = () => {
                     alt="Picture of the author"
                     // placeholder="blur"
                     fill
-                    // blurDataURL={blurHash}
+                // blurDataURL={blurHash}
                 />
             </div>
-            <div className='text-center'>
-                طلا
+            <div className='text-center rtl'>
+                {title}
             </div>
-            <div className='text-center'>
-                18 عیار
+            <div className='text-center rtl'>
+                {disc}
             </div>
             <div className='flex flex-wrap-reverse border-2 border-accent rounded-lg p-2 w-full'>
 
@@ -30,12 +34,12 @@ const ProductCard = () => {
                     <div className='text-nowrap rtl w-fit flex justify-center'>
                         03:00
                     </div>
-                    
+
                 </div>
 
                 <div className='grow flex items-center flex-col justify-center'>
-                    <div>10000000</div>
-                    <div className='line-through text-red-400'>400</div>
+                    <div className='rtl'>{addCommas(price)} ریال</div>
+                    <div className='line-through text-red-400'>{addCommas(offPrice)}</div>
                 </div>
 
             </div>

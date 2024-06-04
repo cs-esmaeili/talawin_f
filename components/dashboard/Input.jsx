@@ -3,7 +3,7 @@ import React from "react";
 const Input = ({ icon, placeholder, bgColor, cssClass, ...props }) => {
   return (
     <div
-      className={`flex w-full items-center space-x-2 rounded-md p-1 shadow-md border-2 border-accent border-opacity-50 rtl ${
+      className={`flex w-full items-center space-x-2 rounded-md p-1 shadow-md border-2 border-accent border-opacity-50 rtl  ${
         bgColor ? bgColor : "bg-secondary"
       }`}
     >

@@ -7,20 +7,21 @@ import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { useSelector } from 'react-redux';
 import { BsShieldLockFill } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa6";
-import { useRouter } from 'next/navigation';
 import config from "@/config.json";
 import translations from "@/translations.json";
 import Image from "next/image";
 import Link from "next/link";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { useEffect, useState } from "react";
+import { getCookie } from 'cookies-next';
 
 const Sidebar = ({ open, setOpen }) => {
 
   const pathname = usePathname();
-  const { replace } = useRouter();
   const permissions = useSelector((state) => state.permissions.value);
   const text = translations["fa"].sideBar;
+  const user = getCookie('user') && JSON.parse(getCookie('user'));
+  const userName = getCookie('userName');
 
   const allItems = [
     { name: text["/dashboard"], url: "/dashboard", icon: <MdSpaceDashboard className="text-2xl" /> },
@@ -31,6 +32,7 @@ const Sidebar = ({ open, setOpen }) => {
     { name: text["/dashboard/role"], url: "/dashboard/role", icon: <BsShieldLockFill className="text-2xl" /> },
     { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
     { name: text["/dashboard/history"], url: "/dashboard/history", icon: <TbArrowsDownUp className="text-2xl" /> },
+    { name: text["/dashboard/product"], url: "/dashboard/product", icon: <TbArrowsDownUp className="text-2xl" /> },
   ];
 
   const [items, setItems] = useState([]);
@@ -71,7 +73,7 @@ const Sidebar = ({ open, setOpen }) => {
 
       <div className="mb-5 mt-8 flex items-center justify-between rounded-md bg-secondary_dark p-3">
         <div className="flex grow justify-center mr-3">
-          <span className="">جواد اسماعیلی</span>
+          <span>{(user && user.fullName != null) ? user.fullName : userName}</span>
         </div>
         <Image
           className="rounded-full"

@@ -1,7 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['localhost'], // Add localhost to allowed domains
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'localhost',
+            },
+            {
+                protocol: 'https',
+                hostname: 'www.back.talawin.ir',
+            },
+            {
+                protocol: 'http',
+                hostname: 'www.back.talawin.ir',
+            }
+        ],
     },
 };
 
