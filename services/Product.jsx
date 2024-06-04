@@ -3,6 +3,6 @@ import config from "../config.json";
 
 const prefixUrl = `${config.api}product`
 
-export const productList = () => {
-    return http.get(`${prefixUrl}/productList`);
+export const productList = (data) => {
+    return http.post(`${prefixUrl}/productList`, JSON.stringify(data));
 };

@@ -60,14 +60,14 @@ const Table = ({
                   key={indexCol}
                 >
                   <div
-                    className={`flex h-full grow flex-wrap items-center justify-center bg-secondary  p-1`}
+                    className={`flex h-full grow flex-wrap items-center justify-center bg-secondary  p-1 ${rowData.length - 1 == indexCol && special == null && "rounded-e-xl"}`}
                   >
                     {ObjectbyString(row, name)}
                   </div>
                 </td>
               );
             })}
-            {special(row, indexRow)}
+            {special && special(row, indexRow)}
           </tr>
         ))}
       </tbody>
