@@ -39,7 +39,7 @@ const ProductCard = ({ title, disc, price, offPrice }) => {
 
                 <div className='grow flex items-center flex-col justify-center'>
                     <div className='rtl'>{addCommas(price)} ریال</div>
-                    <div className='line-through text-red-400'>{addCommas(offPrice)}</div>
+                    <div className='line-through text-red-400 rtl'>{addCommas(offPrice)}</div>
                 </div>
 
             </div>

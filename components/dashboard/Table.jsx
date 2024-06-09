@@ -39,7 +39,7 @@ const Table = ({
       <tbody>
         {rows.map((row, indexRow) => (
           <tr
-            className="mb-5"
+            className="mb-5 "
             key={indexRow}
             onClick={() => {
               if (selectMode) {
@@ -48,7 +48,7 @@ const Table = ({
             }}
           >
             <td className="h-[1px]  p-0 pb-1">
-              <div className="flex h-full items-center justify-center rounded-s-xl bg-secondary p-1">
+              <div className={`flex h-full items-center justify-center rounded-s-xl bg-secondary p-1 ${selectMode && "hover:bg-accent"}`}>
                 {indexRow + 1 + rowCountstart}
               </div>
             </td>
@@ -60,7 +60,9 @@ const Table = ({
                   key={indexCol}
                 >
                   <div
-                    className={`flex h-full grow flex-wrap items-center justify-center bg-secondary  p-1 ${rowData.length - 1 == indexCol && special == null && "rounded-e-xl"}`}
+                    className={`flex h-full grow flex-wrap items-center justify-center bg-secondary  p-1 
+                    ${selectMode && "hover:bg-accent"}
+                    ${rowData.length - 1 == indexCol && special == null && "rounded-e-xl"}`}
                   >
                     {ObjectbyString(row, name)}
                   </div>
