@@ -2,9 +2,6 @@
 
 import ProductCardEdit from '@/components/dashboard/ProductCardEdit';
 import { useState, useEffect } from 'react';
-import { BiSolidEdit } from 'react-icons/bi';
-import Create from '@/components/dashboard/category/Create';
-import Delete from '@/components/dashboard/category/Delete';
 import { productList as RproductList } from '@/services/Product';
 import toast from 'react-hot-toast';
 import Table from '@/components/dashboard/Table';
@@ -21,34 +18,7 @@ const page = () => {
     const [perPage, setPerPage] = useState(6);
     const [editData, setEditData] = useState(null);
     const [apiMode, setApiMode] = useState(false);
-
-    const { someThingIsWrong, categoryPage } = translations['fa'];
-
-
-    const productList = async () => {
-        try {
-            const { data } = await RproductList({ page: activePage, perPage });
-            const { productsCount, products } = data;
-            setProducts(products);
-            setProductsCount(productsCount);
-        } catch (error) {
-            if (error?.response?.data?.message) {
-                toast.error(error.response.data.message);
-            } else {
-                toast.error(someThingIsWrong);
-            }
-        }
-    }
-
-    function getObjectByKey(array, key, value) {
-        return array.find(item => item[key] === value);
-    }
-
-    useEffect(() => {
-        productList();
-    }, [activePage]);
-    
-    let a = {
+    const [apiData, setApiData] = useState({
         "result": [
             {
                 "key": 391296,
@@ -431,20 +401,45 @@ const page = () => {
                 "created_at": "2024-06-09 09:16:13"
             }
         ]
-    };
+    });
 
+    const { someThingIsWrong, categoryPage } = translations['fa'];
+
+
+    const productList = async () => {
+        try {
+            const { data } = await RproductList({ page: activePage, perPage });
+            const { productsCount, products } = data;
+            setProducts(products);
+            setProductsCount(productsCount);
+        } catch (error) {
+            if (error?.response?.data?.message) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error(someThingIsWrong);
+            }
+        }
+    }
+
+
+
+    useEffect(() => {
+        productList();
+    }, [activePage]);
+    
+ 
     return (
         <div className='flex w-full '>
             <div className='w-1/2 justify-center items-center flex'>
                 <div>
-                    <ProductCardEdit editData={editData} setEditData={setEditData} setApiMode={setApiMode} apiMode={apiMode} />
+                    <ProductCardEdit editData={editData} setEditData={setEditData} setApiMode={setApiMode} apiMode={apiMode} apiData={apiData} />
                 </div>
             </div>
             <div className='w-1/2 '>
                 {apiMode ?
                     <div className='flex flex-col  w-full relative overflow-x-auto h-full justify-center bg-red-500'>
                         <SyntaxHighlighter language="javascript" style={tomorrowNightEighties} wrapLongLines>
-                            {JSON.stringify(a, null, 2)}
+                            {JSON.stringify(apiData, null, 2)}
                         </SyntaxHighlighter>
                         <button className='bg-accent w-full sticky bottom-0 p-3 rounded-md rtl' onClick={() => {
                             setApiMode(false);

@@ -2,33 +2,61 @@ import Image from 'next/image';
 import { LuImage } from "react-icons/lu";
 import Input from './Input';
 import { useState, useEffect } from 'react';
+import { createProduct } from '@/services/Product';
+import translations from "@/translations.json";
+import Filemanager from '@/app/dashboard/(main)/filemanager/page';
+import { useModalContext } from '@/components/dashboard/Modal';
+import toast from 'react-hot-toast';
 
-const ProductCard = ({ editData, setEditData, apiMode, setApiMode }) => {
+const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData }) => {
 
     const [name, setName] = useState("");
     const [disc, setDisc] = useState("");
     const [apiPath, setApiPath] = useState("");
     const [formula, setFormula] = useState("");
     const [discount, setDiscount] = useState("");
+    const [visible, setVisible] = useState(true);
+    const [image, setImage] = useState(null);
+    const [price, setPrice] = useState("");
+    const { openModal, closeModal } = useModalContext();
+    const { someThingIsWrong } = translations['fa'];
 
     const addCommas = (number) => {
         if (number)
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+    function getObjectByKey(array, key, value) {
+        return array.find(item => item[key] === value);
+    }
 
-    const submitProduct = () => {
-        console.log(name, disc, apiPath, formula , discount);
+    const submitProduct = async () => {
+        console.log(name, disc, apiPath, formula, discount);
+        try {
+            const { data } = await createProduct({ name, disc, image, price, discount, apiPath, formula, visible });
+        } catch (error) {
+            if (error?.response?.data?.message) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error(someThingIsWrong);
+            }
+        }
     }
 
     return (
         <div className='bg-secondary p-3 rounded-xl items-center justify-between flex flex-col gap-2 hover:bg-opacity-75'>
-            <div className='relative max-w-full w-[180px] lg:w-[200px] xl:w-[210px] h-[210px] m-3 flex justify-center items-center'>
-                {editData ?
+            <div className='relative max-w-full w-[180px] lg:w-[200px] xl:w-[210px] h-[210px] m-3 flex justify-center items-center' onClick={() => {
+                openModal(<Filemanager fileType={"image"} fileSelectListener={(selectedFile) => {
+                    const { baseUrl, file } = selectedFile;
+                    setImage({ url: baseUrl + file.name, blurHash: file.blurHash });
+                    closeModal();
+                }} />);
+            }}>
+                {image ?
                     <Image
-                        src={editData.image.url}
+                        src={image.url}
                         alt="Picture of the author"
                         placeholder="blur"
-                        blurDataURL={editData.image.blurHash}
+                        blurDataURL={image.blurHash}
                         fill
                     />
                     :
@@ -52,6 +80,12 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode }) => {
                         setDisc(e.target.value);
                     }
                 }} />
+            </div>
+            <div className='text-center' >
+                <label className='flex gap-2'>
+                    <span>نمایش کالا</span>
+                    <input type="checkbox" checked={visible} onChange={(e) => setVisible(e.target.checked)} />
+                </label>
             </div>
             <div className='flex flex-wrap-reverse border-2 border-accent rounded-lg p-2 w-full gap-2'>
 

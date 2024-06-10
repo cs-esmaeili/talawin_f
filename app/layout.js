@@ -1,6 +1,7 @@
 import localFont from 'next/font/local'
 import '@/styles/globals.css';
 import config from "@/config.json";
+import 'react-image-crop/dist/ReactCrop.css';
 
 const custom = localFont({
   src: './fonts/IranianSans.ttf',
