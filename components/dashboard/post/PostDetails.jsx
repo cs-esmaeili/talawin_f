@@ -85,13 +85,13 @@ const PostDetails = ({ content, setContent, editMode, editData, updateListener }
         <div className='flex flex-col bg-secondary  p-2 mb-2 rounded-md' >
             <div className='flex  gap-2 mb-2  justify-between flex-wrap  max-w-full'>
                 <div className='grow'>
-                    <Input placeholder={postDetails.inputTitlePlaceholder} color={"bg-primary"} onChange={(e) => setTitle(e.target.value)} value={title} />
+                    <Input placeholder={postDetails.inputTitlePlaceholder} inputCssClass={"bg-primary"} onChange={(e) => setTitle(e.target.value)} value={title} />
                 </div>
                 <div className='grow'>
-                    <Input placeholder={postDetails.inputDiscPlaceholder} color={"bg-primary "} onChange={(e) => setDisc(e.target.value)} value={disc} />
+                    <Input placeholder={postDetails.inputDiscPlaceholder} inputCssClass={"bg-primary "} onChange={(e) => setDisc(e.target.value)} value={disc} />
                 </div>
             </div>
-            <Input placeholder={postDetails.inputtagsPlaceholder} color={"bg-primary"} onKeyDown={(e) => {
+            <Input placeholder={postDetails.inputtagsPlaceholder} inputCssClass={"bg-primary"} onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                     let temp = [...tags];
                     temp.push(e.target.value);

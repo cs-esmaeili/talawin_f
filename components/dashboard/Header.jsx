@@ -4,11 +4,13 @@ import { FaBell } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
 import { RiMenu3Line } from "react-icons/ri";
 import { BiSolidStar } from "react-icons/bi";
-import { PiArrowFatDownFill } from "react-icons/pi";
-import { PiArrowFatUpFill } from "react-icons/pi";
 import { GiOpenTreasureChest } from "react-icons/gi";
+import Prices from "./Prices";
 
 const Header = ({ open, setOpen }) => {
+
+
+
   return (
     <div className="flex items-center p-2">
 
@@ -23,14 +25,7 @@ const Header = ({ open, setOpen }) => {
           <BiSolidStar className="text-2xl  text-blue-400" />
           <span className="text-md">300</span>
         </div>
-        <div className="flex text-green-400">
-          <PiArrowFatDownFill className="text-2xl" />
-          <span className="text-md">12,000,000 M</span>
-        </div>
-        <div className="flex  text-red-400">
-          <PiArrowFatUpFill className="text-2xl" />
-          <span className="text-md">10,000,000 M</span>
-        </div>
+        <Prices />
         <div className="hidden text-yellow-400 md:flex">
           <GiOpenTreasureChest className="text-2xl" />
           <span className="text-md">10 G</span>

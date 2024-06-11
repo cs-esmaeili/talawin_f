@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { LuImage } from "react-icons/lu";
 import Input from './Input';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { createProduct } from '@/services/Product';
 import translations from "@/translations.json";
 import Filemanager from '@/app/dashboard/(main)/filemanager/page';
@@ -24,9 +24,6 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData }) =>
     const addCommas = (number) => {
         if (number)
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-    function getObjectByKey(array, key, value) {
-        return array.find(item => item[key] === value);
     }
 
     const submitProduct = async () => {

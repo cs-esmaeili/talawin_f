@@ -110,10 +110,10 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
     return (
         <>
             <div className='flex flex-col grow  gap-2 w-2/3 max-w-2/3'>
-                <Input onChange={(e) => setFullName(e.target.value)} value={fullName} icon={<MdSubtitles />} placeholder={createuser.fullNamePlaceHolder} color={"bg-primary"} />
-                <Input onChange={(e) => setUserName(e.target.value)} value={userName} icon={<FaMobile />} placeholder={createuser.userNamePlaceHolder} color={"bg-primary"} />
-                <Input onChange={(e) => setNationalCode(e.target.value)} value={nationalCode} icon={<FaIdCardAlt />} placeholder={createuser.nationalCode} color={"bg-primary"} />
-                <Input onChange={(e) => setShebaNumber(e.target.value)} value={shebaNumber} icon={<MdCreditCard />} placeholder={createuser.shebaNumber} color={"bg-primary"} />
+                <Input onChange={(e) => setFullName(e.target.value)} value={fullName} icon={<MdSubtitles />} placeholder={createuser.fullNamePlaceHolder} inputCssClass={"bg-primary"} />
+                <Input onChange={(e) => setUserName(e.target.value)} value={userName} icon={<FaMobile />} placeholder={createuser.userNamePlaceHolder} inputCssClass={"bg-primary"} />
+                <Input onChange={(e) => setNationalCode(e.target.value)} value={nationalCode} icon={<FaIdCardAlt />} placeholder={createuser.nationalCode} inputCssClass={"bg-primary"} />
+                <Input onChange={(e) => setShebaNumber(e.target.value)} value={shebaNumber} icon={<MdCreditCard />} placeholder={createuser.shebaNumber} inputCssClass={"bg-primary"} />
                 <div className='flex justify-between gap-2'>
                     <InputDatePicker icon={<BsImageFill className='' />} value={birthday} reset={birthday} onChange={(time) => setBirthday(time)} />
                     <button className='bg-accent grow text-nowrap p-1 pl-3 pr-3 rounded-md' onClick={() => {

@@ -47,7 +47,7 @@ export default function FileManager({ fileType = null, fileSelectListener }) {
                 <div className='flex grow basis-1 mb-2'>
                     <Input placeholder={filemanagerPage.search}
                         icon={<PiKeyReturnBold className='text-xl' />}
-                        color={"bg-primary"} />
+                        inputCssClass={"bg-primary"} />
                 </div>
             </div>
             <Files

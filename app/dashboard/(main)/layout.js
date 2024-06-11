@@ -10,9 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPermissions } from '@/state/permissions';
 import httpServices from '@/services/httpServices';
 import { getCookie } from 'cookies-next';
-import '@/styles/globals.css';
 import { useRouter, usePathname } from 'next/navigation';
 import translations from "@/translations.json";
+import '@/styles/globals.css';
+import SocketInitializer from '@/components/dashboard/SocketInitializer';
 
 export default function Layout({ children }) {
 
@@ -79,9 +80,8 @@ export default function Layout({ children }) {
   }
 
   useEffect(() => {
-     securityCheck();
+    securityCheck();
   }, []);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -108,7 +108,7 @@ export default function Layout({ children }) {
         </div>
         :
         <ModalProvider>
-
+          <SocketInitializer/>
           <div className={open ? "opacity-50 bg-black w-100% h-screen z-20 top-0 left-0 right-0 bottom-0 fixed cursor-pointer" : "hidden"}
             onClick={() => setOpen(!open)} />
           <div className='flex grow flex-col h-screen min-w-0 max-w-full'>

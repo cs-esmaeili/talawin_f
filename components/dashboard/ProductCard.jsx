@@ -2,10 +2,7 @@ import Image from 'next/image';
 
 const ProductCard = ({ title, disc, price, offPrice }) => {
 
-    const addCommas = (number) => {
-        if (number)
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+
 
     return (
         <div className='bg-secondary p-3 rounded-xl items-center justify-between flex flex-col gap-2 hover:bg-opacity-75'>
@@ -38,8 +35,8 @@ const ProductCard = ({ title, disc, price, offPrice }) => {
                 </div>
 
                 <div className='grow flex items-center flex-col justify-center'>
-                    <div className='rtl'>{addCommas(price)} ریال</div>
-                    <div className='line-through text-red-400 rtl'>{addCommas(offPrice)}</div>
+                    {/* <div className='rtl'>{addCommas(price)} ریال</div>
+                    <div className='line-through text-red-400 rtl'>{addCommas(offPrice)}</div> */}
                 </div>
 
             </div>

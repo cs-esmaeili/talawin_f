@@ -97,7 +97,6 @@ export default function UploadFile({ path, refreshList }) {
                 type="file"
                 accept="image/*, video/*"
                 aria-describedby="file"
-                // multiple
                 ref={fileInputRef}
                 style={{ display: "none" }}
                 onChange={checkFileisImage}

@@ -47,9 +47,9 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
         <div className='flex flex-col w-full gap-4'>
             <div className='w-full'>
                 <Input
-                    bgColor={"bg-secondary !ltr"}
+                    inputCssClass={"bg-secondary !ltr text-center"}
                     placeholder={stepTwo.placeHolderCode}
-                    cssClass={"text-center p-3"}
+                    divCssClass={"p-3"}
                     maxLength={4}
                     onChange={(e) => setCode(e.target.value)}
                     value={code}
@@ -67,7 +67,7 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
                 {loading ?
                     <div className="relative  w-12 h-12">
                         <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>
-                        <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-green-500 border-t-transparent shadow-md"></div>
+                        <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
                     </div>
                     :
                     <div className='flex justify-center items-center bg-accent rounded-md p-4 w-full gap-2' onClick={() => {
