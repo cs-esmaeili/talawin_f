@@ -10,3 +10,7 @@ export const productList = (data) => {
 export const createProduct = (data) => {
     return http.post(`${prefixUrl}/createProduct`, JSON.stringify(data));
 };
+
+export const updateProduct = (data) => {
+    return http.post(`${prefixUrl}/updateProduct`, JSON.stringify(data));
+};

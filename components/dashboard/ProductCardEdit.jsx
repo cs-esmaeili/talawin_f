@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { LuImage } from "react-icons/lu";
 import Input from './Input';
 import { useState, useEffect } from 'react';
-import { createProduct } from '@/services/Product';
+import { createProduct, updateProduct } from '@/services/Product';
 import translations from "@/translations.json";
 import Filemanager from '@/app/dashboard/(main)/filemanager/page';
 import { useModalContext } from '@/components/dashboard/Modal';
@@ -37,7 +37,8 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
         try {
             let result = null;
             if (id) {
-            //    result = await createProduct({ name, disc, image, discount, apiPath, formula, visible });
+                console.log("test");
+                result = await updateProduct({ id, name, disc, image, discount, apiPath, formula, visible });
             } else {
                 result = await createProduct({ name, disc, image, discount, apiPath, formula, visible });
             }
@@ -59,7 +60,7 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
             setId(editData._id);
             setName(editData.name);
             setDisc(editData.disc);
-            setApiPath(editData.apiData);
+            setApiPath(editData.apiPath);
             setFormula(editData.formula);
             setDiscount(editData.discount);
             setVisible(editData.visible);
@@ -110,7 +111,7 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
                     <button className="text-center bg-primary p-3 rounded-md w-full" onClick={() => { setApiMode(true); }} >قیمت کالا</button>
                     {apiMode &&
                         <>
-                            <Input placeholder={"مسیر api"} inputCssClass={"text-center rtl"} value={apiPath} onChange={(e) => {
+                            <Input placeholder={"مسیر api"} inputCssClass={"text-center ltr"} value={apiPath} onChange={(e) => {
                                 setApiPath(e.target.value);
                             }} />
                             <Input placeholder={"(p) فرمول قیمت"} inputCssClass={"text-center ltr"} value={formula} onChange={(e) => {
@@ -127,7 +128,7 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
 
             </div>
 
-            <button className='bg-green-500 w-full rounded-lg p-2 opacity-50' onClick={() => submitProduct()}>{editData ? "ثبت تغییرات" : "ثبت کالا"}</button>
+            <button className='bg-green-500 w-full rounded-lg p-2' onClick={() => submitProduct()}>{editData ? "ثبت تغییرات" : "ثبت کالا"}</button>
             {editData != null ?
                 <button className='bg-red-500 w-full rounded-lg p-2' onClick={() => {
                     setEditData(null);
