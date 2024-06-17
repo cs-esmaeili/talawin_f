@@ -19,7 +19,8 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
     const [visible, setVisible] = useState(true);
     const [image, setImage] = useState(null);
     const { openModal, closeModal } = useModalContext();
-    const { someThingIsWrong } = translations['fa'];
+
+    const { someThingIsWrong, ProductCardEdit } = translations['fa'];
 
 
     const ResetForm = () => {
@@ -90,37 +91,37 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
                 }
             </div>
             <div className='text-center rtl' >
-                <Input placeholder={"نام کالا"} inputCssClass={"text-center"} value={name} onChange={(e) => {
+                <Input placeholder={ProductCardEdit.name} inputCssClass={"text-center"} value={name} onChange={(e) => {
                     setName(e.target.value);
                 }} />
             </div>
             <div className='text-center rtl' >
-                <Input placeholder={"توضیحات کالا"} inputCssClass={"text-center"} value={disc} onChange={(e) => {
+                <Input placeholder={ProductCardEdit.disc} inputCssClass={"text-center"} value={disc} onChange={(e) => {
                     setDisc(e.target.value);
                 }} />
             </div>
             <div className='text-center' >
                 <label className='flex gap-2'>
-                    <span>نمایش کالا</span>
+                    <span>{ProductCardEdit.showProduct}</span>
                     <input type="checkbox" checked={visible} onChange={(e) => setVisible(e.target.checked)} />
                 </label>
             </div>
             <div className='flex flex-wrap-reverse border-2 border-accent rounded-lg p-2 w-full gap-2'>
 
                 <div className='grow flex items-center flex-col justify-center gap-2'>
-                    <button className="text-center bg-primary p-3 rounded-md w-full" onClick={() => { setApiMode(true); }} >قیمت کالا</button>
+                    <button className="text-center bg-primary p-3 rounded-md w-full" onClick={() => { setApiMode(true); }} >{ProductCardEdit.productPrice}</button>
                     {apiMode &&
                         <>
-                            <Input placeholder={"مسیر api"} inputCssClass={"text-center ltr"} value={apiPath} onChange={(e) => {
+                            <Input placeholder={ProductCardEdit.apiPath} inputCssClass={"text-center ltr"} value={apiPath} onChange={(e) => {
                                 setApiPath(e.target.value);
                             }} />
-                            <Input placeholder={"(p) فرمول قیمت"} inputCssClass={"text-center ltr"} value={formula} onChange={(e) => {
+                            <Input placeholder={ProductCardEdit.apiFormula} inputCssClass={"text-center ltr"} value={formula} onChange={(e) => {
                                 setFormula(e.target.value);
                             }} />
                         </>
                     }
                     <div className='text-red-400'>
-                        <Input placeholder={"تخفیف"} inputCssClass={"text-center ltr"} value={discount} onChange={(e) => {
+                        <Input placeholder={ProductCardEdit.discount} inputCssClass={"text-center ltr"} value={discount} onChange={(e) => {
                             setDiscount(e.target.value);
                         }} />
                     </div>
@@ -128,7 +129,7 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
 
             </div>
 
-            <button className='bg-green-500 w-full rounded-lg p-2' onClick={() => submitProduct()}>{editData ? "ثبت تغییرات" : "ثبت کالا"}</button>
+            <button className='bg-green-500 w-full rounded-lg p-2' onClick={() => submitProduct()}>{editData ? ProductCardEdit.submit : ProductCardEdit.update}</button>
             {editData != null ?
                 <button className='bg-red-500 w-full rounded-lg p-2' onClick={() => {
                     setEditData(null);

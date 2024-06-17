@@ -23,7 +23,7 @@ const page = () => {
     const [loading, setLoading] = useState(true);
     const apiData = useSelector((state) => state.apiData.value);
 
-    const { someThingIsWrong, categoryPage } = translations['fa'];
+    const { someThingIsWrong, product } = translations['fa'];
 
 
     const productList = async () => {
@@ -44,7 +44,7 @@ const page = () => {
     }
 
     useEffect(() => {
-       productList();
+        productList();
     }, [activePage, updateList]);
 
 
@@ -63,7 +63,7 @@ const page = () => {
                         </SyntaxHighlighter>
                         <button className='bg-accent w-full sticky bottom-0 p-3 rounded-md rtl' onClick={() => {
                             setApiMode(false);
-                        }}>خروج از API</button>
+                        }}>{product.exitApi}</button>
                     </div>
                     :
                     loading ?
@@ -77,9 +77,9 @@ const page = () => {
                                 {products &&
                                     <Table
                                         headers={[
-                                            { name: categoryPage.id, cssClass: "hidden lg:table-cell" },
-                                            { name: categoryPage.name, cssClass: "" },
-                                            { name: categoryPage.updatedAt, cssClass: "hidden sm:table-cell" },
+                                            { name: product.id, cssClass: "hidden lg:table-cell" },
+                                            { name: product.name, cssClass: "" },
+                                            { name: product.updatedAt, cssClass: "hidden sm:table-cell" },
                                         ]}
                                         rowData={[
                                             { name: '_id', cssClass: "hidden lg:table-cell" },

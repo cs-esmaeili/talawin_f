@@ -11,7 +11,8 @@
             "/dashboard/role": "دسترسی ها",
             "/dashboard/user": "کاربران",
             "/dashboard/history": "تاریخچه خرید و فروش",
-            "/dashboard/product": "مدریت کالا"
+            "/dashboard/product": "مدریت کالا",
+            "/dashboard/admintradeportal": "پورتال خرید و فروش ادمین"
         },
         "logIn": {
             "back": "برگشت",
@@ -111,6 +112,24 @@
             "category": "دسته بندی",
             "updatedAt": "بروز شده",
             "actions": "اعمال"
+        },
+        "product": {
+            "id": "کد",
+            "name": "نام",
+            "updatedAt": "بروز شده",
+            "exitApi": "خروج از API"
+        },
+        "ProductCardEdit": {
+            "name" : "نام کالا",
+            "disc" : "توضیحات کالا",
+            "showProduct" : "نمایش کالا",
+            "productPrice" : "قیمت کالا",
+            "apiPath" : "مسیر api",
+            "apiFormula" : "(p) فرمول قیمت",
+            "discount" : "تخفیف",
+            "submit" : "قبت کالا",
+            "update" : "ثبت تغییرات"
+
         }
     }
 }

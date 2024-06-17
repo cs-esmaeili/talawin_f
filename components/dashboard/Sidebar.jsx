@@ -33,6 +33,7 @@ const Sidebar = ({ open, setOpen }) => {
     { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
     { name: text["/dashboard/history"], url: "/dashboard/history", icon: <TbArrowsDownUp className="text-2xl" /> },
     { name: text["/dashboard/product"], url: "/dashboard/product", icon: <TbArrowsDownUp className="text-2xl" /> },
+    { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <TbArrowsDownUp className="text-2xl" /> },
   ];
 
   const [items, setItems] = useState([]);
