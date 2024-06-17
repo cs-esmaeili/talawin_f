@@ -17,4 +17,7 @@ export const userList = (data) => {
 export const userPermissions = () => {
     return http.post(`${prefixUrl}/userPermissions`);
 };
+export const searchUser = (data) => {
+    return http.post(`${prefixUrl}/searchUser`, JSON.stringify(data));
+};
 
