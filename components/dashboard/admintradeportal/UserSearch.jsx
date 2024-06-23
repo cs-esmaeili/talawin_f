@@ -8,14 +8,13 @@ import translations from "@/translations.json";
 
 const UserSearch = ({ selectedUser, setSelectedUser }) => {
 
-    const [searchValue, setSearchValue] = useState("");
+    const [searchValue, setSearchValue] = useState("جواد");
     const [users, setUsers] = useState(null);
     const { someThingIsWrong } = translations['fa'];
 
     const searchUser = async () => {
         try {
             const { data } = await RsearchUser({ phoneNumber: searchValue, name: searchValue });
-            console.log(data);
             setUsers(data);
         } catch (error) {
             if (error?.response?.data?.message) {

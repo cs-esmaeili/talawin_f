@@ -35,6 +35,8 @@ export default function Layout({ children }) {
 
   const checkUserAccessToUrl = async (permissions) => {
     let access = false;
+    console.log(permissions);
+    console.log(pathname);
     await permissions.forEach(element => {
       if (element.route == pathname) {
         access = true;
@@ -67,6 +69,7 @@ export default function Layout({ children }) {
   const securityCheck = async () => {
     try {
       await checkExpTime();
+
       if (permissions == null || permissions.length === 0) {
         const freshPermissions = await userPsermissions();
         await checkUserAccessToUrl(freshPermissions);

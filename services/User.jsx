@@ -20,4 +20,7 @@ export const userPermissions = () => {
 export const searchUser = (data) => {
     return http.post(`${prefixUrl}/searchUser`, JSON.stringify(data));
 };
+export const buyProducts = (data) => {
+    return http.post(`${prefixUrl}/buyProducts`, JSON.stringify(data));
+};
 

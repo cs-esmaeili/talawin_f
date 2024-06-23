@@ -14,3 +14,7 @@ export const createProduct = (data) => {
 export const updateProduct = (data) => {
     return http.post(`${prefixUrl}/updateProduct`, JSON.stringify(data));
 };
+
+export const searchProduct = (data) => {
+    return http.post(`${prefixUrl}/searchProduct`, JSON.stringify(data));
+};

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import { logInStepOne as RlogInStepOne } from '@/services/Authorization';
 import translations from "@/translations.json";
+import { deleteCookie } from 'cookies-next';
 
 const StepOne = ({ goToNextStep, setTimer, setUserName, userName }) => {
 
@@ -48,6 +49,14 @@ const StepOne = ({ goToNextStep, setTimer, setUserName, userName }) => {
 
     useEffect(() => {
         setErrorMessage(null);
+    }, [userName]);
+    
+    useEffect(() => {
+        const hostname = window.location.hostname;
+        deleteCookie('token', { path: '/', domain: hostname });
+        deleteCookie('user', { path: '/', domain: hostname });
+        deleteCookie('userName', { path: '/', domain: hostname });
+        deleteCookie('role', { path: '/', domain: hostname });
     }, [userName]);
 
     return (
