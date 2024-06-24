@@ -16,19 +16,27 @@ import ProductPrice from '@/components/dashboard/ProductPrice';
 import { addCommas } from '@/utils/main';
 import { buyProducts as RbuyProducts } from '@/services/User';
 
-const ProductSearch = ({ selectedUser }) => {
+const ProductSearch = ({ selectedUser , setSelectedUser }) => {
 
     const [searchValue, setSearchValue] = useState("product");
     const [products, setProducts] = useState(null);
     const [time, setTime] = useState(new DateObject());
     const [cardPrice, setCardPrice] = useState(0);
     const [selectedProducts, setSelectedProducts] = useState([]);
+    const [delivered, setDelivered] = useState(true);
     const { someThingIsWrong } = translations['fa'];
 
     const doBuyProducts = async () => {
         try {
-            const { data } = await RbuyProducts({ time: time.format(), cardPrice, selectedProducts, delivered: false });
+            const { data } = await RbuyProducts({ user_id: selectedUser._id, time: time.format(), cardPrice, selectedProducts, delivered });
             toast.success(data.message);
+
+            setSearchValue("");
+            setProducts(null);
+            setCardPrice(0);
+            setSelectedProducts([]);
+            setDelivered(true);
+            setSelectedUser(null);
         } catch (error) {
             console.log(error);
             if (error?.response?.data?.message) {
@@ -50,6 +58,7 @@ const ProductSearch = ({ selectedUser }) => {
 
     const searchProduct = async () => {
         try {
+            if (searchValue == "") return;
             const { data } = await RsearchProduct({ name: searchValue });
             setProducts(data);
         } catch (error) {
@@ -105,7 +114,7 @@ const ProductSearch = ({ selectedUser }) => {
                 <div className='flex justify-evenly items-center gap-3 bg-secondary p-3 text-center rounded-md h-fit'>
                     <div className='flex gap-2'>
                         <div className='rtl'>
-                            {addCommas(cardPrice)} ریال
+                            {cardPrice != 0 && addCommas(cardPrice) + " ریال"}
                         </div>
                         <div>
                             : مبلغ کل
@@ -129,6 +138,10 @@ const ProductSearch = ({ selectedUser }) => {
                         </div>
                         <div className='rtl'>تاریخ :</div>
                     </div>
+                    <label className='flex gap-2'>
+                        <span>تحویل داده شد</span>
+                        <input type="checkbox" checked={delivered} onChange={(e) => setDelivered(e.target.checked)} />
+                    </label>
                 </div>
                 <div className='flex flex-col grow gap-3 h-full overflow-auto'>
                     {selectedProducts && selectedProducts.length > 0 &&
@@ -171,20 +184,15 @@ const ProductSearch = ({ selectedUser }) => {
                                     }
 
                                     <div className='flex items-center justify-center gap-2 opacity-50'>
-                                        <div>
-                                            ریال
-                                        </div>
-                                        <div className=''>
-
-                                            <ProductPrice product_id={product._id} updateParent={(price) => {
+                                        <ProductPrice product_id={product._id} updateParent={(price) => {
+                                            if (!product.useCPrice) {
                                                 setSelectedProducts(prevContent => {
                                                     const product = [...prevContent];
                                                     product[index].price = price;
                                                     return product;
                                                 });
-                                            }} />
-
-                                        </div>
+                                            }
+                                        }} />
                                     </div>
 
                                     <div>{product.name}</div>

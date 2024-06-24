@@ -26,7 +26,8 @@ const ProductPrice = ({ product_id, updateParent = null }) => {
             return;
         }
         const data = getObjectByKey(productPrices, '_id', product_id);
-        if (data == null) {
+        
+        if (data == null || data.price == null || data.price == undefined) {
             return;
         }
 
@@ -38,15 +39,14 @@ const ProductPrice = ({ product_id, updateParent = null }) => {
         }, 500);
 
     }
-
     useEffect(() => {
         makePrice();
     }, [productPrices]);
 
     return (
-        <>
-            {loading ? loadingComponent : price}
-        </>
+        <div className='rtl'>
+            {loading ? loadingComponent : `${price} ریال`}
+        </div>
     );
 };
 
