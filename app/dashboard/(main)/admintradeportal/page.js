@@ -1,5 +1,6 @@
 'use client'
 
+import BoxSell from '@/components/dashboard/admintradeportal/BoxSell';
 import ProductBuy from '@/components/dashboard/admintradeportal/ProductBuy';
 import ProductSell from '@/components/dashboard/admintradeportal/ProductSell';
 import UserSearch from '@/components/dashboard/admintradeportal/UserSearch';
@@ -9,7 +10,7 @@ import { useState, useEffect } from 'react';
 const page = () => {
 
     const [selectedUser, setSelectedUser] = useState(null);
-    const [status, setStatus] = useState(1);
+    const [status, setStatus] = useState(3);
 
     return (
         <div className='flex grow p-3 gap-3'>
@@ -30,6 +31,9 @@ const page = () => {
                     }
                     {status === 2 &&
                         <ProductSell selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+                    }
+                    {status === 3 &&
+                        <BoxSell selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
                     }
                 </div>
             </div>

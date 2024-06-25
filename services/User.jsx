@@ -26,4 +26,10 @@ export const buyProducts = (data) => {
 export const sellProducts = (data) => {
     return http.post(`${prefixUrl}/sellProducts`, JSON.stringify(data));
 };
+export const boxProducts = (data) => {
+    return http.post(`${prefixUrl}/boxProducts`, JSON.stringify(data));
+};
+export const sellBoxProducts = (data) => {
+    return http.post(`${prefixUrl}/sellBoxProducts`, JSON.stringify(data));
+};
 
