@@ -16,7 +16,7 @@ import ProductPrice from '@/components/dashboard/ProductPrice';
 import { addCommas } from '@/utils/main';
 import { buyProducts as RbuyProducts } from '@/services/User';
 
-const ProductSearch = ({ selectedUser , setSelectedUser }) => {
+const ProductBuy = ({ selectedUser, setSelectedUser }) => {
 
     const [searchValue, setSearchValue] = useState("product");
     const [products, setProducts] = useState(null);
@@ -37,6 +37,7 @@ const ProductSearch = ({ selectedUser , setSelectedUser }) => {
             setSelectedProducts([]);
             setDelivered(true);
             setSelectedUser(null);
+
         } catch (error) {
             console.log(error);
             if (error?.response?.data?.message) {
@@ -46,7 +47,6 @@ const ProductSearch = ({ selectedUser , setSelectedUser }) => {
             }
         }
     }
-
 
     const CalcardPrice = () => {
         let price = 0;
@@ -222,7 +222,7 @@ const ProductSearch = ({ selectedUser , setSelectedUser }) => {
                         })
                     }
                 </div>
-                <button className='bg-green-400 p-3 text-center rounded-sm h-fit' onClick={() => {
+                <button className={`bg-green-400 p-3 text-center rounded-sm h-fit opacity-50 ${selectedUser && selectedProducts.length > 0 && "!opacity-100"}`} onClick={() => {
                     doBuyProducts();
                 }}>
                     خرید
@@ -232,4 +232,4 @@ const ProductSearch = ({ selectedUser , setSelectedUser }) => {
     );
 };
 
-export default ProductSearch;
+export default ProductBuy;

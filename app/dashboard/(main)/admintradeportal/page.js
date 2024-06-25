@@ -1,6 +1,7 @@
 'use client'
 
-import ProductSearch from '@/components/dashboard/admintradeportal/ProductSearch';
+import ProductBuy from '@/components/dashboard/admintradeportal/ProductBuy';
+import ProductSell from '@/components/dashboard/admintradeportal/ProductSell';
 import UserSearch from '@/components/dashboard/admintradeportal/UserSearch';
 import { useState, useEffect } from 'react';
 
@@ -25,7 +26,10 @@ const page = () => {
 
                 <div className='flex flex-col grow w-full p-3 overflow-hidden gap-3'>
                     {status === 1 &&
-                        <ProductSearch selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+                        <ProductBuy selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+                    }
+                    {status === 2 &&
+                        <ProductSell selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
                     }
                 </div>
             </div>

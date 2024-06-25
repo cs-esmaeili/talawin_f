@@ -52,7 +52,9 @@ const UserSearch = ({ selectedUser, setSelectedUser }) => {
                 }
             </div>
             {selectedUser &&
-                <div className='bg-primary flex w-full p-3 rounded-md justify-between border-green-400 border-2'>
+                <div className='bg-primary flex w-full p-3 rounded-md justify-between border-green-400 border-2' onClick={() => {
+                    setSelectedUser(null);
+                }}>
                     <div>{selectedUser.userName}</div>
                     <div>{selectedUser.data.fullName}</div>
                 </div>

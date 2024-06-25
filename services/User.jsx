@@ -23,4 +23,7 @@ export const searchUser = (data) => {
 export const buyProducts = (data) => {
     return http.post(`${prefixUrl}/buyProducts`, JSON.stringify(data));
 };
+export const sellProducts = (data) => {
+    return http.post(`${prefixUrl}/sellProducts`, JSON.stringify(data));
+};
 
