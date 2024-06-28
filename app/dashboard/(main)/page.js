@@ -1,42 +1,58 @@
 'use client'
 
-import Chart from "@/components/dashboard/Chart"
-import ProductCard from "@/components/dashboard/ProductCard";
+import ProductList from "@/components/dashboard/ProductList";
+import { useState, useEffect } from 'react';
+import Pagination from '@/components/dashboard/Pagination';
+import toast from 'react-hot-toast';
+import translations from "@/translations.json";
+import { productList as RproductList } from '@/services/Product';
 
 export default function Dashboard() {
 
+    const [products, setProducts] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [productsCount, setProductsCount] = useState(null);
+    const [activePage, setActivePage] = useState(1);
+    const [perPage, setPerPage] = useState(20);
+    const { someThingIsWrong } = translations['fa'];
+
+    const productList = async () => {
+        try {
+            setLoading(true);
+            const { data } = await RproductList({ page: activePage, perPage });
+            const { productsCount, products } = data;
+            console.log(products);
+            setProducts(products);
+            setProductsCount(productsCount);
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            if (error?.response?.data?.message) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error(someThingIsWrong);
+            }
+        }
+    }
+
+
+    useEffect(() => {
+        productList();
+    }, [activePage]);
+
     return (
-        <div className='flex flex-col  grow h-full overflow-y-auto  gap-1 p-3 overflow-x-hidden'>
-            <div className="min-h-[280px] h-[280px] md:min-h-[305px] lg:min-h-[350px] xl:min-h-[360px] w-full" >
-                <Chart />
-            </div>
-            <div className="grow">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-6">
-                    <ProductCard title={"شمش 18 عیار"} disc={""} price={100000} />
-                    <ProductCard title={"امامی بانکی 86"} disc={"تمام سکه"} price={100000} />
-                    <ProductCard title={"امامی بانکی تاریخ پایین"} disc={"تمام سکه"} price={100000} />
-                    <ProductCard title={"بهار بانکی"} disc={"تمام سکه"} price={100000} />
-                    <ProductCard title={"بانکی 86"} disc={"نیم سکه"} price={100000} />
-                    <ProductCard title={"بانکی سال پایین"} disc={"نیم سکه"} price={100000} />
-                    <ProductCard title={"بانکی 86"} disc={"ربع سکه"} price={100000} />
-                    <ProductCard title={"بانکی سال پایین"} disc={"ربع سکه"} price={100000} />
-                    <ProductCard title={"سکه گرمی بانکی"} disc={""} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.050"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.100"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.150"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.250"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.300"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.400"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.600"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.700"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.800"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"0.900"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"1 گرم"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"1.200 گرم"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"2 گرم"} price={100000} />
-                    <ProductCard title={"پارسیان"} disc={"1.5 گرم"} price={100000} />
+        <div className="flex flex-col items-center justify-center grow">
+            {loading ?
+                <div className="relative  w-20 h-20">
+                    <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>
+                    <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
                 </div>
-            </div>
+                :
+                <div className="overflow-auto">
+                    <ProductList products={products}/>
+                    <Pagination activePage={activePage} perPage={perPage} count={productsCount} setActivePage={setActivePage} />
+                </div>
+            }
         </div>
     )
 }

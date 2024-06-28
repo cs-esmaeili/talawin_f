@@ -2,7 +2,7 @@ import { PiFolderFill } from "react-icons/pi";
 import { usePathname } from 'next/navigation';
 import { MdSpaceDashboard } from "react-icons/md";
 import { BiSolidCategoryAlt } from "react-icons/bi";
-import { MdPostAdd } from "react-icons/md";
+import { MdPostAdd, MdOutlineHistory, MdProductionQuantityLimits } from "react-icons/md";
 import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { useSelector } from 'react-redux';
 import { BsShieldLockFill } from "react-icons/bs";
@@ -14,6 +14,7 @@ import Link from "next/link";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { getCookie } from 'cookies-next';
+import { GiMagicPortal } from "react-icons/gi";
 
 const Sidebar = ({ open, setOpen }) => {
 
@@ -31,15 +32,15 @@ const Sidebar = ({ open, setOpen }) => {
     { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" /> },
     { name: text["/dashboard/role"], url: "/dashboard/role", icon: <BsShieldLockFill className="text-2xl" /> },
     { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
-    { name: text["/dashboard/history"], url: "/dashboard/history", icon: <TbArrowsDownUp className="text-2xl" /> },
-    { name: text["/dashboard/product"], url: "/dashboard/product", icon: <TbArrowsDownUp className="text-2xl" /> },
-    { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <TbArrowsDownUp className="text-2xl" /> },
+    { name: text["/dashboard/history"], url: "/dashboard/history", icon: <MdOutlineHistory className="text-2xl" /> },
+    { name: text["/dashboard/product"], url: "/dashboard/product", icon: <MdProductionQuantityLimits className="text-2xl" /> },
+    { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" /> },
   ];
 
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    let tempItems = [...items];
+    let tempItems = [];
     allItems.forEach(item => {
       permissions.forEach(permission => {
         if (item.url == permission.route) {
@@ -54,8 +55,8 @@ const Sidebar = ({ open, setOpen }) => {
     <div
       className={
         open
-          ? "fixed bottom-0 right-0 top-0 z-30 h-full min-w-max bg-secondary p-7 duration-500 ease-in"
-          : "fixed  right-[-100%] h-full z-30 min-w-max bg-secondary p-7 duration-500 ease-in lg:static lg:block"
+          ? "fixed bottom-0 right-0 top-0 z-30 h-full min-w-max bg-secondary p-7 duration-500 ease-in overflow-y-auto"
+          : "fixed  right-[-100%] h-full z-30 min-w-max bg-secondary p-7 duration-500 ease-in lg:static lg:block overflow-y-auto"
       }
     >
       <div className="flex items-center justify-between">
