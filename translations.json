@@ -127,7 +127,7 @@
             "apiPath" : "مسیر api",
             "apiFormula" : "(p) فرمول قیمت",
             "discount" : "تخفیف",
-            "submit" : "قبت کالا",
+            "submit" : "ثبت کالا",
             "update" : "ثبت تغییرات"
 
         }

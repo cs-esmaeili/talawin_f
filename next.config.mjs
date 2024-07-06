@@ -9,11 +9,11 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'www.back.talawin.ir',
+                hostname: 'back.talawin.ir',
             },
             {
                 protocol: 'http',
-                hostname: 'www.back.talawin.ir',
+                hostname: 'back.talawin.ir',
             }
         ],
     },
