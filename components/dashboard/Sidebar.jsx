@@ -35,6 +35,7 @@ const Sidebar = ({ open, setOpen }) => {
     { name: text["/dashboard/history"], url: "/dashboard/history", icon: <MdOutlineHistory className="text-2xl" /> },
     { name: text["/dashboard/product"], url: "/dashboard/product", icon: <MdProductionQuantityLimits className="text-2xl" /> },
     { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" /> },
+    { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <GiMagicPortal className="text-2xl" /> },
   ];
 
   const [items, setItems] = useState([]);

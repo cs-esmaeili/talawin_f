@@ -12,7 +12,8 @@
             "/dashboard/user": "کاربران",
             "/dashboard/history": "تاریخچه خرید و فروش",
             "/dashboard/product": "مدریت کالا",
-            "/dashboard/admintradeportal": "پورتال خرید و فروش ادمین"
+            "/dashboard/admintradeportal": "پورتال خرید و فروش ادمین",
+            "/dashboard/apibox": "جعبه Api"
         },
         "logIn": {
             "back": "برگشت",

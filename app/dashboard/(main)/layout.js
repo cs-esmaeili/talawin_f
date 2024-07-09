@@ -111,19 +111,13 @@ export default function Layout({ children }) {
         </div>
         :
         <ModalProvider>
-          <SocketInitializer/>
+          <SocketInitializer />
           <div className={open ? "opacity-50 bg-black w-100% h-screen z-20 top-0 left-0 right-0 bottom-0 fixed cursor-pointer" : "hidden"}
             onClick={() => setOpen(!open)} />
           <div className='flex grow flex-col h-screen min-w-0 max-w-full'>
             <Header open={open} setOpen={setOpen} />
             <div className="flex relative grow border-solid  overflow-hidden">
               {children}
-            </div>
-            <div className='flex flex-col gap-3 justify-center items-center bg-secondary rounded-md m-2 p-2 h-fit'>
-              <div className='text-2xl text-yellow-400 text-center'>طلاوین</div>
-              <div className='text-center'>
-                اصفهان / میدان نقش جهان / خ حکیم / بازارچه نو / مقابل بانک کشاورزی
-              </div>
             </div>
           </div>
           <Sidebar open={open} setOpen={setOpen} />
