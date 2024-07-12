@@ -24,15 +24,28 @@ const ProductList = ({ products }) => {
                             </div>
                             <h2 className="text-xl  mb-2">{product.name}</h2>
                             <h2 className="text-xl  mb-2">{product.disc}</h2>
-                            <div className='flex flex-col grow justify-center items-center h-16 my-3'>
+                            <div className='flex flex-col h-fit justify-center items-center my-3 mt-2'>
                                 {product.discount != 0 &&
-                                    <h3 className="text-lg  mb-2 rtl line-through text-red-500 ">
-                                        <ProductDiscount product_id={product._id} />
+                                    <h3 className={`text-lg  mb-2 rtl`}>
+                                        <div className='flex flex-nowrap gap-2 '>
+                                            <span className='rtl '>تخفیف : </span>
+                                            <ProductDiscount product_id={product._id} />
+                                        </div>
                                     </h3>
                                 }
-                                <h3 className={`text-lg  mb-2 rtl ${product.discount != 0 && "text-green-500"}`}>
-                                    <ProductPrice product_id={product._id} />
+                                <h3 className={`text-lg  mb-2 rtl text-green-500`}>
+                                    <div className='flex flex-nowrap gap-2'>
+                                        <span className='rtl'>فروش به شما :</span>
+                                        <ProductPrice product_id={product._id} sellPrice />
+                                    </div>
                                 </h3>
+                                <h3 className={`text-lg  mb-2 rtl text-red-500`}>
+                                    <div className='flex flex-nowrap gap-2'>
+                                        <span className='rtl'>خرید از شما :</span>
+                                        <ProductPrice product_id={product._id} sellPrice={false} />
+                                    </div>
+                                </h3>
+
                             </div>
                             <button className="bg-accent w-full rounded-md p-3 opacity-50 cursor-not-allowed" disabled>افزودن به سبد خرید</button>
                         </div>
