@@ -1,0 +1,6 @@
+{
+    "app_name": "طلاوین",
+    "logo_url": "assets/logo.jpg",
+    "api": "http://localhost:3000/",
+    "site_description" : "خرید و فروش طلا"
+}

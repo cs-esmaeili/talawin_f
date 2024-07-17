@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
 import { getObjectByKey, addCommas } from '@/utils/main';
 import { useEffect, useState } from "react";
 
-const ProductDiscount = ({ product_id, updateParent = null, apiData, productPrices }) => {
-
+const ProductDiscount = ({ product_id, productPrices, updateParent = null }) => {
 
 
     const [loading, setLoading] = useState(true);

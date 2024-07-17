@@ -18,7 +18,6 @@ const page = () => {
     const [activePage, setActivePage] = useState(1);
     const [perPage, setPerPage] = useState(20);
     const [editData, setEditData] = useState(null);
-    const [apiMode, setApiMode] = useState(false);
     const [updateList, setUpdateList] = useState(false);
     const [loading, setLoading] = useState(true);
     const apiData = useSelector((state) => state.apiData.value);
@@ -52,52 +51,41 @@ const page = () => {
         <div className='flex w-full '>
             <div className='w-1/2 justify-center items-center flex'>
                 <div>
-                    <ProductCardEdit editData={editData} setEditData={setEditData} setApiMode={setApiMode} apiMode={apiMode} apiData={apiData} updateList={() => setUpdateList(!updateList)} />
+                    <ProductCardEdit editData={editData} setEditData={setEditData} updateList={() => setUpdateList(!updateList)} />
                 </div>
             </div>
             <div className='flex flex-col justify-center items-center w-1/2 '>
-                {apiMode ?
-                    <div className='flex flex-col  w-full relative overflow-x-auto h-full justify-center'>
-                        <SyntaxHighlighter language="javascript" style={tomorrowNightEighties} wrapLongLines>
-                            {JSON.stringify(apiData, null, 2)}
-                        </SyntaxHighlighter>
-                        <button className='bg-accent w-full sticky bottom-0 p-3 rounded-md rtl' onClick={() => {
-                            setApiMode(false);
-                        }}>{product.exitApi}</button>
+                {loading ?
+                    <div className="relative  w-12 h-12">
+                        <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>
+                        <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
                     </div>
                     :
-                    loading ?
-                        <div className="relative  w-12 h-12">
-                            <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>
-                            <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
+                    <>
+                        <div className='flex grow w-full p-2 overflow-x-scroll'>
+                            {products &&
+                                <Table
+                                    headers={[
+                                        { name: product.id, cssClass: "hidden lg:table-cell" },
+                                        { name: product.name, cssClass: "" },
+                                        { name: product.updatedAt, cssClass: "hidden sm:table-cell" },
+                                    ]}
+                                    rowData={[
+                                        { name: '_id', cssClass: "hidden lg:table-cell" },
+                                        { name: 'name', cssClass: "" },
+                                        { name: 'updatedAt', cssClass: "hidden sm:table-cell" }
+                                    ]}
+                                    rows={products}
+                                    rowCountstart={(perPage * (activePage - 1))}
+                                    selectMode={true}
+                                    selectListener={(row, index) => {
+                                        setEditData(row);
+                                    }}
+                                />
+                            }
                         </div>
-                        :
-                        <>
-                            <div className='flex grow w-full p-2 overflow-x-scroll'>
-                                {products &&
-                                    <Table
-                                        headers={[
-                                            { name: product.id, cssClass: "hidden lg:table-cell" },
-                                            { name: product.name, cssClass: "" },
-                                            { name: product.updatedAt, cssClass: "hidden sm:table-cell" },
-                                        ]}
-                                        rowData={[
-                                            { name: '_id', cssClass: "hidden lg:table-cell" },
-                                            { name: 'name', cssClass: "" },
-                                            { name: 'updatedAt', cssClass: "hidden sm:table-cell" }
-                                        ]}
-                                        rows={products}
-                                        rowCountstart={(perPage * (activePage - 1))}
-                                        selectMode={true}
-                                        selectListener={(row, index) => {
-                                            setEditData(row);
-                                        }}
-                                    />
-                                }
-                            </div>
-                            <Pagination activePage={activePage} perPage={perPage} count={productsCount} setActivePage={setActivePage} />
-                        </>
-
+                        <Pagination activePage={activePage} perPage={perPage} count={productsCount} setActivePage={setActivePage} />
+                    </>
                 }
             </div>
         </div>

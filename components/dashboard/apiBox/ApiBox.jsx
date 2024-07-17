@@ -5,7 +5,7 @@ import { updateApiBox } from '@/services/ApiBox';
 import toast from 'react-hot-toast';
 import translations from "@/translations.json";
 
-const ApiBox = ({ box, updateList }) => {
+const ApiBox = ({ box, updateList, selectMode, boxSelectListener }) => {
 
     const [name, setName] = useState(box.name);
     const [apiPath, setApiPath] = useState(box.apiPath);
@@ -45,7 +45,11 @@ const ApiBox = ({ box, updateList }) => {
     }
 
     return (
-        <div className='flex flex-col h-fit bg-secondary p-3 gap-3 rounded-lg justify-center items-center min-w-40'>
+        <div className='flex flex-col h-fit bg-secondary p-3 gap-3 rounded-lg justify-center items-center min-w-40 hover:opacity-75' onClick={() => {
+            if (selectMode) {
+                boxSelectListener(box);
+            }
+        }}>
             <Input placeholder={"نام"} inputCssClass={"text-center rtl text-accent"} divCssClass={"border-none"} value={name} onChange={(e) => {
                 setName(e.target.value);
                 setEditMode(true);

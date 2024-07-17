@@ -30,7 +30,6 @@ const ProductPrice = ({ product_id, updateParent = null, sellPrice = true }) => 
         if (data == null || data == undefined) {
             return;
         }
-        data = data.apiBox_id;
         
         let targetPrice = null
         if (sellPrice) {

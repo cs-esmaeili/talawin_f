@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const ImageModal = ({ baseUrl, image, blurHash, size }) => {
-  console.log(blurHash);
   return (
     <div className="w-screen min-[300px]:w-[20rem]  min-[400px]:w-[25rem] min-[500px]:w-[30rem] md:w-[35rem]">
       <Image

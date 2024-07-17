@@ -5,16 +5,23 @@ import { useState, useEffect } from 'react';
 import { createProduct, updateProduct } from '@/services/Product';
 import translations from "@/translations.json";
 import Filemanager from '@/app/dashboard/(main)/filemanager/page';
+import ApiBox from '@/app/dashboard/(main)/apibox/page';
 import { useModalContext } from '@/components/dashboard/Modal';
 import toast from 'react-hot-toast';
 
-const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, updateList }) => {
+const ProductCard = ({ editData, setEditData, updateList }) => {
 
     const [id, setId] = useState(null);
     const [name, setName] = useState("");
     const [disc, setDisc] = useState("");
-    const [apiPath, setApiPath] = useState("");
-    const [formula, setFormula] = useState("");
+
+    const [box, setBox] = useState(null);
+
+    const [cBuyPrice, setCBuyPrice] = useState(0);
+    const [cSellPrice, setCSellPrice] = useState(0);
+    const [formulaBuy, setFormulaBuy] = useState('p');
+    const [formulaSell, setFormulaSell] = useState('p');
+
     const [discount, setDiscount] = useState(0);
     const [visible, setVisible] = useState(true);
     const [image, setImage] = useState(null);
@@ -24,10 +31,13 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
 
 
     const ResetForm = () => {
+        setBox(null);
         setName("");
         setDisc("");
-        setApiPath("");
-        setFormula("");
+        setFormulaBuy('p');
+        setFormulaSell('p');
+        setCBuyPrice(0);
+        setCSellPrice(0);
         setDiscount(0);
         setVisible(true);
         setImage(null);
@@ -37,18 +47,18 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
     const submitProduct = async () => {
         try {
             let result = null;
-            if (id) {
-                console.log("test");
-                result = await updateProduct({ id, name, disc, image, discount, apiPath, formula, visible });
+            if (id && id != null) {
+                result = await updateProduct({ box_id: box._id, id, name, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, visible });
             } else {
-                result = await createProduct({ name, disc, image, discount, apiPath, formula, visible });
+                console.log(box._id);
+                result = await createProduct({ box_id: box._id, name, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, visible });
             }
             const { data } = result;
             toast.success(data.message);
             ResetForm();
-            setApiMode(false);
             updateList();
         } catch (error) {
+            console.log(error);
             if (error?.response?.data?.message) {
                 toast.error(error.response.data.message);
             } else {
@@ -56,13 +66,17 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
             }
         }
     }
+
     useEffect(() => {
         if (editData != null) {
+            setBox(editData.apiBox_id)
             setId(editData._id);
             setName(editData.name);
             setDisc(editData.disc);
-            setApiPath(editData.apiPath);
-            setFormula(editData.formula);
+            setFormulaBuy(editData.formulaBuy);
+            setFormulaSell(editData.formulaSell);
+            setCBuyPrice(editData.cBuyPrice);
+            setCSellPrice(editData.cSellPrice);
             setDiscount(editData.discount);
             setVisible(editData.visible);
             setImage(editData.image);
@@ -106,22 +120,36 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
                     <input type="checkbox" checked={visible} onChange={(e) => setVisible(e.target.checked)} />
                 </label>
             </div>
-            <div className='flex flex-wrap-reverse border-2 border-accent rounded-lg p-2 w-full gap-2'>
+            <div className='flex flex-wrap-reverse  rounded-lg p-2 w-full gap-2'>
 
                 <div className='grow flex items-center flex-col justify-center gap-2'>
-                    <button className="text-center bg-primary p-3 rounded-md w-full" onClick={() => { setApiMode(true); }} >{ProductCardEdit.productPrice}</button>
-                    {apiMode &&
-                        <>
-                            <Input placeholder={ProductCardEdit.apiPath} inputCssClass={"text-center ltr"} value={apiPath} onChange={(e) => {
-                                setApiPath(e.target.value);
+                    <button className='rtl bg-accent p-3 w-full rounded-lg' onClick={() => {
+                        openModal(
+                            <ApiBox selectMode boxSelectListener={(box) => {
+                                setBox(box);
+                                closeModal();
                             }} />
-                            <Input placeholder={ProductCardEdit.apiFormula} inputCssClass={"text-center ltr"} value={formula} onChange={(e) => {
-                                setFormula(e.target.value);
-                            }} />
-                        </>
-                    }
-                    <div className='text-red-400'>
-                        <Input placeholder={ProductCardEdit.discount} inputCssClass={"text-center ltr"} value={discount} onChange={(e) => {
+                        );
+                    }}>{box ? box.name : "انتخاب api"}</button>
+
+                    <Input placeholder={ProductCardEdit.formulaBuy} title={ProductCardEdit.formulaBuy} inputCssClass={"text-center ltr"} value={formulaBuy} onChange={(e) => {
+                        setFormulaBuy(e.target.value);
+                    }} />
+
+                    <Input placeholder={ProductCardEdit.formulaSell} title={ProductCardEdit.formulaSell} inputCssClass={"text-center ltr"} value={formulaSell} onChange={(e) => {
+                        setFormulaSell(e.target.value);
+                    }} />
+
+                    <Input placeholder={ProductCardEdit.cBuyPrice} title={ProductCardEdit.cBuyPrice} inputCssClass={"text-center ltr"} value={cBuyPrice} onChange={(e) => {
+                        setCBuyPrice(e.target.value);
+                    }} />
+
+                    <Input placeholder={ProductCardEdit.cSellPrice} title={ProductCardEdit.cSellPrice} inputCssClass={"text-center ltr"} value={cSellPrice} onChange={(e) => {
+                        setCSellPrice(e.target.value);
+                    }} />
+
+                    <div className='text-red-400 w-full'>
+                        <Input placeholder={ProductCardEdit.discount} title={ProductCardEdit.discount} inputCssClass={"text-center ltr"} value={discount} onChange={(e) => {
                             setDiscount(e.target.value);
                         }} />
                     </div>
@@ -134,12 +162,10 @@ const ProductCard = ({ editData, setEditData, apiMode, setApiMode, apiData, upda
                 <button className='bg-red-500 w-full rounded-lg p-2' onClick={() => {
                     setEditData(null);
                     ResetForm();
-                    setApiMode(false);
                 }}>لغو</button>
                 :
                 <button className='bg-red-500 w-full rounded-lg p-2' onClick={() => {
                     ResetForm();
-                    setApiMode(false);
                 }}>{"پاک کردن"}</button>
             }
         </div>

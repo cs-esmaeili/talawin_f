@@ -126,7 +126,10 @@
             "showProduct" : "نمایش کالا",
             "productPrice" : "قیمت کالا",
             "apiPath" : "مسیر api",
-            "apiFormula" : "(p) فرمول قیمت",
+            "formulaBuy" : "فرمول خرید",
+            "formulaSell" : "فرمول فروش",
+            "cBuyPrice" : "قیمت دستی خرید",
+            "cSellPrice" : "قیمت دستی فروش",
             "discount" : "تخفیف",
             "submit" : "ثبت کالا",
             "update" : "ثبت تغییرات"

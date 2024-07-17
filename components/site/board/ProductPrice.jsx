@@ -2,8 +2,7 @@ import { useSelector } from 'react-redux';
 import { getObjectByKey, addCommas } from '@/utils/main';
 import { useEffect, useState } from "react";
 
-const ProductPrice = ({ product_id, updateParent = null, apiData, productPrices }) => {
-
+const ProductPrice = ({ product_id, productPrices, updateParent = null, sellPrice = true }) => {
 
 
     const [loading, setLoading] = useState(true);
@@ -24,17 +23,28 @@ const ProductPrice = ({ product_id, updateParent = null, apiData, productPrices 
         if (productPrices == null) {
             return;
         }
-        const data = getObjectByKey(productPrices, '_id', product_id);
+        let data = getObjectByKey(productPrices, '_id', product_id);
 
-        if (data == null || data.price == null || data.price == undefined) {
+        if (data == null || data == undefined) {
+            return;
+        }
+        
+        let targetPrice = null
+        if (sellPrice) {
+            targetPrice = data.sellPrice;
+        } else {
+            targetPrice = data.buyPrice;
+        }
+
+        if (targetPrice == null || targetPrice == undefined) {
             return;
         }
 
         setTimeout(() => {
-            setPrice(addCommas(data.price));
+            setPrice(addCommas(targetPrice));
             setLoading(false);
             if (updateParent != null)
-                updateParent(data.price);
+                updateParent(targetPrice);
         }, 500);
 
     }
