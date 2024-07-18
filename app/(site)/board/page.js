@@ -26,11 +26,10 @@ const page = () => {
 
     const productList = async (page) => {
         try {
-            setProducts([]);
             setLoading(true);
             const { data } = await RproductList({ page, perPage });
             const { productsCount, products } = data;
-            setProducts(prevProducts => [...prevProducts, ...products]);
+            setProducts(products);
             setProductsCount(productsCount);
             setLoading(false);
         } catch (error) {
@@ -40,7 +39,6 @@ const page = () => {
             } else {
                 toast.error(someThingIsWrong);
             }
-            setLoading(false);
         }
     }
 
@@ -87,66 +85,64 @@ const page = () => {
     }, []);
 
     return (
-        <div className='flex h-screen max-h-screen overflow-y-hidden grow'>
+        <div className='flex h-screen max-h-screen overflow-y-hidden grow justify-center'>
+
             <div className="flex flex-wrap justify-start w-full h-full p-3">
-                {loading ? (
-                    Array.from({ length: 20 }).map((_, index) => (
-                        <div key={index} className="product flex flex-col bg-secondary items-center justify-center p-4 rounded-lg shadow-lg animate-pulse m-2" style={{ flex: '1 1 calc(25% - 1rem)' }}>
-                            <div className="rounded-full bg-slate-700 w-28 h-28"></div>
-                            <div className="h-2 bg-slate-700 rounded my-2 w-3/4"></div>
-                            <div className="flex flex-col gap-5 w-3/4">
-                                <div className="h-2 bg-slate-700 rounded"></div>
-                                <div className="h-2 bg-slate-700 rounded"></div>
-                                <div className="h-2 bg-slate-700 rounded"></div>
-                                <div className="h-2 bg-slate-700 rounded"></div>
-                            </div>
+                {loading ?
+                    <div className='flex grow justify-center items-center'>
+                        <div className="relative  w-40 h-40">
+                            <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>
+                            <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
                         </div>
-                    ))
-                ) : (
-                    products && products.map(product => (
-                        <div key={product._id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
-                            <div className="flex flex-col   bg-secondary items-center justify-center p-4 rounded-lg shadow-lg">
-                                <div className="relative max-w-full h-auto mb-4">
-                                    <Image
-                                        src={product.image.url}
-                                        alt={product.name}
-                                        width={250}
-                                        height={450}
-                                        objectFit="cover"
-                                        className="object-cover"
-                                        placeholder='blur'
-                                        blurDataURL={product.image.blurHash}
-                                    />
-                                </div>
-                                <h2 className="text-xl  mb-2">{product.name}</h2>
-                                <h2 className="text-xl  mb-2">{product.disc}</h2>
-                                <div className='flex flex-col h-fit justify-center items-center my-3 mt-2'>
-                                    {product.discount != 0 &&
-                                        <h3 className={`text-lg  mb-2 rtl`}>
-                                            <div className='flex flex-nowrap gap-2 '>
-                                                <span className='rtl '>تخفیف : </span>
-                                                <ProductDiscount productPrices={productPrices} product_id={product._id} />
+                    </div>
+                    : (
+                        products && products.map(product => (
+                            <div key={product._id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2">
+                                <div className="flex flex-col   bg-secondary items-center justify-center p-4 rounded-lg shadow-lg">
+
+                                    <div className='h-auto w-full flex justify-center items-center'>
+                                        <Image
+                                            src={product.image.url}
+                                            width={200}
+                                            height={200}
+                                            placeholder="blur"
+                                            blurDataURL={product.image.blurHash}
+                                            alt="Picture of the author"
+                                            className='object-contain'
+                                        />
+                                    </div>
+
+
+                                    <h2 className="text-xl  mb-2">{product.name}</h2>
+                                    <h2 className="text-xl  mb-2">{product.disc}</h2>
+
+                                    <div className='flex flex-col h-fit justify-center items-center my-3 mt-2'>
+                                        {product.discount != 0 &&
+                                            <h3 className={`text-lg  mb-2 rtl`}>
+                                                <div className='flex flex-nowrap gap-2 '>
+                                                    <span className='rtl '>تخفیف : </span>
+                                                    <ProductDiscount productPrices={productPrices} product_id={product._id} />
+                                                </div>
+                                            </h3>
+                                        }
+                                        <h3 className={`text-lg  mb-2 rtl `}>
+                                            <div className='flex flex-nowrap gap-2 text-accent'>
+                                                <span className='rtl'>فروش به شما :</span>
+                                                <ProductPrice productPrices={productPrices} product_id={product._id} sellPrice />
                                             </div>
                                         </h3>
-                                    }
-                                    <h3 className={`text-lg  mb-2 rtl text-green-500`}>
-                                        <div className='flex flex-nowrap gap-2'>
-                                            <span className='rtl'>فروش به شما :</span>
-                                            <ProductPrice productPrices={productPrices} product_id={product._id} sellPrice />
-                                        </div>
-                                    </h3>
-                                    <h3 className={`text-lg  mb-2 rtl text-red-500`}>
-                                        <div className='flex flex-nowrap gap-2'>
-                                            <span className='rtl'>خرید از شما :</span>
-                                            <ProductPrice productPrices={productPrices} product_id={product._id} sellPrice={false} />
-                                        </div>
-                                    </h3>
+                                        <h3 className={`text-lg  mb-2 rtl `}>
+                                            <div className='flex flex-nowrap gap-2'>
+                                                <span className='rtl'>خرید از شما :</span>
+                                                <ProductPrice productPrices={productPrices} product_id={product._id} sellPrice={false} />
+                                            </div>
+                                        </h3>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))
-                )}
+                        ))
+                    )}
                 <div id="bottom-of-list" className="h-1"></div>
             </div>
             <div className='flex flex-col gap-3 p-5 w-1/4'>
