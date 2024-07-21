@@ -28,7 +28,7 @@ const ProductPrice = ({ product_id, productPrices, updateParent = null, sellPric
         if (data == null || data == undefined) {
             return;
         }
-        
+
         let targetPrice = null
         if (sellPrice) {
             targetPrice = data.sellPrice;
@@ -53,8 +53,13 @@ const ProductPrice = ({ product_id, productPrices, updateParent = null, sellPric
     }, [productPrices]);
 
     return (
-        <div className='rtl'>
-            {loading ? loadingComponent : `${price} ریال`}
+        <div className='rtl '>
+            {loading ? loadingComponent :
+                <div className='flex gap-1'>
+                    <span className='text-accent'>{price}</span>
+                    <span>ریال</span>
+                </div>
+            }
         </div>
     );
 };
