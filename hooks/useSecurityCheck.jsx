@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import translations from "@/translations.json";
 import useLogout from "@/hooks/useLogout";
 
-const useSecurityCheck = (push) => {
+const useSecurityCheck = (push , setLoading) => {
   const pathname = usePathname();
   const { layoutMain } = translations['fa'];
 
@@ -37,6 +37,7 @@ const useSecurityCheck = (push) => {
     try {
       await checkExpTime();
       await checkUserAccessToUrl();
+      setLoading(false);
     } catch (error) {
       console.log(error);
       useLogout(push);
