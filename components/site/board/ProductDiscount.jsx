@@ -41,8 +41,13 @@ const ProductDiscount = ({ product_id, productPrices, updateParent = null }) => 
     }, [productPrices]);
 
     return (
-        <div className='rtl'>
-            {loading ? loadingComponent : `${discount} ریال`}
+        <div className='rtl '>
+            {loading ? loadingComponent :
+                <div className='flex gap-1'>
+                    <span className='text-accent'>{discount}</span>
+                    <span>ریال</span>
+                </div>
+            }
         </div>
     );
 };

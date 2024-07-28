@@ -9,6 +9,7 @@ import StepTwo from './StepTwo';
 import { FaArrowLeft } from "react-icons/fa6";
 import config from "../../../config.json";
 import translations from "@/translations.json";
+import { hasCookie } from 'cookies-next';
 
 const LogIn = () => {
 
@@ -16,6 +17,7 @@ const LogIn = () => {
     const [loading, setLoading] = useState(false);
     const [timer, setTimer] = useState(0);
     const [userName, setUserName] = useState("09137378601");
+    const text = translations['fa'].logIn;
 
     const { push } = useRouter();
 
@@ -24,7 +26,11 @@ const LogIn = () => {
         push('/dashboard');
     }
 
-    const text = translations['fa'].logIn;
+    useEffect(() => {
+        if (hasCookie("token")) {
+            goToDashboard();
+        }
+    }, []);
 
     return (
         <div className='bg-primary flex h-screen w-full max-w-full overflow-hidden justify-center items-center'>
@@ -40,8 +46,7 @@ const LogIn = () => {
                         <div className='flex flex-row-reverse justify-between w-full'>
                             <div className='relative max-w-full w-[140px] h-[140px] rounded-md overflow-hidden '>
                                 <Image
-                                    src={"/logo.png"}
-                                    //src={config.api + config.logo_url}
+                                    src={config.api + config.logo_url}
                                     alt="Picture of the author"
                                     fill
                                     style={{ objectFit: "cover" }}

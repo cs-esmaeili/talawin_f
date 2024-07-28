@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { FaBell } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
-import { getCookie, deleteCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { deletePermissions } from '@/state/permissions';
 import translations from "@/translations.json";
+import useLogout from "@/hooks/useLogout"
 
 const MiniProfile = ({ sliderIsOpen }) => {
 
@@ -14,25 +13,15 @@ const MiniProfile = ({ sliderIsOpen }) => {
   const user = getCookie('user') && JSON.parse(getCookie('user'));
   const userName = getCookie('userName');
   const role = getCookie('role');
-  const dispatch = useDispatch();
-  const hostname = window.location.hostname;
   const { push } = useRouter();
 
   const { miniProfile } = translations['fa'];
 
 
-  const exitFromDashboard = async () => {
-    deleteCookie('token', { path: '/', domain: hostname });
-    deleteCookie('user', { path: '/', domain: hostname });
-    deleteCookie('userName', { path: '/', domain: hostname });
-    deleteCookie('role', { path: '/', domain: hostname });
-    await dispatch(deletePermissions());
-    push('/dashboard/login');
-  }
 
   return (
     <div
-      className="relative mr-3 flex"
+      className="relative mr-3 flex cursor-pointer"
       onClick={() => {
         setOpen(!open);
       }}
@@ -74,7 +63,7 @@ const MiniProfile = ({ sliderIsOpen }) => {
           <div className="flex flex-col justify-end">
             <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer">{miniProfile.profile}</div>
             <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer" onClick={() => {
-              exitFromDashboard();
+              useLogout(push);
             }}>{miniProfile.exit}</div>
           </div>
           <hr className="mt-2" />

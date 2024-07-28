@@ -1,12 +1,12 @@
 import Input from '@/components/dashboard/Input';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import { logInStepTwo as RlogInStepTwo } from '@/services/Authorization';
 import Timer from '@/components/dashboard/Timer';
 import { setCookie } from 'cookies-next';
 import translations from "@/translations.json";
 
-const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDashboard }) => {
+const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => {
 
     const [code, setCode] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
@@ -14,34 +14,39 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
     const { stepTwo, someThingIsWrong } = translations['fa'];
 
 
-    const logInStepTwo = async () => {
+    const logInStepTwo = async (codeI) => {
         try {
-            if (code.length != 4) {
-                setErrorMessage(<div className='text-center'>{stepTwo.codeFormatIsWrong}</div>);
-                return;
-            }
             setLoading(true);
-            let convertedCode = code.replace(/\s/g, '');
+            let convertedCode = null;
+            if (codeI != null) {
+                convertedCode = codeI.replace(/\s/g, '');
+            } else {
+                convertedCode = code.replace(/\s/g, '');
+            }
+
+            console.log(convertedCode);
             let response = await RlogInStepTwo({ userName, code: convertedCode });
-            let { data } = response;
-            let expObj = { expires: new Date(new Date().getTime() + parseInt(data.sessionTime) * 60000) };
-            setCookie('token', data.token, expObj);
-            setCookie('user', data.user, expObj);
+            let { token, user, role, userPermission, sessionTime } = response.data;
+            let expObj = { expires: new Date(new Date().getTime() + parseInt(sessionTime) * 60000) };
+            setCookie('token', token, expObj);
+            setCookie('user', user, expObj);
             setCookie('userName', userName, expObj);
-            setCookie('role', data.role, expObj);
+            setCookie('role', role, expObj);
+            localStorage.setItem('userPermission', JSON.stringify(userPermission));
             setLoading(false);
             goToDashboard();
         } catch (error) {
-            console.log(error);
+            console.error(error);
+            const errorMessage = error?.response?.data?.message ? error.response.data.message : someThingIsWrong;
+            setErrorMessage(<div className='text-center'>{errorMessage}</div>);
+        } finally {
             setLoading(false);
-            if (error?.response?.data?.message) {
-                setErrorMessage(<div className='text-center'>{error.response.data.message}</div>);
-            } else {
-                setErrorMessage(<div className='text-center'>{someThingIsWrong}</div>);
-            }
         }
     }
 
+    useEffect(() => {
+        setErrorMessage(null);
+    }, [userName]);
 
     return (
         <div className='flex flex-col w-full gap-4'>
@@ -54,8 +59,23 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
                     onChange={(e) => setCode(e.target.value)}
                     value={code}
                     onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            logInStepTwo();
+                        if (e.key === 'Enter' && e.target.value.length === 4) {
+                            logInStepTwo(e.target.value);
+                        }
+                    }}
+                    onPaste={(e) => {
+                        setTimeout(() => {
+                            if (e.target.value.length === 4) {
+                                logInStepTwo(e.target.value);
+                            }
+                        }, 0);
+                    }}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    onKeyPress={(e) => {
+                        const charCode = e.charCode ? e.charCode : e.keyCode;
+                        if (charCode < 48 || charCode > 57) {
+                            e.preventDefault();
                         }
                     }}
                 />
@@ -70,8 +90,13 @@ const StepTwo = ({ timer, setTimer, goToPrevious, setUserName, userName, goToDas
                         <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
                     </div>
                     :
-                    <div className='flex justify-center items-center bg-accent rounded-md p-4 w-full gap-2' onClick={() => {
-                        logInStepTwo();
+                    <div className='flex justify-center items-center bg-accent rounded-md p-4 w-full gap-2 cursor-pointer' onClick={() => {
+                        if (code.length != 4) {
+                            setErrorMessage(<div className='text-center'>{stepTwo.codeFormatIsWrong}</div>);
+                            return;
+                        } else {
+                            logInStepTwo();
+                        }
                     }}
                     >
                         <span>{stepTwo.buttonTitle}</span>

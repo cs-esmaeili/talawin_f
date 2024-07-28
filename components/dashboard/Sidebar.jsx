@@ -19,7 +19,7 @@ import { GiMagicPortal } from "react-icons/gi";
 const Sidebar = ({ open, setOpen }) => {
 
   const pathname = usePathname();
-  const permissions = useSelector((state) => state.permissions.value);
+  const permissions = JSON.parse(localStorage.getItem('userPermission'));
   const text = translations["fa"].sideBar;
   const user = getCookie('user') && JSON.parse(getCookie('user'));
   const userName = getCookie('userName');
