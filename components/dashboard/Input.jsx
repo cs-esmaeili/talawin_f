@@ -1,4 +1,3 @@
-import React from "react";
 
 const Input = ({ icon, placeholder, divCssClass, inputCssClass, titleCssClass, title, ...props }) => {
   return (

@@ -1,5 +1,139 @@
 {
-    "en": {},
+    "en": {
+        "someThingIsWrong": "Something went wrong, please try again",
+        "sideBar": {
+            "/dashboard": "Dashboard",
+            "/dashboard/filemanager": "File Management",
+            "/dashboard/category": "Categories",
+            "/dashboard/post/createPost": "Create Post",
+            "/dashboard/post/postList": "Post List",
+            "/dashboard/role": "Roles",
+            "/dashboard/user": "Users",
+            "/dashboard/history": "Transaction History",
+            "/dashboard/product": "Product Management",
+            "/dashboard/admintradeportal": "Admin Trade Portal",
+            "/dashboard/apibox": "API Box"
+        },
+        "logIn": {
+            "back": "Back",
+            "logInRegister": "Log In | Register"
+        },
+        "stepOne": {
+            "phoneNumberError": "The phone number format is incorrect",
+            "placeholderPhoneNumber": "09xxxxxxxxx",
+            "buttonTitle": "Continue"
+        },
+        "stepTwo": {
+            "codeFormatIsWrong": "The code must be 4 digits",
+            "placeHolderCode": "Code",
+            "buttonTitle": "Log In"
+        },
+        "layoutMain": {
+            "permissionError": "Access Denied!",
+            "securityCheck": "Security Check"
+        },
+        "categoryCreate": {
+            "inputCategoryPlaceholder": "Category",
+            "buttonDone": "Apply",
+            "buttonCreate": "Create",
+            "buttonSelect": "Select",
+            "buttonCancel": "Cancel"
+        },
+        "categoryDelete": {
+            "inputPlaceHolder": "Replace with...",
+            "toastError": "Please enter the replacement category ID"
+        },
+        "filemanagerDelete": {
+            "toastError": "Please select a file first"
+        },
+        "filemanagerFiles": {
+            "pathIsEmpty": "Path is empty"
+        },
+        "filemanagerFolder": {
+            "inputPlaceHolder": "Folder Name"
+        },
+        "filemanagerRename": {
+            "toastError": "Please select a file first",
+            "inputPlaceHolder": "Rename to..."
+        },
+        "postDetails": {
+            "inputTitlePlaceholder": "Title",
+            "inputDiscPlaceholder": "Description",
+            "inputtagsPlaceholder": "Tags",
+            "buttonDone": "Apply",
+            "buttonCreate": "Create",
+            "buttonSelect": "Select Category"
+        },
+        "postList": {
+            "textAreaPlaceHolder": "Text...",
+            "placeText": "Place"
+        },
+        "permissions": {
+            "selecRole": "Select a role"
+        },
+        "rolesT": {
+            "roleListTitle": "Role List"
+        },
+        "createuser": {
+            "fullNamePlaceHolder": "Full Name",
+            "userNamePlaceHolder": "Username",
+            "nationalCode": "National Code",
+            "shebaNumber": "Sheba Number",
+            "selecRole": "Select Role",
+            "cancelUpdate": "Cancel",
+            "updateUser": "Update User",
+            "createUser": "Create User",
+            "userImage": "User Image"
+        },
+        "userlist": {
+            "id": "ID",
+            "userName": "Username",
+            "role": "Role",
+            "createdAt": "Created At",
+            "actions": "Actions"
+        },
+        "miniProfile": {
+            "profile": "Profile",
+            "exit": "Logout"
+        },
+        "categoryPage": {
+            "id": "ID",
+            "name": "Name",
+            "updatedAt": "Updated At",
+            "actions": "Actions"
+        },
+        "filemanagerPage": {
+            "home": "Home",
+            "search": "Search"
+        },
+        "postListPage": {
+            "id": "ID",
+            "title": "Title",
+            "category": "Category",
+            "updatedAt": "Updated At",
+            "actions": "Actions"
+        },
+        "product": {
+            "id": "ID",
+            "name": "Name",
+            "updatedAt": "Updated At",
+            "exitApi": "Exit API"
+        },
+        "ProductCardEdit": {
+            "name": "Product Name",
+            "disc": "Product Description",
+            "showProduct": "Show Product",
+            "productPrice": "Product Price",
+            "apiPath": "API Path",
+            "formulaBuy": "Buy Formula",
+            "formulaSell": "Sell Formula",
+            "cBuyPrice": "Manual Buy Price",
+            "cSellPrice": "Manual Sell Price",
+            "discount": "Discount",
+            "submit": "Submit Product",
+            "update": "Submit Changes"
+        }
+    },
     "fa": {
         "someThingIsWrong": "مشکلی پیش آمد دوباره تلاش کنید",
         "sideBar": {
@@ -121,19 +255,18 @@
             "exitApi": "خروج از API"
         },
         "ProductCardEdit": {
-            "name" : "نام کالا",
-            "disc" : "توضیحات کالا",
-            "showProduct" : "نمایش کالا",
-            "productPrice" : "قیمت کالا",
-            "apiPath" : "مسیر api",
-            "formulaBuy" : "فرمول خرید",
-            "formulaSell" : "فرمول فروش",
-            "cBuyPrice" : "قیمت دستی خرید",
-            "cSellPrice" : "قیمت دستی فروش",
-            "discount" : "تخفیف",
-            "submit" : "ثبت کالا",
-            "update" : "ثبت تغییرات"
-
+            "name": "نام کالا",
+            "disc": "توضیحات کالا",
+            "showProduct": "نمایش کالا",
+            "productPrice": "قیمت کالا",
+            "apiPath": "مسیر api",
+            "formulaBuy": "فرمول خرید",
+            "formulaSell": "فرمول فروش",
+            "cBuyPrice": "قیمت دستی خرید",
+            "cSellPrice": "قیمت دستی فروش",
+            "discount": "تخفیف",
+            "submit": "ثبت کالا",
+            "update": "ثبت تغییرات"
         }
     }
 }
