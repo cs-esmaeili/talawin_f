@@ -6,6 +6,8 @@ import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import translations from "@/translations.json";
 import useLogout from "@/hooks/useLogout"
+import UserInformation from '@/app/dashboard/(main)/user/page';
+import { useModalContext } from '@/components/dashboard/Modal';
 
 const MiniProfile = ({ sliderIsOpen }) => {
 
@@ -14,6 +16,7 @@ const MiniProfile = ({ sliderIsOpen }) => {
   const userName = getCookie('userName');
   const role = getCookie('role');
   const { push } = useRouter();
+  const { openModal, closeModal } = useModalContext();
 
   const { miniProfile } = translations['fa'];
 
@@ -61,12 +64,15 @@ const MiniProfile = ({ sliderIsOpen }) => {
           </div>
           <hr className=" mb-2 mt-2 sm:hidden" />
           <div className="flex flex-col justify-end">
-            <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer">{miniProfile.profile}</div>
+            <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer" onClick={() => {
+              openModal(<UserInformation selfMode/>);
+            }}>{miniProfile.profile}</div>
+
             <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer" onClick={() => {
               useLogout(push);
             }}>{miniProfile.exit}</div>
           </div>
-          <hr className="mt-2" />
+          {/* <hr className="mt-2" />
           <div className="flex flex-row justify-end mt-2">
             <div className="flex">
               <MdSunny className="text-2xl" />
@@ -74,7 +80,7 @@ const MiniProfile = ({ sliderIsOpen }) => {
             <div className="flex">
               <FaBell className="ml-3 text-2xl" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

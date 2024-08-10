@@ -24,16 +24,15 @@ const Sidebar = ({ open, setOpen }) => {
 
   const allItems = [
     { name: text["/dashboard"], url: "/dashboard", icon: <MdSpaceDashboard className="text-2xl" /> },
+    { name: text["/dashboard/product"], url: "/dashboard/product", icon: <MdProductionQuantityLimits className="text-2xl" /> },
+    { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" /> },
+    { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <GiMagicPortal className="text-2xl" /> },
     { name: text["/dashboard/filemanager"], url: "/dashboard/filemanager", icon: <PiFolderFill className="text-2xl" /> },
     { name: text["/dashboard/category"], url: "/dashboard/category", icon: <BiSolidCategoryAlt className="text-2xl" /> },
     { name: text["/dashboard/post/createPost"], url: "/dashboard/post/createPost", icon: <MdPostAdd className="text-2xl" /> },
     { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" /> },
     { name: text["/dashboard/role"], url: "/dashboard/role", icon: <BsShieldLockFill className="text-2xl" /> },
     { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
-    { name: text["/dashboard/history"], url: "/dashboard/history", icon: <MdOutlineHistory className="text-2xl" /> },
-    { name: text["/dashboard/product"], url: "/dashboard/product", icon: <MdProductionQuantityLimits className="text-2xl" /> },
-    { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" /> },
-    { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <GiMagicPortal className="text-2xl" /> },
   ];
 
   const [items, setItems] = useState([]);

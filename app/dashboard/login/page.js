@@ -11,12 +11,13 @@ import config from "../../../config.json";
 import translations from "@/translations.json";
 import { hasCookie } from 'cookies-next';
 
+
 const LogIn = () => {
 
     const [step, setStep] = useState(false);
     const [loading, setLoading] = useState(false);
     const [timer, setTimer] = useState(0);
-    const [userName, setUserName] = useState("09137378601");
+    const [userName, setUserName] = useState(config.onLocal ? "09137378601" : "");
     const text = translations['fa'].logIn;
 
     const { push } = useRouter();

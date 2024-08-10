@@ -2,5 +2,6 @@
     "app_name": "طلاوین",
     "logo_url": "assets/logo.jpg",
     "api": "https://back.talawin.ir/",
-    "site_description" : "خرید و فروش طلا"
+    "site_description" : "خرید و فروش طلا",
+    "onLocal" : false
 }

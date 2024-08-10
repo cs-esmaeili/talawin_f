@@ -15,7 +15,7 @@ import { FaIdCardAlt } from "react-icons/fa";
 import { MdCreditCard } from "react-icons/md";
 import translations from "@/translations.json";
 
-const CreateUser = ({ editData, setEditData, setRefreshList }) => {
+const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
 
     const [role, setRole] = useState(null);
     const [image, setImage] = useState(null);
@@ -116,13 +116,17 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
                 <Input onChange={(e) => setShebaNumber(e.target.value)} value={shebaNumber} icon={<MdCreditCard />} placeholder={createuser.shebaNumber} inputCssClass={"bg-primary"} />
                 <div className='flex justify-between gap-2'>
                     <InputDatePicker icon={<BsImageFill className='' />} value={birthday} reset={birthday} onChange={(time) => setBirthday(time)} />
-                    <button className='bg-accent grow text-nowrap p-1 pl-3 pr-3 rounded-md' onClick={() => {
-                        openModal(<Roles selectMode listener={(role) => {
-                            const { name, _id } = role;
-                            setRole({ name, _id });
-                            closeModal();
-                        }} />);
-                    }}>{role ? role.name : createuser.selecRole}</button>
+
+                    {!selfMode &&
+                        <button className='bg-accent grow text-nowrap p-1 pl-3 pr-3 rounded-md' onClick={() => {
+                            openModal(<Roles selectMode listener={(role) => {
+                                const { name, _id } = role;
+                                setRole({ name, _id });
+                                closeModal();
+                            }} />);
+                        }}>{role ? role.name : createuser.selecRole}</button>
+                    }
+                    
                 </div>
                 <div className='flex grow gap-2'>
                     {editData &&
@@ -147,27 +151,29 @@ const CreateUser = ({ editData, setEditData, setRefreshList }) => {
                 </div>
             </div>
 
-            <div className='flex flex-col grow md:grow-0  w-1/3 justify-start bg-primary rounded-md p-2'>
-                <div className='w-fit'>{createuser.userImage}</div>
-                <div className='flex grow relative justify-center text-center mt-3'>
-                    {image &&
-                        <Image
-                            src={image.url}
-                            alt="Picture of the author"
-                            fill
-                            objectFit="cover"
-                            placeholder="blur"
-                            blurDataURL={image.blurHash}
-                            onClick={(e) => {
-                                pickImage();
-                            }}
-                        />
-                    }
-                    <BsImageFill className='text-green-400 text-8xl m-10' onClick={() => {
-                        pickImage();
-                    }} />
+            {!selfMode &&
+                <div className='flex flex-col grow md:grow-0  w-1/3 justify-start bg-primary rounded-md p-2'>
+                    <div className='w-fit'>{createuser.userImage}</div>
+                    <div className='flex grow relative justify-center text-center mt-3'>
+                        {image &&
+                            <Image
+                                src={image.url}
+                                alt="Picture of the author"
+                                fill
+                                objectFit="cover"
+                                placeholder="blur"
+                                blurDataURL={image.blurHash}
+                                onClick={(e) => {
+                                    pickImage();
+                                }}
+                            />
+                        }
+                        <BsImageFill className='text-green-400 text-8xl m-10' onClick={() => {
+                            pickImage();
+                        }} />
+                    </div>
                 </div>
-            </div>
+            }
         </>
     );
 };

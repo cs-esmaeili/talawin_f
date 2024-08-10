@@ -8,7 +8,7 @@ import translations from "@/translations.json";
 
 const UserSearch = ({ selectedUser, setSelectedUser }) => {
 
-    const [searchValue, setSearchValue] = useState("جواد");
+    const [searchValue, setSearchValue] = useState("");
     const [users, setUsers] = useState(null);
     const { someThingIsWrong } = translations['fa'];
 

@@ -48,7 +48,7 @@ export default function Dashboard() {
                     <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
                 </div>
                 :
-                <div className="overflow-auto">
+                <div className="overflow-auto mb-5">
                     <ProductList products={products}/>
                     <Pagination activePage={activePage} perPage={perPage} count={productsCount} setActivePage={setActivePage} />
                 </div>
