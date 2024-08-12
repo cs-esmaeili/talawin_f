@@ -43,13 +43,13 @@ export default function Dashboard() {
     return (
         <div className="flex flex-col items-center justify-center grow">
             {loading ?
-                <div className="relative  w-20 h-20">
+                <div className="relative w-20 h-20">
                     <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>
                     <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
                 </div>
                 :
                 <div className="overflow-auto mb-5">
-                    <ProductList products={products}/>
+                    <ProductList products={products} />
                     <Pagination activePage={activePage} perPage={perPage} count={productsCount} setActivePage={setActivePage} />
                 </div>
             }

@@ -26,13 +26,10 @@ const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => 
 
             console.log(convertedCode);
             let response = await RlogInStepTwo({ userName, code: convertedCode });
-            let { token, user, role, userPermission, sessionTime } = response.data;
+            let { token, sessionTime } = response.data;
             let expObj = { expires: new Date(new Date().getTime() + parseInt(sessionTime) * 60000) };
             setCookie('token', token, expObj);
-            setCookie('user', user, expObj);
             setCookie('userName', userName, expObj);
-            setCookie('role', role, expObj);
-            localStorage.setItem('userPermission', JSON.stringify(userPermission));
             setLoading(false);
             goToDashboard();
         } catch (error) {

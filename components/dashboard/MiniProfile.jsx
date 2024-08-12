@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaBell } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
@@ -8,20 +8,21 @@ import translations from "@/translations.json";
 import useLogout from "@/hooks/useLogout"
 import UserInformation from '@/app/dashboard/(main)/user/page';
 import { useModalContext } from '@/components/dashboard/Modal';
+import { useSelector } from 'react-redux';
 
 const MiniProfile = ({ sliderIsOpen }) => {
 
   const [open, setOpen] = useState(false);
-  const user = getCookie('user') && JSON.parse(getCookie('user'));
-  const userName = getCookie('userName');
-  const role = getCookie('role');
+  const information = useSelector((state) => state.information.value);
+  const role = useSelector((state) => state.role.value);
+  const [userName, setUserName] = useState("");
   const { push } = useRouter();
   const { openModal, closeModal } = useModalContext();
-
   const { miniProfile } = translations['fa'];
 
-
-
+  useEffect(() => {
+    setUserName(getCookie('userName'));
+  }, []);
   return (
     <div
       className="relative mr-3 flex cursor-pointer"
@@ -37,8 +38,8 @@ const MiniProfile = ({ sliderIsOpen }) => {
         height={50}
       />
       <div className="ml-3 hidden flex-col text-center sm:flex">
-        <span>{(user && user.fullName != null) ? user.fullName : userName}</span>
-        <span>{role}</span>
+        <span>{information?.data?.fullName ?? userName}</span>
+        <span>{role.name}</span>
       </div>
 
       <div
@@ -58,14 +59,14 @@ const MiniProfile = ({ sliderIsOpen }) => {
               height={50}
             />
             <div className="ml-2 flex flex-col text-center">
-              <span>{(user && user.fullName != null) ? user.fullName : userName}</span>
-              <span>{role}</span>
+              <span>{information?.data?.fullName ?? userName}</span>
+              <span>{role.name}</span>
             </div>
           </div>
           <hr className=" mb-2 mt-2 sm:hidden" />
           <div className="flex flex-col justify-end">
             <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer" onClick={() => {
-              openModal(<UserInformation selfMode/>);
+              openModal(<UserInformation selfMode />);
             }}>{miniProfile.profile}</div>
 
             <div className="text-right hover:bg-accent rounded-md p-1 cursor-pointer" onClick={() => {

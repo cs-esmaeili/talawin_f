@@ -13,14 +13,17 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getCookie } from 'cookies-next';
 import { GiMagicPortal } from "react-icons/gi";
+import { useSelector } from 'react-redux';
 
 const Sidebar = ({ open, setOpen }) => {
 
   const pathname = usePathname();
-  const permissions = JSON.parse(localStorage.getItem('userPermission'));
   const text = translations["fa"].sideBar;
-  const user = getCookie('user') && JSON.parse(getCookie('user'));
-  const userName = getCookie('userName');
+  const [userName, setUserName] = useState("");
+
+
+  const information = useSelector((state) => state.information.value);
+  const permissions = useSelector((state) => state.permissions.value);
 
   const allItems = [
     { name: text["/dashboard"], url: "/dashboard", icon: <MdSpaceDashboard className="text-2xl" /> },
@@ -38,16 +41,21 @@ const Sidebar = ({ open, setOpen }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    let tempItems = [];
-    allItems.forEach(item => {
-      permissions.forEach(permission => {
-        if (item.url == permission.route) {
-          tempItems.push(item);
-        }
+
+    setUserName(getCookie('userName'));
+
+    if (permissions != null) {
+      let tempItems = [];
+      allItems.forEach(item => {
+        permissions.forEach(permission => {
+          if (item.url == permission.route) {
+            tempItems.push(item);
+          }
+        });
       });
-    });
-    setItems(tempItems);
-  }, []);
+      setItems(tempItems);
+    }
+  }, [permissions]);
 
   return (
     <div
@@ -73,7 +81,7 @@ const Sidebar = ({ open, setOpen }) => {
 
       <div className="mb-5 mt-8 flex items-center justify-between rounded-md bg-secondary_dark p-3">
         <div className="flex grow justify-center mr-3">
-          <span>{(user && user.fullName != null) ? user.fullName : userName}</span>
+          <span>{information?.data?.fullName ?? userName}</span>
         </div>
         <Image
           className="rounded-full"

@@ -5,10 +5,10 @@ import { store } from "@/state/store";
 export default function Layout({ children }) {
 
   return (
-    <html lang="en">
+    <section>
       <Provider store={store}>
-        <body>{children}</body>
+        {children}
       </Provider>
-    </html>
+    </section>
   )
 }

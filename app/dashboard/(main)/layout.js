@@ -14,11 +14,11 @@ import translations from "@/translations.json";
 export default function Layout({ children }) {
 
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { push } = useRouter();
   const { layoutMain } = translations['fa'];
 
-  useSecurityCheck(push, setLoading);
+  // useSecurityCheck(push, setLoading);
 
   useEffect(() => {
     const handleResize = () => {

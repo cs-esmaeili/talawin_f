@@ -8,6 +8,7 @@ import Input from '@/components/dashboard/Input';
 import InputDatePicker from '@/components/dashboard/InputDatePicker';
 import Roles from '@/components/dashboard/role/Roles';
 import { registerPure, updateRegisterPure } from '@/services/User';
+import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import toast from 'react-hot-toast';
 import { MdSubtitles } from "react-icons/md";
 import { FaMobile } from "react-icons/fa6";
@@ -109,13 +110,18 @@ const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
 
     return (
         <>
-            <div className='flex flex-col grow  gap-2 w-2/3 max-w-2/3'>
+            <div className='flex flex-col grow  gap-2 w-2/3 max-w-2/3 '>
                 <Input onChange={(e) => setFullName(e.target.value)} value={fullName} icon={<MdSubtitles />} placeholder={createuser.fullNamePlaceHolder} inputCssClass={"bg-primary"} />
-                <Input onChange={(e) => setUserName(e.target.value)} value={userName} icon={<FaMobile />} placeholder={createuser.userNamePlaceHolder} inputCssClass={"bg-primary"} />
+                {!selfMode &&
+                    <Input onChange={(e) => setUserName(e.target.value)} value={userName} icon={<FaMobile />} placeholder={createuser.userNamePlaceHolder}
+                        inputCssClass={`bg-primary`}
+                    />
+                }
+
                 <Input onChange={(e) => setNationalCode(e.target.value)} value={nationalCode} icon={<FaIdCardAlt />} placeholder={createuser.nationalCode} inputCssClass={"bg-primary"} />
                 <Input onChange={(e) => setShebaNumber(e.target.value)} value={shebaNumber} icon={<MdCreditCard />} placeholder={createuser.shebaNumber} inputCssClass={"bg-primary"} />
                 <div className='flex justify-between gap-2'>
-                    <InputDatePicker icon={<BsImageFill className='' />} value={birthday} reset={birthday} onChange={(time) => setBirthday(time)} />
+                    <InputDatePicker icon={<LiaBirthdayCakeSolid  className='text-2xl' />} value={birthday} reset={birthday} onChange={(time) => setBirthday(time)} />
 
                     {!selfMode &&
                         <button className='bg-accent grow text-nowrap p-1 pl-3 pr-3 rounded-md' onClick={() => {
@@ -126,7 +132,7 @@ const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
                             }} />);
                         }}>{role ? role.name : createuser.selecRole}</button>
                     }
-                    
+
                 </div>
                 <div className='flex grow gap-2'>
                     {editData &&

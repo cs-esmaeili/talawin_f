@@ -3,11 +3,20 @@
 import { useState, useEffect } from 'react';
 import CreateUser from '@/components/dashboard/users/CreateUser';
 import UserList from '@/components/dashboard/users/UserList';
+import { useSelector } from 'react-redux';
 
 export default function user({ selfMode = false }) {
 
+    const information = useSelector((state) => state.information.value);
+
     const [editData, setEditData] = useState(null);
     const [refreshList, setRefreshList] = useState(false);
+
+    useEffect(() => {
+        if (selfMode) {
+            setEditData(information);
+        }
+    }, [information]);
 
     return (
         <div className='flex flex-col grow max-w-full min-w-0'>
