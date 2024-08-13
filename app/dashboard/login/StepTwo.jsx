@@ -5,6 +5,7 @@ import { logInStepTwo as RlogInStepTwo } from '@/services/Authorization';
 import Timer from '@/components/dashboard/Timer';
 import { setCookie } from 'cookies-next';
 import translations from "@/translations.json";
+import axios from "axios";
 
 const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => {
 
@@ -26,6 +27,7 @@ const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => 
 
             let response = await RlogInStepTwo({ userName, code: convertedCode });
             let { token, sessionTime } = response.data;
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             let expObj = { expires: new Date(new Date().getTime() + parseInt(sessionTime) * 60000) };
             setCookie('token', token, expObj);
             setCookie('userName', userName, expObj);

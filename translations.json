@@ -81,7 +81,7 @@
             "shebaNumber": "Sheba Number",
             "selecRole": "Select Role",
             "cancelUpdate": "Cancel",
-            "updateUser": "Update User",
+            "updateUser": "Update",
             "createUser": "Create User",
             "userImage": "User Image"
         },
@@ -216,7 +216,7 @@
             "shebaNumber": "شماره شبا",
             "selecRole": "انتخاب نقش",
             "cancelUpdate": "لغو",
-            "updateUser": "بروز رسانی کاربر",
+            "updateUser": "بروز رسانی",
             "createUser": "ساخت کاربر",
             "userImage": "تصویر کاربر"
         },

@@ -6,7 +6,7 @@ import Header from '@/components/dashboard/Header';
 import { useState, useEffect } from "react";
 import { Toaster } from 'react-hot-toast';
 import '@/styles/globals.css';
-import SocketInitializer from '@/components/dashboard/SocketInitializer';
+import useSocket from '@/hooks/useSocket';
 import useSecurityCheck from '@/hooks/useSecurityCheck';
 import { useRouter } from 'next/navigation';
 import translations from "@/translations.json";
@@ -18,6 +18,7 @@ export default function Layout({ children }) {
   const { push } = useRouter();
   const { layoutMain } = translations['fa'];
 
+  useSocket();
   useSecurityCheck(push, setLoading);
 
   useEffect(() => {
@@ -36,7 +37,6 @@ export default function Layout({ children }) {
   return (
     <div className='bg-primary flex h-screen w-full max-w-full overflow-hidden'>
       <Toaster position="top-center" />
-      <SocketInitializer />
       {loading ?
         <div className="relative flex flex-col gap-5 justify-center items-center h-full w-full">
           <div className="w-32 h-32 rounded-full border-8 border-solid border-accent border-t-transparent animate-spin"></div>

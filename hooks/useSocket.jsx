@@ -1,30 +1,26 @@
 import { useEffect } from 'react';
-import { io } from 'socket.io-client';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setApiData } from '@/state/apiData';
 import { setProductPrices } from '@/state/productPrices';
 import { setboxPrices } from '@/state/boxPrices';
 import { setPermissions } from '@/state/permissions';
 import { setinformation } from '@/state/information';
 import { setrole } from '@/state/role';
-import config from "@/config.json";
-import { getCookie } from 'cookies-next';
+import { initializeSocket, getSocket } from '@/services/scoket';
 import useLogout from "@/hooks/useLogout"
 import { useRouter } from 'next/navigation';
+
 const useSocket = () => {
     const dispatch = useDispatch();
-    const token = getCookie('token');
     const { push } = useRouter();
 
     useEffect(() => {
-        if (!token) {
+        const socket = initializeSocket();
+
+        if (!socket) {
             useLogout(push);
-            console.error('No token available for socket connection');
             return;
         }
-        const socket = io(config.api, {
-            query: { token }
-        });
 
         socket.on('apiData', (data) => {
             if (data != null && data.length > 0) {
@@ -51,7 +47,6 @@ const useSocket = () => {
 
             if (data.information.role_id != null)
                 dispatch(setrole(data.information.role_id));
-
         });
 
         socket.on("disconnect", () => {
@@ -64,7 +59,7 @@ const useSocket = () => {
         return () => {
             socket.disconnect();
         };
-    }, [dispatch, token]);
+    }, [dispatch, push]);
 
     return null;
 };

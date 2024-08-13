@@ -45,6 +45,7 @@ function InputDatePicker({ icon, value, onChange, reset, length = 3 }) {
                 ref={inputRefs.current[0]}
                 placeholder='1379'
                 value={defaultTime[0]}
+                tabIndex={7}
                 onChange={onChangedDates}
                 onKeyDown={(e) => {
                     if (e.key === 'Backspace' && e.currentTarget.value === '') {
@@ -60,6 +61,7 @@ function InputDatePicker({ icon, value, onChange, reset, length = 3 }) {
                 className='bg-transparent p-1 outline-none text-center min-w-0'
                 ref={inputRefs.current[1]}
                 value={defaultTime[1]}
+                tabIndex={6}
                 placeholder='01'
                 onChange={onChangedDates}
                 onKeyDown={(e) => {
@@ -76,6 +78,7 @@ function InputDatePicker({ icon, value, onChange, reset, length = 3 }) {
                 className='bg-transparent p-1 outline-none text-center min-w-0'
                 ref={inputRefs.current[2]}
                 value={defaultTime[2]}
+                tabIndex={5}
                 placeholder='11'
                 onChange={onChangedDates}
                 onKeyDown={(e) => {
