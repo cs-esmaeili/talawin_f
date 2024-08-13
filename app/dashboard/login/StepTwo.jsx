@@ -24,7 +24,6 @@ const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => 
                 convertedCode = code.replace(/\s/g, '');
             }
 
-            console.log(convertedCode);
             let response = await RlogInStepTwo({ userName, code: convertedCode });
             let { token, sessionTime } = response.data;
             let expObj = { expires: new Date(new Date().getTime() + parseInt(sessionTime) * 60000) };

@@ -141,8 +141,6 @@ const BoxSell = ({ selectedUser, setSelectedUser }) => {
                     {selectedProducts && selectedProducts.length > 0 &&
                         selectedProducts.map((product, index) => {
 
-                            console.log(product);
-
                             return (
                                 <div className='bg-secondary flex w-full h-fit gap-2 p-3 rounded-md justify-between items-center' onClick={() => {
                                 }}>

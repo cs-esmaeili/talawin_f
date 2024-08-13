@@ -23,7 +23,7 @@ const Prices = () => {
 
     useEffect(() => {
         setLoading(true);
-        if (apiData != null) {
+        if (apiData != null && apiData.length > 0) {
             setTimeout(() => {
                 setLoading(false);
             }, 500);

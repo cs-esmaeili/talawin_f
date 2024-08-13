@@ -27,21 +27,32 @@ const useSocket = () => {
         });
 
         socket.on('apiData', (data) => {
-            dispatch(setApiData(data));
+            if (data != null && data.length > 0) {
+                dispatch(setApiData(data));
+                console.log("size = " + data.length);
+            }
         });
 
         socket.on('productPrices', (data) => {
-            dispatch(setProductPrices(data));
+            if (data != null && data.length > 0)
+                dispatch(setProductPrices(data));
         });
 
         socket.on('boxPrices', (data) => {
-            dispatch(setboxPrices(data));
+            if (data != null && data.length > 0)
+                dispatch(setboxPrices(data));
         });
 
         socket.on('information', (data) => {
-            dispatch(setPermissions(data.permissions));
-            dispatch(setinformation(data.information));
-            dispatch(setrole(data.information.role_id));
+            if (data.permissions != null && data.permissions.length > 0)
+                dispatch(setPermissions(data.permissions));
+
+            if (data.information != null)
+                dispatch(setinformation(data.information));
+
+            if (data.information.role_id != null)
+                dispatch(setrole(data.information.role_id));
+
         });
 
         socket.on("disconnect", () => {

@@ -21,7 +21,6 @@ export default function Dashboard() {
             setLoading(true);
             const { data } = await RproductList({ page: activePage, perPage });
             const { productsCount, products } = data;
-            console.log(products);
             setProducts(products);
             setProductsCount(productsCount);
             setLoading(false);

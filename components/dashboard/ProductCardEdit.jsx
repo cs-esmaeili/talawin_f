@@ -50,7 +50,6 @@ const ProductCard = ({ editData, setEditData, updateList }) => {
             if (id && id != null) {
                 result = await updateProduct({ box_id: box._id, id, name, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, visible });
             } else {
-                console.log(box._id);
                 result = await createProduct({ box_id: box._id, name, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, visible });
             }
             const { data } = result;

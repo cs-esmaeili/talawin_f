@@ -39,7 +39,6 @@ const page = () => {
             <div className='grid h-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 rtl'>
                 {historys && historys.length > 0 && historys.reverse().map((history, index) => {
                     const { title, createdAt, price, _id, type, products } = history;
-                    console.log(title);
                     return (
                         <HistoryCard key={index} title={title} date={createdAt} price={price} id={_id} type={type} products={products} />
                     )
