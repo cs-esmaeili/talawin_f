@@ -1,25 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCookie } from 'cookies-next';
 import { usePathname } from 'next/navigation';
 import translations from "@/translations.json";
 import useLogout from "@/hooks/useLogout";
+import { useSelector } from 'react-redux';
 
-const useSecurityCheck = (push , setLoading) => {
+const useSecurityCheck = (push, setLoading) => {
   const pathname = usePathname();
   const { layoutMain } = translations['fa'];
+  const userPermission = useSelector((state) => state.permissions.value);
+  const [isPermissionLoaded, setIsPermissionLoaded] = useState(false);
 
   const checkExpTime = async () => {
     const token = getCookie('token');
-    if (token == null || token == undefined) {
+    if (!token) {
       console.log("Token not found!");
-      throw new Error(layoutMain.permissionError);
+      return false;
     }
+    return true;
   };
 
   const checkUserAccessToUrl = async () => {
     let access = false;
-    const userPermission = JSON.parse(localStorage.getItem('userPermission'));
-    if (userPermission) {
+    if (userPermission != null && userPermission.length > 0) {
       userPermission.forEach(permission => {
         if (permission.route === pathname) {
           access = true;
@@ -28,16 +31,19 @@ const useSecurityCheck = (push , setLoading) => {
     }
     if (!access) {
       console.log("Permission Not granted!");
-      throw new Error(layoutMain.permissionError);
     }
     return access;
   };
 
   const securityCheck = async () => {
     try {
-      await checkExpTime();
-      await checkUserAccessToUrl();
-      setLoading(false);
+      const check1 = await checkExpTime();
+      const check2 = await checkUserAccessToUrl();
+      if (check1 && check2) {
+        setLoading(false);
+        return true;
+      }
+      return false;
     } catch (error) {
       console.log(error);
       useLogout(push);
@@ -45,8 +51,16 @@ const useSecurityCheck = (push , setLoading) => {
   };
 
   useEffect(() => {
-    securityCheck();
-  }, [pathname]);
+    if (userPermission !== null && userPermission.length > 0) {
+      setIsPermissionLoaded(true);
+    }
+  }, [userPermission]);
+
+  useEffect(() => {
+    if (isPermissionLoaded) {
+      securityCheck();
+    }
+  }, [isPermissionLoaded, pathname]);
 };
 
 export default useSecurityCheck;

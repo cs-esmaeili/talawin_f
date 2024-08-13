@@ -29,7 +29,6 @@ const useSocket = () => {
         socket.on('apiData', (data) => {
             if (data != null && data.length > 0) {
                 dispatch(setApiData(data));
-                console.log("size = " + data.length);
             }
         });
 
