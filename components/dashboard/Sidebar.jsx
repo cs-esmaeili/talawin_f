@@ -20,7 +20,7 @@ const Sidebar = ({ open, setOpen }) => {
   const pathname = usePathname();
   const text = translations["fa"].sideBar;
   const [userName, setUserName] = useState("");
-
+  const [loading, setLoading] = useState(true);
 
   const information = useSelector((state) => state.information.value);
   const permissions = useSelector((state) => state.permissions.value);
@@ -41,9 +41,6 @@ const Sidebar = ({ open, setOpen }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-
-    setUserName(getCookie('userName'));
-
     if (permissions != null) {
       let tempItems = [];
       allItems.forEach(item => {
@@ -55,17 +52,27 @@ const Sidebar = ({ open, setOpen }) => {
       });
       setItems(tempItems);
     }
-  }, [permissions]);
+  }, [permissions , information]);
+
+  useEffect(() => {
+    if (permissions != null && permissions.length > 0 && information != null) {
+      setLoading(false);
+    }
+  }, [permissions, information]);
+
+  useEffect(() => {
+    setUserName(getCookie('userName'));
+  }, []);
 
   return (
     <div
       className={
         open
           ? "fixed bottom-0 right-0 top-0 z-30 h-full min-w-max bg-secondary p-7 duration-500 ease-in overflow-y-auto"
-          : "fixed  right-[-100%] h-full z-30 min-w-max bg-secondary p-7 duration-500 ease-in lg:static lg:block overflow-y-auto"
+          : "fixed  right-[-100%] h-full z-30 min-w-max bg-secondary p-7 duration-500 ease-in lg:static lg:flex overflow-y-auto flex-col"
       }
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between min-w-[256px]">
         <div className="flex grow justify-center">
           <span className="ml-3 text-2xl "> {config.app_name} </span>
         </div>
@@ -78,36 +85,46 @@ const Sidebar = ({ open, setOpen }) => {
         />
 
       </div>
-
-      <div className="mb-5 mt-8 flex items-center justify-between rounded-md bg-secondary_dark p-3">
-        <div className="flex grow justify-center mr-3">
-          <span>{information?.data?.fullName ?? userName}</span>
+      {loading ?
+        <div className="flex grow w-full justify-center items-center">
+          <div className="relative w-20 h-20">
+            <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>
+            <div className="w-full h-full rounded-full absolute animate-spin  border-4 border-solid border-accent border-t-transparent shadow-md"></div>
+          </div>
         </div>
-        <Image
-          className="rounded-full"
-          src="/avatar.jpg"
-          alt="Site logo"
-          width={45}
-          height={45}
-        />
-      </div>
-      <div>
-        {items.map((item, index) => {
-          const { url, icon, name } = item;
-          return (
-            <Link href={url} key={index}>
-              <div className={(pathname == url) ?
-                "bg-siebar_item mb-5 flex items-center rounded-lg bg-active_background p-3 text-accent rtl"
-                :
-                "mb-5 flex items-center p-3 text-dactive rtl"
-              }>
-                {icon}
-                <span className="mr-3">{name}</span>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+        :
+        <>
+          <div className="mb-5 mt-8 flex items-center justify-between rounded-md bg-secondary_dark p-3">
+            <div className="flex grow justify-center mr-3">
+              <span>{information?.data?.fullName ?? userName}</span>
+            </div>
+            <Image
+              className="rounded-full"
+              src="/avatar.jpg"
+              alt="Site logo"
+              width={45}
+              height={45}
+            />
+          </div>
+          <div>
+            {items.map((item, index) => {
+              const { url, icon, name } = item;
+              return (
+                <Link href={url} key={index}>
+                  <div className={(pathname == url) ?
+                    "bg-siebar_item mb-5 flex items-center rounded-lg bg-active_background p-3 text-accent rtl"
+                    :
+                    "mb-5 flex items-center p-3 text-dactive rtl"
+                  }>
+                    {icon}
+                    <span className="mr-3">{name}</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </>
+      }
     </div>
   );
 };
