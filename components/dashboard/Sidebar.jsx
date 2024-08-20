@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { getCookie } from 'cookies-next';
 import { GiMagicPortal } from "react-icons/gi";
 import { useSelector } from 'react-redux';
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
 
 const Sidebar = ({ open, setOpen }) => {
 
@@ -31,9 +32,9 @@ const Sidebar = ({ open, setOpen }) => {
     { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" /> },
     { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <GiMagicPortal className="text-2xl" /> },
     { name: text["/dashboard/filemanager"], url: "/dashboard/filemanager", icon: <PiFolderFill className="text-2xl" /> },
-    { name: text["/dashboard/category"], url: "/dashboard/category", icon: <BiSolidCategoryAlt className="text-2xl" /> },
-    { name: text["/dashboard/post/createPost"], url: "/dashboard/post/createPost", icon: <MdPostAdd className="text-2xl" /> },
-    { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" /> },
+    { name: text["/dashboard/category"], url: "/dashboard/category", icon: <BiSolidCategoryAlt className="text-2xl" />, lock: true },
+    { name: text["/dashboard/post/createPost"], url: "/dashboard/post/createPost", icon: <MdPostAdd className="text-2xl" />, lock: true },
+    { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" />, lock: true },
     { name: text["/dashboard/role"], url: "/dashboard/role", icon: <BsShieldLockFill className="text-2xl" /> },
     { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
   ];
@@ -52,7 +53,7 @@ const Sidebar = ({ open, setOpen }) => {
       });
       setItems(tempItems);
     }
-  }, [permissions , information]);
+  }, [permissions, information]);
 
   useEffect(() => {
     if (permissions != null && permissions.length > 0 && information != null) {
@@ -110,14 +111,28 @@ const Sidebar = ({ open, setOpen }) => {
             {items.map((item, index) => {
               const { url, icon, name } = item;
               return (
-                <Link href={url} key={index}>
+                <Link href={(item.lock) ? "" : url} key={index}>
                   <div className={(pathname == url) ?
-                    "bg-siebar_item mb-5 flex items-center rounded-lg bg-active_background p-3 text-accent rtl"
+                    "relative bg-siebar_item mb-5 flex items-center rounded-lg bg-active_background p-3 text-accent rtl"
                     :
-                    "mb-5 flex items-center p-3 text-dactive rtl"
+                    "relative mb-5 flex items-center p-3 text-dactive rtl"
                   }>
-                    {icon}
-                    <span className="mr-3">{name}</span>
+                    <div className={item.lock && "opacity-50"}>
+                      {icon}
+                    </div>
+                    <span className={`mr-3 text-nowrap ${item.lock && "opacity-50"}`}>
+                      {name}
+                    </span>
+                    {item.lock == true &&
+                      <div className='flex grow justify-center items-center w-full'>
+                        <Player
+                          autoplay
+                          loop
+                          src="/assets/animation.json"
+                          style={{ height: '100px', width: '100px' }}
+                        />
+                      </div>
+                    }
                   </div>
                 </Link>
               );
