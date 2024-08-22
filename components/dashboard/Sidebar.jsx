@@ -15,6 +15,8 @@ import { getCookie } from 'cookies-next';
 import { GiMagicPortal } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import { FaBoxArchive } from "react-icons/fa6";
+import { FaSms } from "react-icons/fa";
 
 const Sidebar = ({ open, setOpen }) => {
 
@@ -30,8 +32,9 @@ const Sidebar = ({ open, setOpen }) => {
     { name: text["/dashboard"], url: "/dashboard", icon: <MdSpaceDashboard className="text-2xl" /> },
     { name: text["/dashboard/product"], url: "/dashboard/product", icon: <MdProductionQuantityLimits className="text-2xl" /> },
     { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" /> },
-    { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <GiMagicPortal className="text-2xl" /> },
+    { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <FaBoxArchive className="text-2xl" /> },
     { name: text["/dashboard/filemanager"], url: "/dashboard/filemanager", icon: <PiFolderFill className="text-2xl" /> },
+    { name: text["/dashboard/sms"], url: "/dashboard/sms", icon: <FaSms  className="text-2xl" /> },
     { name: text["/dashboard/category"], url: "/dashboard/category", icon: <BiSolidCategoryAlt className="text-2xl" />, lock: true },
     { name: text["/dashboard/post/createPost"], url: "/dashboard/post/createPost", icon: <MdPostAdd className="text-2xl" />, lock: true },
     { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" />, lock: true },

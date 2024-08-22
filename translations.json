@@ -12,7 +12,8 @@
             "/dashboard/history": "Transaction History",
             "/dashboard/product": "Product Management",
             "/dashboard/admintradeportal": "Admin Trade Portal",
-            "/dashboard/apibox": "API Box"
+            "/dashboard/apibox": "API Box",
+            "/dashboard/sms": "sms"
         },
         "logIn": {
             "back": "Back",
@@ -147,7 +148,8 @@
             "/dashboard/history": "تاریخچه خرید و فروش",
             "/dashboard/product": "مدریت کالا",
             "/dashboard/admintradeportal": "پورتال خرید و فروش ادمین",
-            "/dashboard/apibox": "جعبه Api"
+            "/dashboard/apibox": "جعبه Api",
+             "/dashboard/sms": "پیامک"
         },
         "logIn": {
             "back": "برگشت",
