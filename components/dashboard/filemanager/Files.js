@@ -67,7 +67,7 @@ export default function Files({ path, selectedFile, setSelectedFile, setPath, re
     }
     const File = (file, index) => {
         const { name, type } = file;
-        if (fileType != null && type != fileType) {
+        if (fileType != null && type != "folder" && type != fileType) {
             return null;
         }
         let icon = null;
@@ -115,7 +115,7 @@ export default function Files({ path, selectedFile, setSelectedFile, setPath, re
     }, [refreshList, path]);
 
     return (
-        <div className='relative flex flex-col grow max-w-full max-h-full overflow-hidden'>
+        <div className='relative flex flex-col grow max-w-full max-h-full overflow-hidden p-3'>
             {statusElement()}
         </div>
     )

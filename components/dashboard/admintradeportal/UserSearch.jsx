@@ -5,12 +5,15 @@ import { useState, useEffect } from 'react';
 import { searchUser as RsearchUser } from '@/services/User';
 import toast from 'react-hot-toast';
 import translations from "@/translations.json";
+import CreateUser from "@/components/dashboard/users/CreateUser";
+import { useModalContext } from '@/components/dashboard/Modal';
 
 const UserSearch = ({ selectedUser, setSelectedUser }) => {
 
     const [searchValue, setSearchValue] = useState("");
     const [users, setUsers] = useState(null);
     const { someThingIsWrong } = translations['fa'];
+    const { openModal, closeModal } = useModalContext();
 
     const searchUser = async () => {
         try {
@@ -29,7 +32,10 @@ const UserSearch = ({ selectedUser, setSelectedUser }) => {
 
     return (
         <>
-            <div className='bg-primary w-full rounded-md p-3 flex justify-center' ><span>انتخاب کاربر</span></div>
+            <div className='bg-primary w-full rounded-md p-3 flex justify-center' >انتخاب کاربر</div>
+            <div className='bg-primary w-full rounded-md p-3 flex justify-center hover:bg-accent cursor-pointer' onClick={() => {
+                openModal(<CreateUser  />);
+            }}>ساخت کاربر</div>
             <Input placeholder={"جستجو بر اساس نام یا شماره تلفن"} inputCssClass={"text-center ltr"}
                 onChange={(e) => setSearchValue(e.target.value)} value={searchValue}
                 onKeyDown={(e) => {

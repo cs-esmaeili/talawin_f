@@ -102,7 +102,7 @@ const SmsScreen = ({ selectedTemplate, selectedUser, setSelectedTemplate, setSel
               </div>
             </div>
           )}
-          {userName && phoneNumber && selectedTemplate &&
+          {phoneNumber && selectedTemplate &&
             <div className='flex flex-col gap-3'>
               <div className='flex bg-primary rounded-md justify-between border-2 border-green-400 p-3'>
                 <span>{phoneNumber}</span>

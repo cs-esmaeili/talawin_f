@@ -66,7 +66,8 @@ const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
             const { message } = data;
             toast.success(message);
             resetForm();
-            setRefreshList();
+            if (setRefreshList)
+                setRefreshList();
             if (selfMode) {
                 emitEvent("information", null);
                 closeModal();
@@ -114,8 +115,8 @@ const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
     }, [editData]);
 
     return (
-        <>
-            <div className='flex flex-col grow  gap-2 w-2/3 max-w-2/3 '>
+        <div className='flex w-full'>
+            <div className='flex flex-col grow  gap-2 w-2/3'>
                 <Input onChange={(e) => setFullName(e.target.value)} tabIndex={1} value={fullName} icon={<MdSubtitles />} placeholder={createuser.fullNamePlaceHolder} inputCssClass={"bg-primary"} />
                 {!selfMode &&
                     <Input onChange={(e) => setUserName(e.target.value)} value={userName} icon={<FaMobile />} tabIndex={2} placeholder={createuser.userNamePlaceHolder}
@@ -185,7 +186,7 @@ const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
                     </div>
                 </div>
             }
-        </>
+        </div>
     );
 };
 
