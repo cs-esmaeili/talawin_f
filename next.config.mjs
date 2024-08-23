@@ -14,6 +14,14 @@ const nextConfig = {
             {
                 protocol: 'http',
                 hostname: 'back.talawin.ir',
+            },
+            {
+                protocol: 'https',
+                hostname: 'www.back.talawin.ir',
+            },
+            {
+                protocol: 'http',
+                hostname: 'www.back.talawin.ir',
             }
         ],
     },
