@@ -9,12 +9,16 @@ const SmsScreen = ({ selectedTemplate, selectedUser, setSelectedTemplate, setSel
   const [code, setCode] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [text, setText] = useState(null);
+  const [name, setName] = useState(null);
 
   const [inputValues, setInputValues] = useState([]);
 
   useEffect(() => {
     if (selectedTemplate && selectedTemplate.text) {
       setCode(selectedTemplate.code)
+      setText(selectedTemplate.text)
+      setName(selectedTemplate.name)
       const placeholders = selectedTemplate.text.match(/#\w+#/g) || [];
       const initialValues = placeholders.map((placeholder) => ({
         name: placeholder.replace(/#/g, ''),
@@ -41,7 +45,14 @@ const SmsScreen = ({ selectedTemplate, selectedUser, setSelectedTemplate, setSel
     );
   };
 
-
+  const generateFinalPureText = () => {
+    let finalText = selectedTemplate.text;
+    inputValues.forEach(({ name, value }) => {
+      const placeholder = `#${name}#`;
+      finalText = finalText.replace(new RegExp(placeholder, 'g'), value || placeholder);
+    });
+    return finalText;
+  };
   const generateFinalText = () => {
     let finalText = selectedTemplate.text;
     inputValues.forEach(({ name, value }) => {
@@ -57,7 +68,7 @@ const SmsScreen = ({ selectedTemplate, selectedUser, setSelectedTemplate, setSel
   const sendSmsToUser = async () => {
     try {
       setLoading(true);
-      const { data } = await RsendSmsToUser({ phoneNumber, code, params: inputValues });
+      const { data } = await RsendSmsToUser({ name, text: generateFinalPureText(), phoneNumber, code, params: inputValues });
       const { message } = data;
       toast.success(message);
       setLoading(false);

@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { FaBoxArchive } from "react-icons/fa6";
 import { FaSms } from "react-icons/fa";
+import { MdHistoryEdu } from "react-icons/md";
 
 const Sidebar = ({ open, setOpen }) => {
 
@@ -35,11 +36,13 @@ const Sidebar = ({ open, setOpen }) => {
     { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <FaBoxArchive className="text-2xl" /> },
     { name: text["/dashboard/filemanager"], url: "/dashboard/filemanager", icon: <PiFolderFill className="text-2xl" /> },
     { name: text["/dashboard/sms"], url: "/dashboard/sms", icon: <FaSms  className="text-2xl" /> },
+    { name: text["/dashboard/smshistory"], url: "/dashboard/smshistory", icon: <MdHistoryEdu   className="text-2xl" /> },
+
+    { name: text["/dashboard/role"], url: "/dashboard/role", icon: <BsShieldLockFill className="text-2xl" /> },
+    { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
     { name: text["/dashboard/category"], url: "/dashboard/category", icon: <BiSolidCategoryAlt className="text-2xl" />, lock: true },
     { name: text["/dashboard/post/createPost"], url: "/dashboard/post/createPost", icon: <MdPostAdd className="text-2xl" />, lock: true },
     { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" />, lock: true },
-    { name: text["/dashboard/role"], url: "/dashboard/role", icon: <BsShieldLockFill className="text-2xl" /> },
-    { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
   ];
 
   const [items, setItems] = useState([]);

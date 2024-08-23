@@ -13,7 +13,8 @@
             "/dashboard/product": "Product Management",
             "/dashboard/admintradeportal": "Admin Trade Portal",
             "/dashboard/apibox": "API Box",
-            "/dashboard/sms": "sms"
+            "/dashboard/sms": "sms",
+            "/dashboard/smshistory": "Sms History"
         },
         "logIn": {
             "back": "Back",
@@ -149,7 +150,8 @@
             "/dashboard/product": "مدریت کالا",
             "/dashboard/admintradeportal": "پورتال خرید و فروش ادمین",
             "/dashboard/apibox": "جعبه Api",
-             "/dashboard/sms": "پیامک"
+            "/dashboard/sms": "پیامک",
+            "/dashboard/smshistory": "تاریخچه پیامک"
         },
         "logIn": {
             "back": "برگشت",
