@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Input from '@/components/dashboard/Input';
 import { sendSmsToUser as RsendSmsToUser } from '@/services/smsTemplate';
 import toast from 'react-hot-toast';
+import translations from "@/translations.json";
 
 const SmsScreen = ({ selectedTemplate, selectedUser, setSelectedTemplate, setSelectedUser }) => {
 
@@ -13,6 +14,7 @@ const SmsScreen = ({ selectedTemplate, selectedUser, setSelectedTemplate, setSel
   const [name, setName] = useState(null);
 
   const [inputValues, setInputValues] = useState([]);
+  const { someThingIsWrong } = translations['fa'];
 
   useEffect(() => {
     if (selectedTemplate && selectedTemplate.text) {

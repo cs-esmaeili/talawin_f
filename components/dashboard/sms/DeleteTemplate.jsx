@@ -1,8 +1,11 @@
 import { MdDelete } from "react-icons/md";
 import { deleteSmsTemplate as RdeleteSmsTemplate } from '@/services/smsTemplate';
 import toast from 'react-hot-toast';
+import translations from "@/translations.json";
 
 const DeleteTemplate = ({ _id, updateList }) => {
+
+    const { someThingIsWrong } = translations['fa'];
 
     const smsTemplateList = async () => {
         try {

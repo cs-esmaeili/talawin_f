@@ -4,11 +4,8 @@ import { deleteCookie } from 'cookies-next';
 const useSecurityCheck = (push) => {
 
   const hostname = window.location.hostname;
-  deleteCookie('token', { path: '/', domain: hostname });
-  deleteCookie('user', { path: '/', domain: hostname });
-  deleteCookie('userName', { path: '/', domain: hostname });
-  deleteCookie('role', { path: '/', domain: hostname });
-  localStorage.removeItem('userPermission');
+  deleteCookie('token');
+  deleteCookie('userName');
   push('/dashboard/login');
 
 };

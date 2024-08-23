@@ -9,7 +9,7 @@ import StepTwo from './StepTwo';
 import { FaArrowLeft } from "react-icons/fa6";
 import config from "../../../config.json";
 import translations from "@/translations.json";
-import { hasCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 
 
 const LogIn = () => {
@@ -31,7 +31,7 @@ const LogIn = () => {
         if(config.onLocal){
             setUserName("09137378601");
         }
-        if (hasCookie("token")) {
+        if (getCookie("token") != null) {
             goToDashboard();
         }
     }, []);

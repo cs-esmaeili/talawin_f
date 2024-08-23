@@ -1,7 +1,6 @@
 'use client'
 
 import UserSearch from '@/components/dashboard/admintradeportal/UserSearch';
-import Input from '@/components/dashboard/Input';
 import SmsScreen from '@/components/dashboard/sms/SmsScreen';
 import SmsTemplates from '@/components/dashboard/sms/SmsTemplates';
 import { useState } from 'react';

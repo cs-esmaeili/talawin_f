@@ -20,6 +20,7 @@ const page = () => {
     const [activePage, setActivePage] = useState(1);
     const { someThingIsWrong } = translations['fa'];
     const [perPage, setPerPage] = useState(8);
+    const [size, setSize] = useState(null);
 
     const productList = async (page) => {
         try {
@@ -34,9 +35,9 @@ const page = () => {
             } else {
                 toast.error(someThingIsWrong);
             }
-            // setTimeout(() => {
-            //     productList(activePage);
-            // }, 5000);
+            setTimeout(() => {
+                productList(activePage);
+            }, 5000);
         }
     };
 
@@ -44,25 +45,17 @@ const page = () => {
         productList(activePage);
     }, [activePage, perPage]);
 
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         const width = window.innerWidth;
-    //         if (width >= 1280) {
-    //             setPerPage(8); // 4 columns
-    //         } else if (width >= 1024) {
-    //             setPerPage(6); // 3 columns
-    //         } else if (width >= 768) {
-    //             setPerPage(4); // 2 columns
-    //         } else {
-    //             setPerPage(2); // 1 column
-    //         }
-    //     };
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            setSize(width)
+        };
 
-    //     window.addEventListener('resize', handleResize);
-    //     handleResize(); // Set initial value
+        window.addEventListener('resize', handleResize);
+        handleResize(); 
 
-    //     return () => window.removeEventListener('resize', handleResize);
-    // }, []);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         const socket = io(config.api);
@@ -85,7 +78,7 @@ const page = () => {
         };
     }, []);
 
-    if (window.innerWidth >= 1024) {
+    if (size && size>= 1024) {
         return (
             <div className='flex h-screen max-h-screen overflow-y-hidden grow justify-center'>
                 <div className="grid grid-rows-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full h-screen p-2 gap-2">
@@ -160,7 +153,7 @@ const page = () => {
     } else {
         return (
             <div className="flex p-2 h-screen overflow-y-auto flex-wrap-reverse sm:flex-nowrap">
-                <div className="flex flex-wrap justify-start items-center bg-teal-300 grow overflow-y-auto">
+                <div className="flex flex-wrap justify-start items-center grow overflow-y-auto">
                     {products && products.length > 0 &&
                         products.map(product => (
                             <div key={product._id} className="w-full sm:w-full md:w-2/4 lg:w-1/4 p-2">
@@ -203,7 +196,7 @@ const page = () => {
                     }
                 </div>
 
-                <div className='flex flex-col gap-1 p-5  bg-red-500 overflow-hidden min-w-fit w-full   sm:w-1/3 md:w-1/3 lg:w-1/4'>
+                <div className='flex flex-col gap-1 p-5   overflow-hidden min-w-fit w-full   sm:w-1/3 md:w-1/3 lg:w-1/4'>
                     <div className='flex flex-col gap-2 p-3 rounded-lg bg-secondary'>
                         <div className='flex justify-center items-center text-2xl md:text-4xl rtl'>
                             <span className='text-accent'>طلا</span>
