@@ -16,3 +16,7 @@ export const createSmsTemplate = (data) => {
 export const sendSmsToUser = (data) => {
     return http.post(`${prefixUrl}/sendSmsToUser`, JSON.stringify(data));
 };
+
+export const cancelSendSmsToUser = (data) => {
+    return http.post(`${prefixUrl}/cancelSendSmsToUser`, JSON.stringify(data));
+};
