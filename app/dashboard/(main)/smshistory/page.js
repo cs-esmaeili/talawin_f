@@ -8,6 +8,7 @@ import Pagination from '@/components/dashboard/Pagination';
 import translations from "@/translations.json";
 import { TbListDetails } from "react-icons/tb";
 import { useModalContext } from '@/components/dashboard/Modal';
+import { MdCancelScheduleSend } from "react-icons/md";
 
 const page = () => {
 
@@ -40,41 +41,44 @@ const page = () => {
         categoryList();
     }, [activePage]);
 
+
+
     return (
         <div className='flex flex-col w-full'>
             <div className='flex grow w-full p-2 overflow-x-scroll'>
                 {historys &&
                     <Table
-                        headers={[
-                            { name: "_id", cssClass: "hidden lg:table-cell" },
-                            { name: "templateName", cssClass: "" },
-                            { name: "text", cssClass: "hidden sm:table-cell" },
-                            { name: "phoneNumber", cssClass: "hidden lg:table-cell" },
-                            { name: categoryPage.actions, cssClass: "" },
-                        ]}
-                        rowData={[
-                            { name: '_id', cssClass: "hidden lg:table-cell" },
-                            { name: 'templateName', cssClass: "hidden sm:table-cell" },
-                            { name: 'text', cssClass: "hidden sm:table-cell" },
-                            { name: 'phoneNumber', cssClass: "" },
-                        ]}
+                        headers={["id", "قالب", "وضعیت", "شماره تلفن"]}
+                        rowsData={["_id", "templateName", "status", "phoneNumber"]}
                         rows={historys}
-                        rowCountstart={(perPage * (activePage - 1))}
-                        special={(row, index) => {
-                            return (
-                                <td className={`h-[1px]  p-0 pb-1`}>
-                                    <div className="flex h-full items-center justify-center rounded-e-xl bg-secondary p-1 text-nowrap">
-                                        <TbListDetails className='text-blue-400 text-2xl' onClick={() => {
-                                            openModal(
-                                                <div>
-                                                    {row.text}
-                                                </div>
-                                            );
-                                        }} />
-                                    </div>
-                                </td>
-                            )
+                        headerClasses={["", "", "", ""]}
+                        rowClasses={(row, rowIndex) => {
+                            return "";
                         }}
+                        cellClasses={(cell, cellIndex, row, rowIndex) => {
+                            return cell == "ارسال شده" && "text-green-400";
+                        }}
+                        columnVisibilityClasses={[
+                            "",
+                            "hidden sm:table-cell", 
+                            "hidden sm:table-cell", 
+                            ""
+                        ]}
+                        actionComponent={({ rowData, rowIndex }) => {
+                            return (
+                                <div className="flex h-fit items-center gap-3 justify-center text-nowrap ">
+                                    <MdCancelScheduleSend className='text-red-400 text-2xl' />
+                                    <TbListDetails className='text-blue-400 text-2xl' onClick={() => {
+                                        openModal(
+                                            <div>
+                                                {rowData.text}
+                                            </div>
+                                        );
+                                    }} />
+                                </div>
+                            );
+                        }}
+                        rowCountstart={(perPage * (activePage - 1))}
                     />
                 }
             </div>
