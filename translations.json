@@ -92,6 +92,7 @@
             "userName": "Username",
             "role": "Role",
             "createdAt": "Created At",
+            "fullName": "fullName",
             "actions": "Actions"
         },
         "miniProfile": {
@@ -229,7 +230,8 @@
             "userName": "نام کاربری",
             "role": "نقش",
             "createdAt": "تاریخ ساخت",
-            "actions": "اعمال"
+            "actions": "اعمال",
+            "fullName": "نام خانوادگی"
         },
         "miniProfile": {
             "profile": "حساب کاربری",

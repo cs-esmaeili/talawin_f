@@ -65,20 +65,24 @@ const page = () => {
                         <div className='flex grow w-full p-2 overflow-x-scroll'>
                             {products &&
                                 <Table
-                                    headers={[
-                                        { name: product.id, cssClass: "hidden lg:table-cell" },
-                                        { name: product.name, cssClass: "" },
-                                        { name: product.updatedAt, cssClass: "hidden sm:table-cell" },
-                                    ]}
-                                    rowData={[
-                                        { name: '_id', cssClass: "hidden lg:table-cell" },
-                                        { name: 'name', cssClass: "" },
-                                        { name: 'updatedAt', cssClass: "hidden sm:table-cell" }
-                                    ]}
+                                    headers={[product.id, product.name]}
+                                    rowsData={["_id", "name"]}
                                     rows={products}
+                                    headerClasses={["", "", "", ""]}
+                                    rowClasses={(row, rowIndex) => {
+                                        return "";
+                                    }}
+                                    cellClasses={(cell, cellIndex, row, rowIndex) => {
+                                        return cell == "ارسال شده" && "text-green-400";
+                                    }}
+                                    columnVisibilityClasses={[
+                                        "",
+                                        "",
+                                        "",
+                                        ""
+                                    ]}
                                     rowCountstart={(perPage * (activePage - 1))}
-                                    selectMode={true}
-                                    selectListener={(row, index) => {
+                                    selectListener={(row, rowIndex) => {
                                         setEditData(row);
                                     }}
                                 />

@@ -1,7 +1,11 @@
 import React from "react";
 
+const getNestedValue = (obj, path) => {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj) || '';
+};
+
 const Table = ({
-    headers, 
+    headers,
     rows,
     rowsData,
     headerClasses,
@@ -10,14 +14,15 @@ const Table = ({
     actionComponent: ActionComponent,
     actionHeader = "#",
     columnVisibilityClasses = [],
-    rowCountstart
+    rowCountstart,
+    selectListener
 }) => {
     return (
         <div>
             <table className="table-fixed w-full border-collapse">
                 <thead>
                     <tr className="bg-secondary text-xl">
-                        <th className="p-2 text-center">#</th> 
+                        <th className="p-2 text-center">#</th>
                         {headers.map((header, index) => (
                             <th
                                 key={index}
@@ -38,10 +43,11 @@ const Table = ({
                             <tr
                                 key={rowIndex}
                                 className={`${rowIndex % 2 === 1 ? "bg-secondary" : ""} ${rowClass}`}
+                                onClick={(e) => { (selectListener) && selectListener(row, rowIndex) }}
                             >
                                 <td className="p-2 text-center">{rowIndex + 1 + (rowCountstart != null ? rowCountstart : 0)}</td>
                                 {rowsData.map((key, headerIndex) => {
-                                    const cellData = row[key] || "";
+                                    const cellData = getNestedValue(row, key);
                                     const cellClass = cellClasses ? cellClasses(cellData, headerIndex, row, rowIndex) : "";
                                     return (
                                         <td

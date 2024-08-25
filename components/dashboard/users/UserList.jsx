@@ -20,6 +20,7 @@ const UserList = ({ editData, setEditData, refreshList }) => {
         try {
             const { data } = await RuserList({ page: activePage, perPage });
             const { usersCount, users } = data;
+            
             setUsers(users);
             setUsersCount(usersCount);
         } catch (error) {
@@ -37,42 +38,40 @@ const UserList = ({ editData, setEditData, refreshList }) => {
 
     return (
         <div className='flex flex-col grow'>
-            <div className='flex grow w-full overflow-x-scroll'>
+            <div className='flex grow w-full overflow-x-scroll '>
                 {users &&
                     <Table
-                        headers={[
-                            { name: userlist.id, cssClass: "hidden lg:table-cell" },
-                            { name: userlist.userName, cssClass: "" },
-                            { name: userlist.role, cssClass: "" },
-                            { name: userlist.createdAt, cssClass: "hidden sm:table-cell" },
-                            { name: userlist.actions, cssClass: "" },
-                        ]}
-                        rowData={[
-                            { name: '_id', cssClass: "hidden lg:table-cell" },
-                            { name: 'userName', cssClass: "" },
-                            { name: 'role_id.name', cssClass: "" },
-                            { name: 'createdAt', cssClass: "hidden sm:table-cell" }
-                        ]}
+                        headers={[userlist.userName, userlist.role, userlist.fullName]}
+                        rowsData={[, "userName", "role_id.name", "data.fullName"]}
                         rows={users}
-                        rowCountstart={(perPage * (activePage - 1))}
-                        selectMode={false}
-                        special={(row, index) => {
-                            return (
-                                <td className={`h-[1px]  p-0 pb-1 `}>
-                                    <div className="flex h-full items-center justify-center rounded-e-xl bg-secondary p-1 text-nowrap">
-                                        <FaUserLock className='text-xl ml-4 text-red-400' onClick={() => {
-
-                                        }} />
-                                        <MdQueryStats className='text-xl ml-4 text-yellow-400' onClick={() => {
-
-                                        }} />
-                                        <BiSolidEdit className='text-xl ml-4 text-blue-400' onClick={() => {
-                                            setEditData(row);
-                                        }} />
-                                    </div>
-                                </td>
-                            )
+                        headerClasses={["", "", "", ""]}
+                        rowClasses={(row, rowIndex) => {
+                            return "";
                         }}
+                        cellClasses={(cell, cellIndex, row, rowIndex) => {
+                            return cell == "ارسال شده" && "text-green-400";
+                        }}
+                        columnVisibilityClasses={[
+                            "",
+                            "",
+                            ""
+                        ]}
+                        actionComponent={({ rowData, rowIndex }) => {
+                            return (
+                                <div className="flex h-full items-center justify-center gap-2 text-nowrap">
+                                    {/* <FaUserLock className='text-xl ml-4 text-red-400' onClick={() => {
+
+                                    }} />
+                                    <MdQueryStats className='text-xl ml-4 text-yellow-400' onClick={() => {
+
+                                    }} /> */}
+                                    <BiSolidEdit className='text-xl ml-4 text-blue-400' onClick={() => {
+                                        setEditData(rowData);
+                                    }} />
+                                </div>
+                            );
+                        }}
+                        rowCountstart={(perPage * (activePage - 1))}
                     />
                 }
             </div>

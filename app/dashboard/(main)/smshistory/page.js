@@ -59,10 +59,10 @@ const page = () => {
                             return cell == "ارسال شده" && "text-green-400";
                         }}
                         columnVisibilityClasses={[
+                            "hidden xl:table-cell",
+                            "hidden md:table-cell", 
+                            "hidden sm:table-cell", 
                             "",
-                            "hidden sm:table-cell", 
-                            "hidden sm:table-cell", 
-                            ""
                         ]}
                         actionComponent={({ rowData, rowIndex }) => {
                             return (
