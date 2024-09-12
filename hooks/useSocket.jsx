@@ -3,18 +3,18 @@ import { useDispatch } from 'react-redux';
 import { setApiData } from '@/state/apiData';
 import { setProductPrices } from '@/state/productPrices';
 import { setboxPrices } from '@/state/boxPrices';
-import { setPermissions } from '@/state/permissions';
-import { setinformation } from '@/state/information';
-import { setrole } from '@/state/role';
-import { initializeSocket, getSocket } from '@/services/scoket';
+import { initializeSocket } from '@/services/scoket';
 import useLogout from "@/hooks/useLogout"
 import { useRouter } from 'next/navigation';
 
-const useSocket = () => {
+const useSocket = (connect) => {
     const dispatch = useDispatch();
     const { push } = useRouter();
 
     useEffect(() => {
+        if (!connect) {
+            return;
+        }
         const socket = initializeSocket();
 
         if (!socket) {
@@ -38,28 +38,10 @@ const useSocket = () => {
                 dispatch(setboxPrices(data));
         });
 
-        socket.on('information', (data) => {
-            if (data.permissions != null && data.permissions.length > 0)
-                dispatch(setPermissions(data.permissions));
-
-            if (data.information != null)
-                dispatch(setinformation(data.information));
-
-            if (data.information.role_id != null)
-                dispatch(setrole(data.information.role_id));
-        });
-
-        socket.on("disconnect", () => {
-            useLogout(push);
-            dispatch(setApiData(null));
-            dispatch(setProductPrices(null));
-            dispatch(setboxPrices(null));
-        });
-
         return () => {
             socket.disconnect();
         };
-    }, [dispatch, push]);
+    }, [dispatch, push, connect]);
 
     return null;
 };
