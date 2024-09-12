@@ -14,7 +14,6 @@ import { MdSubtitles } from "react-icons/md";
 import { FaMobile } from "react-icons/fa6";
 import { FaIdCardAlt } from "react-icons/fa";
 import { MdCreditCard } from "react-icons/md";
-import { emitEvent } from "@/services/scoket";
 import translations from "@/translations.json";
 
 const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
@@ -69,8 +68,7 @@ const CreateUser = ({ editData, setEditData, setRefreshList, selfMode }) => {
             if (setRefreshList)
                 setRefreshList();
             if (selfMode) {
-                emitEvent("information", null);
-                closeModal();
+                window.location.reload();
             }
         } catch (error) {
             console.log(error);

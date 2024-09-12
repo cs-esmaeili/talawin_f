@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaBell } from "react-icons/fa";
-import { MdSunny } from "react-icons/md";
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import translations from "@/translations.json";

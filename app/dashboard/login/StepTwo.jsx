@@ -5,6 +5,8 @@ import { logInStepTwo as RlogInStepTwo } from '@/services/Authorization';
 import Timer from '@/components/dashboard/Timer';
 import { setCookie } from 'cookies-next';
 import translations from "@/translations.json";
+import { useDispatch } from 'react-redux';
+import { setlogOutTime } from '@/state/logOutTime';
 import axios from "axios";
 
 const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => {
@@ -13,7 +15,7 @@ const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => 
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
     const { stepTwo, someThingIsWrong } = translations['fa'];
-
+    const dispatch = useDispatch();
 
     const logInStepTwo = async (codeI) => {
         try {
@@ -29,8 +31,12 @@ const StepTwo = ({ timer, setTimer, userName, goToPrevious, goToDashboard }) => 
             let { token, sessionTime } = response.data;
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             let expObj = { expires: new Date(new Date().getTime() + parseInt(sessionTime) * 60000) };
+
+            
             setCookie('token', token, expObj);
             setCookie('userName', userName, expObj);
+            setCookie('sessionTime', sessionTime, expObj);
+            dispatch(setlogOutTime(new Date()));
             setLoading(false);
             goToDashboard();
         } catch (error) {

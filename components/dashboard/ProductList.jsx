@@ -16,7 +16,7 @@ const ProductList = ({ products }) => {
                                     src={product.image.url}
                                     alt={product.name}
                                     width={250}
-                                    height={450}
+                                    height={250}
                                     objectFit="cover"
                                     className="object-cover"
                                     placeholder='blur'

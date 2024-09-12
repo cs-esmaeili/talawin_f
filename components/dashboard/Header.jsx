@@ -3,9 +3,11 @@ import MiniProfile from "./MiniProfile";
 import { FaBell } from "react-icons/fa";
 import { MdSunny } from "react-icons/md";
 import { RiMenu3Line } from "react-icons/ri";
-import { BiSolidStar } from "react-icons/bi";
 import { GiOpenTreasureChest } from "react-icons/gi";
+
+
 import Prices from "./Prices";
+import LogOutTimer from "./LogOutTimer";
 
 const Header = ({ open, setOpen }) => {
 
@@ -22,8 +24,7 @@ const Header = ({ open, setOpen }) => {
 
       <div className="flex  grow flex-wrap justify-around gap-1 rounded-xl bg-secondary p-2">
         <div className="hidden md:flex ">
-          <BiSolidStar className="text-2xl  text-blue-400" />
-          <span className="text-md">300</span>
+          <LogOutTimer />
         </div>
         <Prices />
         <div className="hidden text-yellow-400 md:flex">

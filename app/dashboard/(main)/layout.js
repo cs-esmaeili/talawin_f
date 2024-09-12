@@ -21,15 +21,16 @@ export default function Layout({ children }) {
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [isSecurityCheckComplete, setSecurityCheckComplete] = useState(false);
   const { push } = useRouter();
   const { layoutMain } = translations['fa'];
   const pathname = usePathname();
   const dispatch = useDispatch();
-  useSocket(isSecurityCheckComplete);
+  useSocket(!loading);
 
   const securityCheck = async () => {
     try {
+
+      setLoading(true);
       const { data } = await RsecurityCheck({ route: pathname });
       const { information, permissions } = data;
 
@@ -38,7 +39,6 @@ export default function Layout({ children }) {
       dispatch(setrole(information.role_id));
 
       setLoading(false);
-      setSecurityCheckComplete(true);
     } catch (error) {
       console.log(error);
       useLogout(push);

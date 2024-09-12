@@ -5,6 +5,7 @@ import productPricesSlice from "./productPrices";
 import boxPricesSlice from "./boxPrices";
 import informationSlice from "./information";
 import roleSlice from "./role";
+import logOutTime from "./logOutTime";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         boxPrices: boxPricesSlice,
         information: informationSlice,
         role: roleSlice,
+        logOutTime: logOutTime,
     },
     devTools: true
 });
