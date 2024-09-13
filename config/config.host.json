@@ -3,5 +3,6 @@
     "logo_url": "assets/logo.jpg",
     "api": "https://back.talawin.ir/",
     "site_description" : "خرید و فروش طلا",
-    "onLocal" : false
+    "onLocal" : false,
+    "board_key" : "chxgQAdzj3wISRMcfIwTvBzZn3Yca0LAhfbWuIOw9VfIR9pPTR"
 }

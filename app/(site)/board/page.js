@@ -52,14 +52,15 @@ const page = () => {
         };
 
         window.addEventListener('resize', handleResize);
-        handleResize(); 
+        handleResize();
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     useEffect(() => {
-        const socket = io(config.api);
-
+        const socket = io(config.api, {
+            query: { token: config.board_key }
+        });
         socket.on('productPrices', (data) => {
             setProductPrices(data);
         });
@@ -78,7 +79,7 @@ const page = () => {
         };
     }, []);
 
-    if (size && size>= 1024) {
+    if (size && size >= 1024) {
         return (
             <div className='flex h-screen max-h-screen overflow-y-hidden grow justify-center'>
                 <div className="grid grid-rows-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full h-screen p-2 gap-2">

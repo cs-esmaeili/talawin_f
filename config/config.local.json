@@ -3,5 +3,6 @@
     "logo_url": "assets/logo.jpg",
     "api": "http://localhost:3000/",
     "site_description" : "خرید و فروش طلا",
-    "onLocal" : true
+    "onLocal" : true,
+    "board_key" : "chxgQAdzj3wISRMcfIwTvBzZn3Yca0LAhfbWuIOw9VfIR9pPTR"
 }
