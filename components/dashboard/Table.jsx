@@ -18,8 +18,8 @@ const Table = ({
     selectListener
 }) => {
     return (
-        <div>
-            <table className="table-fixed w-full border-collapse">
+        <div className="overflow-x-auto w-full">
+            <table className="w-full border-collapse min-w-full"> 
                 <thead>
                     <tr className="bg-secondary text-xl">
                         <th className="p-2 text-center">#</th>
@@ -53,6 +53,7 @@ const Table = ({
                                         <td
                                             key={headerIndex}
                                             className={`p-2 text-center ${cellClass} ${columnVisibilityClasses?.[headerIndex] || ""}`}
+                                            style={{ whiteSpace: 'nowrap' }} 
                                         >
                                             {cellData}
                                         </td>
