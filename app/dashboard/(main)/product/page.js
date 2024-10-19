@@ -48,13 +48,13 @@ const page = () => {
 
 
     return (
-        <div className='flex w-full flex-col lg:flex-row overflow-y-auto overflow-x-hidden'>
-            <div className='justify-center items-center flex-1'>
-                <div>
+        <div className='flex w-full flex-col lg:flex-row overflow-y-auto overflow-x-hidden p-3'>
+            <div className='flex justify-center items-center flex-1 h-fit'>
+                <div className='max-w-lg '>
                     <ProductCardEdit editData={editData} setEditData={setEditData} updateList={() => setUpdateList(!updateList)} />
                 </div>
             </div>
-            <div className='flex flex-col justify-center items-center flex-1'>
+            <div className='flex flex-col justify-center items-center flex-1 h-fit'>
                 {loading ?
                     <div className="relative  w-12 h-12">
                         <div className="w-full h-full rounded-full absolute  border-4 border-solid border-gray-200"></div>

@@ -26,13 +26,13 @@ export const ModalProvider = ({ children }) => {
       {modals.map((modal, index) => (
         <div
           key={index}
-          className="fixed  overflow-hidden pt-20 pb-20 max-h-full inset-0 z-40 flex cursor-pointer items-center justify-center bg-black bg-opacity-50"
+          className="fixed  overflow-hidden pt-20 pb-20 max-h-full inset-0 z-40 flex cursor-pointer items-center justify-center bg-black bg-opacity-50 "
           onClick={(e) => {
             e.stopPropagation();
             closeModal();
           }}
         >
-          <div className="w-max rounded-md bg-primary overflow-auto max-h-full">
+          <div className="w-max rounded-md bg-primary overflow-auto max-h-full sm:min-w-[400px] md:min-w-[500px]">
             <div className="p-2" onClick={(e) => e.stopPropagation()}>
               {modal.body}
             </div>
