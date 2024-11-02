@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { createProduct, updateProduct } from '@/services/Product';
 import translations from "@/translations.json";
 import Filemanager from '@/app/dashboard/(main)/filemanager/page';
+import CategoryPage from '@/app/dashboard/(main)/category/page';
 import ApiBox from '@/app/dashboard/(main)/apibox/page';
 import { useModalContext } from '@/components/dashboard/Modal';
 import toast from 'react-hot-toast';
@@ -15,6 +16,7 @@ const ProductCard = ({ editData, setEditData, updateList }) => {
     const [name, setName] = useState("");
     const [disc, setDisc] = useState("");
     const [box, setBox] = useState(null);
+    const [Category, setCategory] = useState(null);
     const [cBuyPrice, setCBuyPrice] = useState(0);
     const [cSellPrice, setCSellPrice] = useState(0);
     const [formulaBuy, setFormulaBuy] = useState('p');
@@ -38,6 +40,7 @@ const ProductCard = ({ editData, setEditData, updateList }) => {
 
     const ResetForm = () => {
         setBox(null);
+        setCategory(null);
         setName("");
         setDisc("");
         setFormulaBuy('p');
@@ -61,9 +64,9 @@ const ProductCard = ({ editData, setEditData, updateList }) => {
         try {
             let result = null;
             if (id && id != null) {
-                result = await updateProduct({ box_id: box._id, id, name, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, status, inventory, weight, ayar, ang, ojrat, labName });
+                result = await updateProduct({ box_id: box._id, id, name, category_id: Category._id, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, status, inventory, weight, ayar, ang, ojrat, labName });
             } else {
-                result = await createProduct({ box_id: box._id, name, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, status, inventory, weight, ayar, ang, ojrat, labName });
+                result = await createProduct({ box_id: box._id, name, category_id: Category._id, cBuyPrice, cSellPrice, formulaBuy, formulaSell, disc, image, discount, status, inventory, weight, ayar, ang, ojrat, labName });
             }
             const { data } = result;
             toast.success(data.message);
@@ -82,6 +85,7 @@ const ProductCard = ({ editData, setEditData, updateList }) => {
     useEffect(() => {
         if (editData != null) {
             setBox(editData.apiBox_id)
+            setCategory(editData.category_id)
             setId(editData._id);
             setName(editData.name);
             setDisc(editData.disc);
@@ -188,6 +192,15 @@ const ProductCard = ({ editData, setEditData, updateList }) => {
                             }} />
                         );
                     }}>{box ? box.name : "انتخاب api"}</button>
+
+                    <button className='rtl bg-accent p-3 w-full rounded-lg' onClick={() => {
+                        openModal(
+                            <CategoryPage pickMode selectListener={(Category) => {
+                                setCategory(Category);
+                                closeModal();
+                            }} />
+                        );
+                    }}>{Category ? Category.name : "انتخاب دسته بندی"}</button>
 
                     <div className='flex flex-col border-2 border-accent p-3 gap-3'>
                         <div className="flex items-center gap-2">
