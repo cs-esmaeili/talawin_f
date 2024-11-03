@@ -10,7 +10,7 @@ import ApiBox from '@/app/dashboard/(main)/apibox/page';
 import { useModalContext } from '@/components/dashboard/Modal';
 import toast from 'react-hot-toast';
 
-const ProductCard = ({ editData, setEditData, updateList }) => {
+const ProductCardEdit = ({ editData, setEditData, updateList }) => {
 
     const [id, setId] = useState(null);
     const [name, setName] = useState("");
@@ -340,4 +340,4 @@ const ProductCard = ({ editData, setEditData, updateList }) => {
     );
 };
 
-export default ProductCard;
+export default ProductCardEdit;
