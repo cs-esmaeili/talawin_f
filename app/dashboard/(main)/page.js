@@ -6,6 +6,7 @@ import Pagination from '@/components/dashboard/Pagination';
 import toast from 'react-hot-toast';
 import translations from "@/translations.json";
 import { productList as RproductList } from '@/services/Product';
+import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
 
@@ -15,11 +16,13 @@ export default function Dashboard() {
     const [activePage, setActivePage] = useState(1);
     const [perPage, setPerPage] = useState(20);
     const { someThingIsWrong } = translations['fa'];
+    const roleName = useSelector((state) => state.information.value.role_id.name);
 
     const productList = async () => {
         try {
             setLoading(true);
-            const { data } = await RproductList({ page: activePage, perPage });
+
+            const { data } = await RproductList({ page: activePage, perPage, category: (roleName == "coWorker" ? roleName : "") });
             const { productsCount, products } = data;
             setProducts(products);
             setProductsCount(productsCount);
