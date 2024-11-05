@@ -2,7 +2,7 @@ import { PiFolderFill } from "react-icons/pi";
 import { usePathname } from 'next/navigation';
 import { MdSpaceDashboard } from "react-icons/md";
 import { BiSolidCategoryAlt } from "react-icons/bi";
-import { MdPostAdd, MdOutlineHistory, MdProductionQuantityLimits } from "react-icons/md";
+import { MdPostAdd, MdProductionQuantityLimits } from "react-icons/md";
 import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { BsShieldLockFill } from "react-icons/bs";
 import { FaUserPlus } from "react-icons/fa6";
@@ -18,6 +18,7 @@ import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { FaBoxArchive } from "react-icons/fa6";
 import { FaSms } from "react-icons/fa";
 import { MdHistoryEdu } from "react-icons/md";
+import { FaFileInvoiceDollar } from "react-icons/fa";
 
 const Sidebar = ({ open, setOpen }) => {
 
@@ -32,17 +33,17 @@ const Sidebar = ({ open, setOpen }) => {
   const allItems = [
     { name: text["/dashboard"], url: "/dashboard", icon: <MdSpaceDashboard className="text-2xl" /> },
     { name: text["/dashboard/product"], url: "/dashboard/product", icon: <MdProductionQuantityLimits className="text-2xl" /> },
-    { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" /> },
     { name: text["/dashboard/apibox"], url: "/dashboard/apibox", icon: <FaBoxArchive className="text-2xl" /> },
     { name: text["/dashboard/filemanager"], url: "/dashboard/filemanager", icon: <PiFolderFill className="text-2xl" /> },
-    { name: text["/dashboard/sms"], url: "/dashboard/sms", icon: <FaSms  className="text-2xl" /> },
-    { name: text["/dashboard/smshistory"], url: "/dashboard/smshistory", icon: <MdHistoryEdu   className="text-2xl" /> },
-
+    { name: text["/dashboard/sms"], url: "/dashboard/sms", icon: <FaSms className="text-2xl" /> },
+    { name: text["/dashboard/smshistory"], url: "/dashboard/smshistory", icon: <MdHistoryEdu className="text-2xl" /> },
     { name: text["/dashboard/role"], url: "/dashboard/role", icon: <BsShieldLockFill className="text-2xl" /> },
     { name: text["/dashboard/user"], url: "/dashboard/user", icon: <FaUserPlus className="text-2xl" /> },
-    { name: text["/dashboard/category"], url: "/dashboard/category", icon: <BiSolidCategoryAlt className="text-2xl" />, lock: true },
-    { name: text["/dashboard/post/createPost"], url: "/dashboard/post/createPost", icon: <MdPostAdd className="text-2xl" />, lock: true },
-    { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" />, lock: true },
+    { name: text["/dashboard/factors"], url: "/dashboard/factors", icon: <FaFileInvoiceDollar className="text-2xl" /> },
+    { name: text["/dashboard/admintradeportal"], url: "/dashboard/admintradeportal", icon: <GiMagicPortal className="text-2xl" />},
+    // { name: text["/dashboard/category"], url: "/dashboard/category", icon: <BiSolidCategoryAlt className="text-2xl" />, lock: true },
+    // { name: text["/dashboard/post/createPost"], url: "/dashboard/post/createPost", icon: <MdPostAdd className="text-2xl" />, lock: true },
+    // { name: text["/dashboard/post/postList"], url: "/dashboard/post/postList", icon: <HiOutlineClipboardDocumentList className="text-2xl" />, lock: true },
   ];
 
   const [items, setItems] = useState([]);

@@ -21,7 +21,7 @@ const ProductCardV2 = ({ product }) => {
                 setLoadingSell(true);
             }
             let result = await executeTrade({
-                price: (purchase) ? (buyPrice * weight) : (sellPrice * weight),
+                price: (purchase) ? (buyPrice * (weight == 0 ? 1 : weight)) : (sellPrice * (weight == 0 ? 1 : weight)),
                 purchase, product_id: product._id,
                 product_price: (purchase) ? buyPrice : sellPrice,
                 weight

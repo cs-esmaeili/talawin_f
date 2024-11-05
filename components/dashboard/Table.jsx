@@ -1,5 +1,3 @@
-import React from "react";
-
 const getNestedValue = (obj, path) => {
     return path.split('.').reduce((acc, part) => acc && acc[part], obj) || '';
 };
@@ -15,7 +13,8 @@ const Table = ({
     actionHeader = "#",
     columnVisibilityClasses = [],
     rowCountstart,
-    selectListener
+    selectListener,
+    dataModifier // Add dataModifier prop
 }) => {
     return (
         <div className="overflow-x-auto w-full">
@@ -47,7 +46,13 @@ const Table = ({
                             >
                                 <td className="p-2 text-center">{rowIndex + 1 + (rowCountstart != null ? rowCountstart : 0)}</td>
                                 {rowsData.map((key, headerIndex) => {
-                                    const cellData = getNestedValue(row, key);
+                                    let cellData = getNestedValue(row, key);
+                                    
+                                    // Apply dataModifier if defined
+                                    if (dataModifier) {
+                                        cellData = dataModifier(cellData, headerIndex, rowIndex);
+                                    }
+
                                     const cellClass = cellClasses ? cellClasses(cellData, headerIndex, row, rowIndex) : "";
                                     return (
                                         <td
@@ -72,5 +77,4 @@ const Table = ({
         </div>
     );
 };
-
 export default Table;

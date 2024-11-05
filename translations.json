@@ -9,12 +9,12 @@
             "/dashboard/post/postList": "Post List",
             "/dashboard/role": "Roles",
             "/dashboard/user": "Users",
-            "/dashboard/history": "Transaction History",
             "/dashboard/product": "Product Management",
             "/dashboard/admintradeportal": "Admin Trade Portal",
             "/dashboard/apibox": "API Box",
             "/dashboard/sms": "sms",
-            "/dashboard/smshistory": "Sms History"
+            "/dashboard/smshistory": "Sms History",
+            "/dashboard/factors": "Factors"
         },
         "logIn": {
             "back": "Back",
@@ -147,12 +147,12 @@
             "/dashboard/post/postList": "لیست پست ها",
             "/dashboard/role": "دسترسی ها",
             "/dashboard/user": "کاربران",
-            "/dashboard/history": "تاریخچه خرید و فروش",
             "/dashboard/product": "مدریت کالا",
             "/dashboard/admintradeportal": "پورتال خرید و فروش ادمین",
             "/dashboard/apibox": "جعبه Api",
             "/dashboard/sms": "پیامک",
-            "/dashboard/smshistory": "تاریخچه پیامک"
+            "/dashboard/smshistory": "تاریخچه پیامک",
+            "/dashboard/factors": "فاکتور ها"
         },
         "logIn": {
             "back": "برگشت",
