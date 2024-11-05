@@ -7,6 +7,8 @@ const Input = ({
   title,
   multiline = false,
   disabled,
+  min,
+  type = "text",
   ...props
 }) => {
   return (
@@ -27,9 +29,10 @@ const Input = ({
         />
       ) : (
         <input
-          type="text"
+          type={type}
           placeholder={placeholder}
           disabled={disabled}
+          min={min}
           className={`flex-1 min-w-0 outline-0 border-0 bg-transparent placeholder-gray-400 focus:ring-0 ${icon ? "pr-2" : ""} ${inputCssClass}`}
           {...props}
         />
