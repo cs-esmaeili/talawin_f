@@ -8,7 +8,7 @@ const ProductPrice = ({ product_id, priceListener = null, sellPrice = true, hidd
     const productPrices = useSelector((state) => state.productPrices.value);
 
     const [loading, setLoading] = useState(true);
-    const [price, setPrice] = useState(null);
+    const [price, setPrice] = useState(0);
 
     const loadingComponent = (
         <div className="relative w-4 h-4">
@@ -31,7 +31,8 @@ const ProductPrice = ({ product_id, priceListener = null, sellPrice = true, hidd
             return;
         }
 
-        let targetPrice = null
+
+        let targetPrice = 0;
         if (sellPrice) {
             targetPrice = data.sellPrice;
         } else {
