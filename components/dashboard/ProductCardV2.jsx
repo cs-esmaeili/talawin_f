@@ -20,8 +20,9 @@ const ProductCardV2 = ({ product }) => {
             } else {
                 setLoadingSell(true);
             }
+            let finalWeight = (!weight || weight === 0) ? 1 : weight;
             let result = await executeTrade({
-                price: (purchase) ? (buyPrice * (weight == 0 ? 1 : weight)) : (sellPrice * (weight == 0 ? 1 : weight)),
+                price: (purchase) ? (buyPrice * finalWeight) : (sellPrice * finalWeight),
                 purchase, product_id: product._id,
                 product_price: (purchase) ? buyPrice : sellPrice,
                 weight
@@ -42,7 +43,7 @@ const ProductCardV2 = ({ product }) => {
         }
     }
     return (
-        <div key={product._id} className="w-full sm:w-1/2 p-2">
+        <div key={product._id} className={`w-full sm:w-1/2 p-2 ${product.status && "opacity-50"}`}>
             <div className="flex flex-col  rounded-lg  rtl bg-secondary">
 
                 <div className='flex'>
@@ -65,7 +66,7 @@ const ProductCardV2 = ({ product }) => {
                     <div className='text-md  w-full h-auto flex  justify-center  items-center  p-3'>
                         {product.name}
                     </div>
-                    <div className={`w-full h-auto flex justify-center items-center p-3 ${product.weight == null || product.weight <= 0 ? "invisible" : ""}`}>
+                    <div disabled={product.status} className={`w-full h-auto flex justify-center items-center p-3 ${product.weight == null || product.weight <= 0 ? "invisible" : ""}`}>
                         <Input
                             type="number"
                             min="1"
@@ -84,7 +85,7 @@ const ProductCardV2 = ({ product }) => {
                                 <div className="w-10 h-10 rounded-full border-8 border-solid border-accent border-t-transparent animate-spin"></div>
                             </div>
                             :
-                            <button className=' bg-green-500 rounded-md p-2' onClick={() => {
+                            <button className=' bg-green-500 rounded-md p-2' disabled={product.status} onClick={() => {
                                 submitExecuteTrade(true);
                             }}>
                                 <ProductPrice product_id={product._id} sellPrice={false}
@@ -111,7 +112,7 @@ const ProductCardV2 = ({ product }) => {
                                 <div className="w-10 h-10 rounded-full border-8 border-solid border-accent border-t-transparent animate-spin"></div>
                             </div>
                             :
-                            <button className=' bg-red-500 rounded-md p-2' onClick={() => {
+                            <button className=' bg-red-500 rounded-md p-2' disabled={product.status} onClick={() => {
                                 submitExecuteTrade(false);
                             }}>
                                 <ProductPrice product_id={product._id} sellPrice

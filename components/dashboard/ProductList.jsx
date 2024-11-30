@@ -12,7 +12,7 @@ const ProductList = ({ products }) => {
             <div className="flex flex-wrap justify-start items-center">
                 {products && products.length > 0 && products.map((product) => {
                     if (roleName == "coWorker") {
-                        return (<ProductCardV2 product={product} />)
+                        return (<ProductCardV2 product={product}/>)
                     } else {
                         return (<ProductCard product={product} />)
                     }
