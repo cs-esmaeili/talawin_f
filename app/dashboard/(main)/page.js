@@ -22,7 +22,7 @@ export default function Dashboard() {
         try {
             setLoading(true);
 
-            const { data } = await RproductList({ page: activePage, perPage, category: (roleName == "coWorker" ? roleName : "") });
+            const { data } = await RproductList({ page: activePage, perPage, category: roleName });
             const { productsCount, products } = data;
             setProducts(products);
             setProductsCount(productsCount);

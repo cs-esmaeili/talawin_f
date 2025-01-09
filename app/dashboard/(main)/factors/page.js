@@ -119,7 +119,7 @@ const page = () => {
                                     return (
                                         <div className="flex h-fit items-center gap-3 justify-center text-nowrap ">
 
-                                            {roleName == "coWorker" && (rowData.type == 1 || rowData.type == 2) &&
+                                            {(roleName == "Manager" || roleName == "Admin") && (rowData.type == 1 || rowData.type == 2) &&
                                                 <>
                                                     <button className='bg-red-400 p-3 rounded-md' onClick={() => {
                                                         changeStatus(rowData._id, 4);
